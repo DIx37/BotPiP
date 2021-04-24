@@ -2,12 +2,18 @@ import config
 import logging
 import asyncio
 import time
+import error_sender as es
 from datetime import datetime
 from aiogram import Bot, Dispatcher, executor, types
-import error_sender as es
+from sqllite import SQLighter
+
+db.get_id_email(email_id)
 
 # Уровень логгов
 logging.basicConfig(level=logging.INFO)
+
+# Подключение к БД
+db = SQLighter("Delivery.db")
 
 # Иннициализуем бота
 bot = Bot(token=config.ErrorBot_TOKEN)
