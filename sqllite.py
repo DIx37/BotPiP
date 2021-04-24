@@ -18,6 +18,11 @@ class SQLighter:
             result = self.cursor.execute('SELECT * FROM `delivery` WHERE `id_email` = ?', (id_email,)).fetchall()
             return bool(len(result))
 
+    def get_send_group(self, sender_email = "orderspip@yandex.ru", send_group = False):
+        """Получаем всех активных подписчиков бота"""
+        with self.connection:
+            return self.cursor.execute("SELECT * FROM `delivery` WHERE `sender_email` = ? AND `send_group` = ?", (sender_email, send_group,)).fetchall()
+
     def get_subscriptions(self, status = True):
         """Получаем всех активных подписчиков бота"""
         with self.connection:

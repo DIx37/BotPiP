@@ -56,8 +56,6 @@ def get_email(email_id):
             db.add_email(id_email, date_email, sender_email, body_email)
 
 def read_email():
-    # Запрос папок почты
-    response = mail.list()
     # Выбор папки входящие
     mail.select("inbox")
 
