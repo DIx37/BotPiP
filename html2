@@ -1,0 +1,203 @@
+Delivered-To: orders@pizzafab.ru
+Received: from imap.yandex.ru
+        by 94.100.178.33 with IMAP4 (c;1572116356:2:1)
+        Sat, 26 Oct 2019 19:25:49 +0000
+Received: from mxfront5o.mail.yandex.net (localhost [127.0.0.1])
+        by mxfront5o.mail.yandex.net with LMTP id mEkMxWco0R-hRQc9fN7
+        for <orderspip@yandex.ru>; Sat, 26 Oct 2019 22:03:17 +0300
+Received: from m1.rauf2.beget.com (m1.rauf2.beget.com [87.236.20.118])
+        by mxfront5o.mail.yandex.net (nwsmtp/Yandex) with ESMTPS id kBIw9OPrnM-3G4qcAId;
+        Sat, 26 Oct 2019 22:03:16 +0300
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (Client certificate not present)
+Return-Path: info@birdsandbees.ru
+X-Yandex-Front: mxfront5o.mail.yandex.net
+X-Yandex-TimeMark: 1572116596.491
+Authentication-Results: mxfront5o.mail.yandex.net; spf=softfail (mxfront5o.mail.yandex.net: transitioning domain of birdsandbees.ru does not designate 87.236.20.118 as permitted sender, rule=[~all]) smtp.mail=info@birdsandbees.ru
+X-Yandex-Suid-Status: 1 1374962457
+X-Yandex-Spam: 1
+X-Yandex-Envelope: aGVsbz1tMS5yYXVmMi5iZWdldC5jb20KbWFpbF9mcm9tPWluZm9AYmlyZHNhbmRiZWVzLnJ1CnJjcHRfdG89b3JkZXJzcGlwQHlhbmRleC5ydQpyZW1vdGVfaG9zdD1tMS5yYXVmMi5iZWdldC5jb20KcmVtb3RlX2lwPTg3LjIzNi4yMC4xMTgK
+X-Yandex-Fwd: NTc2MDY3ODE4MDY4MjM0NjE1NSwxMzc5ODY4Mzg5ODE0NTQ3NjA0Mg==
+Received: from itpizzo1 (Authenticated sender itpizzo1@rauf2.beget.ru)
+        by rauf2.beget.ru with local (Exim 4.92-beget)
+        (envelope-from <info@birdsandbees.ru>)
+        id 1iORLH-0002Q8-8P
+        for orderspip@yandex.ru; Sat, 26 Oct 2019 22:03:15 +0300
+To: orderspip@yandex.ru
+Subject: =?UTF-8?B?0KMg0LLQsNGBINC90L7QstGL0Lkg0LfQsNC60LDQtyAjMTkxMC81MQ==?=
+Date: Sat, 26 Oct 2019 22:03:15 +0300
+From: =?UTF-8?B?0J/RgtC40YbRiyDQuCDQv9GH0ZHQu9GL?= <info@birdsandbees.ru>
+Message-ID: <6bab326d4a44e3ff132a2ef62d067885@birdsandbees.ru>
+X-Mailer: PHPMailer 5.2.26 (https://github.com/PHPMailer/PHPMailer)
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Yandex-Forward: bc7733c2bd2c5480c8f38ff8eec6d7bd
+X-Mru-Rpop: 1
+X-Ipop: 129682780
+X-Mru-UID: 1183681644
+X-Mailru-Intl-Transport: d,03c87f6
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Птицы и пчёлы</title>
+</head>
+<body style="margin:0;padding:0;background:#f6f6f6;">
+<div style="height:100%;padding-top:20px;background:#f6f6f6;">
+
+        <a href="https://birdsandbees.ru">
+            <img style="display:block;margin: auto;"
+                 src="https://birdsandbees.ru/assets/template/img/logo_2.png"
+                 alt="https://birdsandbees.ru"
+                 width="200" height="55"/>
+        </a>
+
+    <!-- body -->
+    <table class="body-wrap" style="padding:0 20px 20px 20px;width: 100%;background:#f6f6f6;margin-top:10px;">
+        <tr>
+            <td class="container" style="border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;">
+                <div class="content">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+
+    У вас новый заказ #1910/51
+                                </h3>
+
+
+                                    <table style="width:90%;margin:auto;">
+                                        <thead>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Наименование</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Количество</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Вес</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Стоимость</th>
+                                        </tr>
+                                        </thead>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1753/big/foto.jpg"
+                                                             alt="чимичурри"
+                                                             title="чимичурри"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/chimichurri-/-chesnochnyij-/-klyukvennyij-/-malinovyij-/-brusnichnyij.html"
+                                                           style="color:#348eda;">
+                                                            чимичурри                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">50 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">100 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1766/big/foto.jpg"
+                                                             alt="чесночный"
+                                                             title="чесночный"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/chesnochnyij.html"
+                                                           style="color:#348eda;">
+                                                            чесночный                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">50 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">100 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1767/big/foto.jpg"
+                                                             alt="клюквенный"
+                                                             title="клюквенный"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/klyukvennyij.html"
+                                                           style="color:#348eda;">
+                                                            клюквенный                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">50 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">100 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1768/big/foto.jpg"
+                                                             alt="малиновый"
+                                                             title="малиновый"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/malinovyij.html"
+                                                           style="color:#348eda;">
+                                                            малиновый                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">50 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">100 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1748/big/ptitsy-i-pchely-20190822-192.jpg"
+                                                             alt="ДЕНВЕР 300 гр"
+                                                             title="ДЕНВЕР 300 гр"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/denver-300-gr.html"
+                                                           style="color:#348eda;">
+                                                            ДЕНВЕР 300 гр                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">4 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">250 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 190 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1747/big/ptitsy-i-pchely-20190822-207.jpg"
+                                                             alt="БЛЕЙД 300 гр"
+                                                             title="БЛЕЙД 300 гр"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/blejd-300-gr.html"
+                                                           style="color:#348eda;">
+                                                            БЛЕЙД 300 гр                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">250 кг.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 150 руб.</td>
+                                            </tr>
+                                                                                <tfoot>
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                9 шт.                                            </th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                1 450 кг.                                            </th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                6 310 руб.                                            </th>
+                                        </tr>
+                                        </tfoot>
+
+                                    </table>
+                                    <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+                                        Итого, с доставкой:
+                                                                                <strong>6 310</strong> руб.                                    </h3>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+            </td>
+            <td></td>
+        </tr>
