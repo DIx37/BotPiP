@@ -1,0 +1,237 @@
+"Delivered-To: orders@pizzafab.ru
+Return-path: <orderspip@yandex.ru>
+Authentication-Results: emx.mail.ru; spf=pass (mxpdd31.m.smailru.net: domain of yandex.ru designates 37.140.190.181 as permitted sender) smtp.mailfrom=orderspip@yandex.ru smtp.helo=forward101o.mail.yandex.net
+Received-SPF: pass (mxpdd31.m.smailru.net: domain of yandex.ru designates 37.140.190.181 as permitted sender) client-ip=37.140.190.181; envelope-from=orderspip@yandex.ru; helo=forward101o.mail.yandex.net;
+Received: from forward101o.mail.yandex.net ([37.140.190.181]:37250)
+	by mxpdd31.m.smailru.net with esmtp (envelope-from <orderspip@yandex.ru>)
+	id 1iPilK-0000YD-E2
+	for orders@pizzafab.ru; Wed, 30 Oct 2019 10:51:26 +0300
+Received: from forward101q.mail.yandex.net (forward101q.mail.yandex.net [IPv6:2a02:6b8:c0e:4b:0:640:4012:bb98])
+	by forward101o.mail.yandex.net (Yandex) with ESMTP id 2C1C33C027D0
+	for <orders@pizzafab.ru>; Wed, 30 Oct 2019 10:51:26 +0300 (MSK)
+Received: from mxfront2q.mail.yandex.net (mxfront2q.mail.yandex.net [IPv6:2a02:6b8:c0e:370:0:640:9713:9628])
+	by forward101q.mail.yandex.net (Yandex) with ESMTP id 27D42CF40002
+	for <orders@pizzafab.ru>; Wed, 30 Oct 2019 10:51:26 +0300 (MSK)
+Received: from mxfront2q.mail.yandex.net (localhost [127.0.0.1])
+	by mxfront2q.mail.yandex.net with LMTP id MZe7QmlXO0-jIUBoYbR
+	for <orderspip@yandex.ru>; Wed, 30 Oct 2019 10:51:25 +0300
+Received: from m1.rauf2.beget.com (m1.rauf2.beget.com [87.236.20.118])
+	by mxfront2q.mail.yandex.net (nwsmtp/Yandex) with ESMTPS id V5BTJC7KVf-pPZGNZs5;
+	Wed, 30 Oct 2019 10:51:25 +0300
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client certificate not present)
+X-Yandex-Suid-Status: 1 1374962457
+X-Yandex-Fwd: NTc2MDY3ODE4MDY4MjM0NjE1NSwxMzc5ODY4Mzg5ODE0NTQ3NjA0Mg==
+Received: from itpizzo1 (Authenticated sender itpizzo1@rauf2.beget.ru)
+	by rauf2.beget.ru with local (Exim 4.92-beget)
+	(envelope-from <info@birdsandbees.ru>)
+	id 1iPilJ-0009B5-51
+	for orderspip@yandex.ru; Wed, 30 Oct 2019 10:51:25 +0300
+To: orderspip@yandex.ru
+Subject: =?UTF-8?B?0KMg0LLQsNGBINC90L7QstGL0Lkg0LfQsNC60LDQtyAjMTkxMC81OA==?=
+Date: Wed, 30 Oct 2019 10:51:25 +0300
+From: =?UTF-8?B?0J/RgtC40YbRiyDQuCDQv9GH0ZHQu9GL?= <info@birdsandbees.ru>
+Message-ID: <ef555a3983c96c065355972c1e07dbed@birdsandbees.ru>
+X-Mailer: PHPMailer 5.2.26 (https://github.com/PHPMailer/PHPMailer)
+MIME-Version: 1.0
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Yandex-Forward: bc7733c2bd2c5480c8f38ff8eec6d7bd
+X-77F55803: EB4D0EFF3B2C26D7B78C6AD6BB63D6B76B090B1A966371BE37879D9F5B5B71B9EFCBA9003E7EE1817D2AD89B776A0B8450B51C660DE91301
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE796563325B6E011C8C2099A533E45F2D0395957E7521B51C2CFCAF695D4D8E9FCEA1F7E6F0F101C6778DA827A17800CE796563325B6E011C88F08D7030A58E5AD6BA297DBC24807EA9E090A209D583F00A18204E546F3947CE09BD823EB0A41A194A01A37955EE4D8C8A9BA7A39EFB76607313C5A0F23912F2A9DFC76A009802327C277FBC8AE2E8B4D276E902E31046D3D18E9B272DCF130F4A82D016A4342E3C000B2305B6E4547A49D2DD0114DE7899E8FC8737B5C22498FED9C6A5DDD87B19E090A209D583F006C569B605AB1DE48DBF02ECDB25306B2DC472D2EB32EE5D637ED71242AC0637078DA827A17800CE7A6C6B4F62B5196E2748D6DAA7CDC329355B839D036431AF2CCE9D373345FA621492DEEA227C5E6936D6720F9B555D2266C758E381683326BCC7F00164DA146DAFE8445B8C89999728AA50765F7900637F6B57BC7E64490618DEB871D839B7333395957E7521B51C2545D4CF71C94A83E9FA2833FD35BB23D27C277FBC8AE2E8BAA867293B0326636D2E47CDBA5A965834E70A05D1297E1BBCB5012B2E24CD356
+X-Mras: OK
+X-Spam: undefined
+X-Mailru-Intl-Transport: d,03c87f6
+
+
+<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN""
+        ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
+<html xmlns=""http://www.w3.org/1999/xhtml"">
+<head>
+    <meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8""/>
+    <title>Птицы и пчёлы</title>
+</head>
+<body style=""margin:0;padding:0;background:#f6f6f6;"">
+<div style=""height:100%;padding-top:20px;background:#f6f6f6;"">
+    
+        <a href=""https://birdsandbees.ru"">
+            <img style=""display:block;margin: auto;""
+                 src=""https://birdsandbees.ru/assets/template/img/logo_2.png""
+                 alt=""https://birdsandbees.ru""
+                 width=""200"" height=""55""/>
+        </a>
+    
+    <!-- body -->
+    <table class=""body-wrap"" style=""padding:0 20px 20px 20px;width: 100%;background:#f6f6f6;margin-top:10px;"">
+        <tr>
+            <td class=""container"" style=""border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;"">
+                <div class=""content"">
+                    <table style=""width:100%;"">
+                        <tr>
+                            <td>
+                                <h3 style=""font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;"">
+                                    
+    У вас новый заказ #1910/58
+                                </h3>
+
+                                
+                                    <table style=""width:90%;margin:auto;"">
+                                        <thead>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">Наименование</th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">Количество</th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">Вес</th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">Стоимость</th>
+                                        </tr>
+                                        </thead>
+                                                                                    <tr>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <img src=""https://birdsandbees.ru/assets/images/products/1119/big/1.jpg""
+                                                             alt=""ОВОЩНАЯ СОЛОМКА из огурца, моркови, болгарского перца и помидор черри""
+                                                             title=""ОВОЩНАЯ СОЛОМКА из огурца, моркови, болгарского перца и помидор черри""
+                                                             width=""120"" height=""90""/>
+                                                                                                    </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <a href=""https://birdsandbees.ru/ovoshhnaya-solomka-iz-ogurcza-morkovi-bolgarskogo-percz.html""
+                                                           style=""color:#348eda;"">
+                                                            ОВОЩНАЯ СОЛОМКА из огурца, моркови, болгарского перца и помидор черри                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">1 шт.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">150 кг.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">150 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <img src=""https://birdsandbees.ru/assets/images/products/955/big/167.jpg""
+                                                             alt=""ФИЛЕ СИБАСА на белой фасоли в сливочно - грибном соусе""
+                                                             title=""ФИЛЕ СИБАСА на белой фасоли в сливочно - грибном соусе""
+                                                             width=""120"" height=""90""/>
+                                                                                                    </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <a href=""https://birdsandbees.ru/file-sibasa-na-beloj-fasoli-v-slivochno-gribnom-souse-i-sousom-pesto.html""
+                                                           style=""color:#348eda;"">
+                                                            ФИЛЕ СИБАСА на белой фасоли в сливочно - грибном соусе                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">1 шт.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">270 кг.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">860 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <img src=""https://birdsandbees.ru/assets/images/products/1646/big/ptitsy-i-pchely-201906251672.jpg""
+                                                             alt=""ЖАРЕНЫЙ КАЛЬМАР с запечённым картофелем и зелёным луком в соусе на выбор: соевый / устричный / чесночный""
+                                                             title=""ЖАРЕНЫЙ КАЛЬМАР с запечённым картофелем и зелёным луком в соусе на выбор: соевый / устричный / чесночный""
+                                                             width=""120"" height=""90""/>
+                                                                                                    </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <a href=""https://birdsandbees.ru/kalmar-na-grile-s-zapechyonnyim-kartofelem-i-svezhej-kinzoj.html""
+                                                           style=""color:#348eda;"">
+                                                            ЖАРЕНЫЙ КАЛЬМАР с запечённым картофелем и зелёным луком в соусе на выбор: соевый / устричный / чесночный                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">1 шт.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">280 кг.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">790 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <img src=""https://birdsandbees.ru/assets/images/products/1614/big/ptitsy-i-pchely-20190424095.jpg""
+                                                             alt=""САЛАТ ДАЧНЫЙ, с огурцом, редисом, перепелиным яйцом под йогуртовой заправкой""
+                                                             title=""САЛАТ ДАЧНЫЙ, с огурцом, редисом, перепелиным яйцом под йогуртовой заправкой""
+                                                             width=""120"" height=""90""/>
+                                                                                                    </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                                                                            <a href=""https://birdsandbees.ru/salat-dachnyij-s-ogurczom-redisom-perepelinyim-yajczom-pod-jogurtovoj-zapravkoj.html""
+                                                           style=""color:#348eda;"">
+                                                            САЛАТ ДАЧНЫЙ, с огурцом, редисом, перепелиным яйцом под йогуртовой заправкой                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">1 шт.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">260 кг.</td>
+                                                <td style=""font-family: Arial;text-align: left;color: #111111;"">310 руб.</td>
+                                            </tr>
+                                                                                <tfoot>
+                                        <tr>
+                                            <th colspan=""2""></th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                4 шт.                                            </th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                960 кг.                                            </th>
+                                            <th style=""font-family: Arial;text-align: left;color: #111111;"">
+                                                2 110 руб.                                            </th>
+                                        </tr>
+                                        </tfoot>
+
+                                    </table>
+                                    <h3 style=""font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;"">
+                                        Итого, с доставкой:
+                                                                                <strong>2 110</strong> руб.                                    </h3>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+            </td>
+            <td></td>
+        </tr>
+        
+        
+        <tr>
+            <td class=""container"" style=""border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;"">
+                
+                        <div style=""width:90%;margin:auto;"">
+                            <h2>Контактные данные</h2>
+                            <div>ФИО получателя:     <b>Хмарчук Наталья Валерьевна</b></div>
+                            <div>Телефон: <b>916815-64-94</b></div>
+                            <div>e-mail:  <b>natasha@rrb.ru</b></div>
+                            <div>Комментарий: <b>без сдачи</b></div>
+                            
+                            
+                            <h2>Адрес доставки</h2>
+                            <div>Город:  <b>Москва</b></div>
+                            <div>Улица: <b>Калужское ш. 24-й км. поселен. Сосенское</b></div>
+                            <div>Дом: <b>домовлад.1</b></div>
+                            <div>Квартира: <b>РусьРегион</b></div>
+                            
+                            <p>Оплата: <b>Оплата наличными</b></p>
+                            <p>Комментарий к заказу: <b></b></p>
+                            <p>Стоимость доставки: <b>0</b></p>
+                        </div>
+                
+            </td>
+        </tr>
+                                        
+                                        
+    </table>
+    <!-- /body -->
+    <!-- footer -->
+    <table style=""clear:both !important;width: 100%;"">
+        <tr>
+            <td></td>
+            <td class=""container"">
+                <!-- content -->
+                <div class=""content"">
+                    <table style=""width:100%;text-align: center;"">
+                        <tr>
+                            <td align=""center"">
+                                <p style=""font-family: Arial;color: #666666;font-size: 12px;"">
+                                    
+                                    <a href=""https://birdsandbees.ru"" style=""color: #999999;"">
+                                        Птицы и пчёлы                                    </a>
+                                    
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <!-- /footer -->
+</div>
+</body>
+</html>
+
+"
