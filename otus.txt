@@ -1,198 +1,260 @@
-Delivered-To: orders@pizzafab.ru
-Return-path: <orderspip@yandex.ru>
-Authentication-Results: emx.mail.ru; spf=pass (mxpdd11.m.smailru.net: domain of yandex.ru designates 5.45.198.241 as permitted sender) smtp.mailfrom=orderspip@yandex.ru smtp.helo=forward101j.mail.yandex.net
-Received-SPF: pass (mxpdd11.m.smailru.net: domain of yandex.ru designates 5.45.198.241 as permitted sender) client-ip=5.45.198.241; envelope-from=orderspip@yandex.ru; helo=forward101j.mail.yandex.net;
-Received: from forward101j.mail.yandex.net ([5.45.198.241]:45204)
-	by mxpdd11.m.smailru.net with esmtp (envelope-from <orderspip@yandex.ru>)
-	id 1kycCg-0007D3-E2
-	for orders@pizzafab.ru; Sun, 10 Jan 2021 18:00:27 +0300
-Received: from forward102q.mail.yandex.net (forward102q.mail.yandex.net [IPv6:2a02:6b8:c0e:1ba:0:640:516:4e7d])
-	by forward101j.mail.yandex.net (Yandex) with ESMTP id 42A931BE0316
-	for <orders@pizzafab.ru>; Sun, 10 Jan 2021 18:00:26 +0300 (MSK)
-Received: from vla1-9102b9bbde46.qloud-c.yandex.net (vla1-9102b9bbde46.qloud-c.yandex.net [IPv6:2a02:6b8:c0d:98f:0:640:9102:b9bb])
-	by forward102q.mail.yandex.net (Yandex) with ESMTP id 3B8943A20002
-	for <orders@pizzafab.ru>; Sun, 10 Jan 2021 18:00:26 +0300 (MSK)
-Received: from vla1-9af16629bff8.qloud-c.yandex.net (vla1-9af16629bff8.qloud-c.yandex.net [2a02:6b8:c0d:389a:0:640:9af1:6629])
-	by vla1-9102b9bbde46.qloud-c.yandex.net with LMTP id grM7oNqagH-FaaR63Fx
-	for <orderspip@yandex.ru>; Sun, 10 Jan 2021 18:00:26 +0300
-Received: from m1.rauf2.beget.com (m1.rauf2.beget.com [87.236.20.118])
-	by vla1-9af16629bff8.qloud-c.yandex.net (mxfront/Yandex) with ESMTPS id nHzFUzIvY1-0PYq5ouo;
-	Sun, 10 Jan 2021 18:00:25 +0300
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(Client certificate not present)
-X-Yandex-Suid-Status: 1 1374962457
-X-Yandex-Fwd: NTc2MDY3ODE4MDY4MjM0NjE1NSwxMzc5ODY4Mzg5ODE0NTQ3NjA0Mg==
-Received: from itpizzo1 (Authenticated sender itpizzo1@rauf2.beget.ru)
-	by rauf2.beget.ru with local (Exim 4.90.1-beget)
-	(envelope-from <request@birdsandbees.ru>)
-	id 1kycCf-000ANn-EC
-	for orderspip@yandex.ru; Sun, 10 Jan 2021 18:00:25 +0300
-To: orderspip@yandex.ru
-Subject: =?UTF-8?B?0KMg0LLQsNGBINC90L7QstGL0Lkg0LfQsNC60LDQtyAjMjEwMS8xMQ==?=
-Date: Sun, 10 Jan 2021 18:00:25 +0300
-From: =?UTF-8?B?0J/RgtC40YbRiyDQuCDQv9GH0ZHQu9GL?= <request@birdsandbees.ru>
-Message-ID: <1c9a190fb13ca67dee61d8fe528d58f5@birdsandbees.ru>
-X-Mailer: PHPMailer 5.2.27 (https://github.com/PHPMailer/PHPMailer)
-MIME-Version: 1.0
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Yandex-Forward: bc7733c2bd2c5480c8f38ff8eec6d7bd
-X-7564579A: B8F34718100C35BD
-X-77F55803: 2AE3CB71FB232A48B0AE8E75B15F0883D065BFE6A7F09A9CEF252797D5069B7B0B1B4D97AFAB451C8694CDEC45FA22E544E6EC9CE4E0F02B
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5259CC434672EE6371C2A783ECEC0211AD4AD6D5ED66289B524E70A05D1297E1BBAC83A81C8FD4AD239742502CCDD46D0D5C553DABC76643498638F802B75D45FF5571747095F342E8A1F47976AA9FA43113377AFFFEAFD26923F8577A6DFFEA7C537CDE6FCC5D86374AD6D5ED66289B52EBDA4506C45E481B518EAB20CDFFDB20D5E8D9A59859A8B64ABBC116B787A1BC9E090A209D583F00A67888F3F043C9C93D2A67FEBBB11DEA37ED71242AC06370C09775C1D3CA48CF48CA6F05B4ACA9339E090A209D583F006C569B605AB1DE48B4D9232B6BAE5DD466B8C9BA84C0253137ED71242AC0637078DA827A17800CE79E5C1B7D3F04D0A0748D6DAA7CDC329355B839D036431AF20D3BD39CBFD3FB59B0838CD44B3A85FFDFE9F66FAC70A89D7D7BB1AA93F8ADA2CC7F00164DA146DAFE8445B8C89999728AA50765F7900637BA2F0AEB80054583389733CBF5DBD5E9C8A9BA7A39EFB766F5D81C698A659EA7CC7F00164DA146DA9985D098DBDEAEC8EDCF5861DED71B2F389733CBF5DBD5E9B5C8C57E37DE458BEDDA962BC3F61961
-X-C1DE0DAB: 8BD88D57C5CADBC8B2710865C386751044134C1731524B9AD4B1C5A7DE0BC7B117A6586CE9496FEC1638054B7D09EC084CA102B2C2209A0D296C473AB1E14218862C7CFF44610546C2033CF449CDCA5DB2710865C3867510F1175FABE1C0F9B60E80A8B57FFB4C78912AB7649887A20645F93BA578C2B99FF80C73F942D37B3FC56D7844EC840A143832D4A8E5EB6C66E71C62924816F33411D9E4A111A9DE161F9513A7CA91E555FF55FE49A3C2BFCFC8C84E951CD0BE2F296C473AB1E142186AFB9B40001E44062DF5536E963C9602296C473AB1E14218A1A6A4D890CD6D7D2DF5536E963C9602D1984449AD83FB0FF76EB79A2507AE7CC6CDE5D1141D2B1C6504713F5DF549A5282B5C8A11928A6D29B0C64EB850124DAD91A466A1DEF99B296C473AB1E14218936957DD56B9F8AEEE55FF87CC2B515914426B5BD3B5D9000E5E5C374F3061BC4149B4CAC14B9A2E0BBB3A167846B17635D2385A5E2B3AC36DABF04D5057A81F43E36BDAC0F1D4243414BA6AC50EE0205D6A48FE5D414C3E29A1D76069652C34253F27DA5A70FAF3BDAD6C7F3747799A
-X-C8649E89: 4E36BF7865823D7055A7F0CF078B5EC49A30900B95165D34B8CF715B894FC71154FC94A521AE9F5AD6F1C4BFD0E8CF7BC2DFE4457B3A00B746320FD1D1ABE2011D7E09C32AA3244C237F1DCEA5862AF0B0CBC293DBC8142997FE24653F78E6683EB3F6AD6EA9203E
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr59cQFxbtK52n3Ibb91comNrwTDbZjg0ktGWyd3ZwR5M2G0g+gzS0PKeJDOBrL//rLYldd2avYxhfs9M+DuXTOBSH/SnnzuO3dUdTEydar/8eFJ0Yov0iBYpjTcJej7YfDw==
-X-F696D7D5: G8/6oklgnh+K2/3h1uDtQEJAp3C4SB0VzW/yJ2cceLVjTcJej7YfDw==
-X-Mras: Ok
-X-Spam: undefined
-X-Mailru-Intl-Transport: d,6db67b6
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Птицы и пчёлы</title>
-</head>
-<body style="margin:0;padding:0;background:#f6f6f6;">
-<div style="height:100%;padding-top:20px;background:#f6f6f6;">
-    <!-- body -->
-    <table class="body-wrap" style="padding:0 20px 20px 20px;width: 100%;background:#f6f6f6;margin-top:10px;">
-        <tr>
-            <td class="container" style="border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;">
-                <div class="content">
-                    <table style="width:100%;">
-                        <tr>
-                            <td>
-                                <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
-                                    
-    У вас новый заказ #2101/11
-                                </h3>
-
-                                
-                                    <table style="width:90%;margin:auto;">
-                                        <thead>
-                                        <tr>
-                                            <th>&nbsp;</th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">Наименование</th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">Количество</th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">Вес</th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">Стоимость</th>
-                                        </tr>
-                                        </thead>
-                                                                                    <tr>
-                                                <td style="font-family: Arial;text-align: left;color: #111111;">
-                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1566/small/188.jpg"
-                                                             alt="ТЕЛЯЧЬЯ ЩЕКОВИНА из дровяной печи с пюре"
-                                                             title="ТЕЛЯЧЬЯ ЩЕКОВИНА из дровяной печи с пюре"
-                                                             width="120" height="90"/>
-                                                                                                    </td>
-                                                <td style="font-family: Arial;text-align: left;color: #111111;">
-                                                                                                            <a href="https://birdsandbees.ru/zemlya/telyachya-shhekovina-s-nezhnyim-pyure-pod-sousom-demiglas.html"
-                                                           style="color:#348eda;">
-                                                            ТЕЛЯЧЬЯ ЩЕКОВИНА из дровяной печи с пюре                                                        </a>
-                                                                                                                                                        </td>
-                                                <td style="font-family: Arial;text-align: left;color: #111111;">1 шт.</td>
-                                                <td style="font-family: Arial;text-align: left;color: #111111;">0 г.</td>
-                                                <td style="font-family: Arial;text-align: left;color: #111111;">850 руб.</td>
-                                            </tr>
-                                                                                <tfoot>
-                                        <tr>
-                                            <th colspan="2"></th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">
-                                                1 шт.                                            </th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">
-                                                0 г.                                            </th>
-                                            <th style="font-family: Arial;text-align: left;color: #111111;">
-                                                765 руб.                                            </th>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                    <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
-                                        Итого, с доставкой:
-                                                                                <strong>765</strong> руб.                                    </h3>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- /content -->
-            </td>
-        </tr>
-        <tr>
-            <td class="container" style="border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;">
-                
-                        <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
-                            Контактные данные
-                        </h3>
-                        <div style="width:90%;margin:auto;">
-                            <div>ФИО получателя:     <b>Татьяна</b></div>
-                            <div>Телефон: <b>+7916870-41-27</b></div>
-                            <div>e-mail:  <b>istchuk_tatiana@mail.ru</b></div>
-                            <div>Комментарий: <b></b></div>
-                        </div>
-                            
-                        <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
-                            Адрес доставки
-                        </h3>
-                        <div style="width:90%;margin:auto;">
-                            <div>Город:  <b></b></div>
-                            <div>Улица: <b></b></div>
-                            <div>Дом: <b></b></div>
-                            <div>Квартира: <b></b></div>
-                            
-                            <p>Оплата: <b>Оплата картой при получении заказа</b></p>
-                            <p>Комментарий к заказу: <b></b></p>
-                            <p>Стоимость доставки: <b>-10%</b></p>
-                        </div>
-                
-            </td>
-        </tr>
-        
-        
-        
-    </table>
-    <!-- /body -->
-    <table style="clear:both !important;width: 100%;">
-        <tr>
-            <td></td>
-            <td class="container">
-                <!-- content -->
-                <div class="content">
-                    <table style="width:100%;text-align: center;">
-                        <tr>
-                            <td align="center">
-                                <p style="font-family: Arial;color: #666666;font-size: 12px;">
-                                    
-                            
-                                <a href="https://birdsandbees.ru/menyu/" style="color: #ff0000;font-size:18px;">Новое меню!</a> |  
-                                <a href="https://birdsandbees.ru/napitki/" style="color: #ff0000;font-size:18px;">напитки, пиво</a> |  
-                                <a href="https://birdsandbees.ru/desertyi/" style="color: #ff0000;font-size:18px;">десерты</a> |  
-                                <a href="https://birdsandbees.ru/giriachie-zakuski/" style="color: #ff0000;font-size:18px;">горячие закуски</a>
-                                    
-                                </p>
-
-                                <p style="font-family: Arial;color: #666666;font-size: 12px;">
-                                    <a href="https://birdsandbees.ru" style="color: #999999;">
-                                        Птицы и пчёлы                                    </a>                                    
-                                </p>
-                               
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- /content -->
-            </td>
-            <td></td>
-        </tr>
-    </table>    
-    <!-- footer -->
-
-    <!-- /footer -->
-</div>
-</body>
-</html>
-
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Птицы и пчёлы</title>
+</head>
+<body style="margin:0;padding:0;background:#f6f6f6;">
+<div style="height:100%;padding-top:20px;background:#f6f6f6;">
+    <!-- body -->
+    <table class="body-wrap" style="padding:0 20px 20px 20px;width: 100%;background:#f6f6f6;margin-top:10px;">
+        <tr>
+            <td class="container" style="border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;">
+                <div class="content">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+                                    
+    У вас новый заказ #2105/6
+                                </h3>
+
+                                
+                                    <table style="width:90%;margin:auto;">
+                                        <thead>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Наименование</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Количество</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Вес</th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">Стоимость</th>
+                                        </tr>
+                                        </thead>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1767/small/ptitsy-i-pchely-20190424497.jpg"
+                                                             alt="ХРУСТЯЩИЕ БАКЛАЖАНЫ с кунжутом и узбекскими томатами"
+                                                             title="ХРУСТЯЩИЕ БАКЛАЖАНЫ с кунжутом и узбекскими томатами"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/giriachie-zakuski/salat-ix-xrustyashhix-baklazhan-s-kunzhutom-i-svezhimi-tomatami.html"
+                                                           style="color:#348eda;">
+                                                            ХРУСТЯЩИЕ БАКЛАЖАНЫ с кунжутом и узбекскими томатами                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">3 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">0 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">480 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1944/small/ptitsy-i-pchely-2020.06.14-299.jpg"
+                                                             alt="АДЖАПСАНДАЛИ тар-тар из печёных овощей"
+                                                             title="АДЖАПСАНДАЛИ тар-тар из печёных овощей"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/zakuski/adzhapsandali-tar-tar-iz-pechyonyix-ovoshhej.html"
+                                                           style="color:#348eda;">
+                                                            АДЖАПСАНДАЛИ тар-тар из печёных овощей                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">2 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">0 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">350 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1758/small/fokachcha-ss-chesnokom.jpg"
+                                                             alt="ФОКАЧЧА с чесноком"
+                                                             title="ФОКАЧЧА с чесноком"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/xleb/fokachcha-s-chesnokom.html"
+                                                           style="color:#348eda;">
+                                                            ФОКАЧЧА с чесноком                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">2 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">180 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">230 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1627/small/ptitsy-i-pchely-2020.06.17-722.jpg"
+                                                             alt="КАРТОФЕЛЬ по-ДЕРЕВЕНСКИ"
+                                                             title="КАРТОФЕЛЬ по-ДЕРЕВЕНСКИ"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/garniryi/kartoshka-po-derevenski.html"
+                                                           style="color:#348eda;">
+                                                            КАРТОФЕЛЬ по-ДЕРЕВЕНСКИ                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">3 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">180 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">210 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1674/small/ptitsy-i-pchely-2020.06.14-351.jpg"
+                                                             alt="ШАШЛЫК из КУРИНОГО БЕДРА"
+                                                             title="ШАШЛЫК из КУРИНОГО БЕДРА"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/shashlyiki/shashlyik-iz-kurinogo-bedra.html"
+                                                           style="color:#348eda;">
+                                                            ШАШЛЫК из КУРИНОГО БЕДРА                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">3 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">0 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">610 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1677/small/ptitsy-i-pchely-2020.06.14-311.jpg"
+                                                             alt="ШАШЛЫК из СВИНОЙ ШЕИ"
+                                                             title="ШАШЛЫК из СВИНОЙ ШЕИ"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/shashlyiki/shashlyik-iz-svinoj-shei.html"
+                                                           style="color:#348eda;">
+                                                            ШАШЛЫК из СВИНОЙ ШЕИ                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">2 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">330 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">630 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/2043/small/img-20200818-wa0027.jpg"
+                                                             alt="ШАШЛЫК из БАРАНИНЫ"
+                                                             title="ШАШЛЫК из БАРАНИНЫ"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/shashlyiki/shashlyik-iz-baraninyi.html"
+                                                           style="color:#348eda;">
+                                                            ШАШЛЫК из БАРАНИНЫ                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">2 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">330 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">730 руб.</td>
+                                            </tr>
+                                                                                    <tr>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <img src="https://birdsandbees.ru/assets/images/products/1675/small/ptitsy-i-pchely-2020.06.14-346.jpg"
+                                                             alt="ЛЮЛЯ из БАРАНИНЫ"
+                                                             title="ЛЮЛЯ из БАРАНИНЫ"
+                                                             width="120" height="90"/>
+                                                                                                    </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">
+                                                                                                            <a href="https://birdsandbees.ru/shashlyiki/lyulya-kebab-230griz-baraninyi.html"
+                                                           style="color:#348eda;">
+                                                            ЛЮЛЯ из БАРАНИНЫ                                                        </a>
+                                                                                                                                                        </td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">4 шт.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">0 г.</td>
+                                                <td style="font-family: Arial;text-align: left;color: #111111;">790 руб.</td>
+                                            </tr>
+                                                                                <tfoot>
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                21 шт.                                            </th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                2 220 г.                                            </th>
+                                            <th style="font-family: Arial;text-align: left;color: #111111;">
+                                                10 940 руб.                                            </th>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+                                        Итого, с доставкой:
+                                                                                <strong>10 940</strong> руб.                                    </h3>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+            </td>
+        </tr>
+        <tr>
+            <td class="container" style="border:1px solid #f0f0f0;background:#ffffff;width:800px;margin:auto;">
+                
+                        <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+                            Контактные данные
+                        </h3>
+                        <div style="width:90%;margin:auto;">
+                            <div>ФИО получателя:     <b>Сергей</b></div>
+                            <div>Телефон: <b>+7964566-66-55</b></div>
+                            <div>e-mail:  <b>Skar52@mail.ru</b></div>
+                            <div>Комментарий: <b>Подъезд 2, этаж 9, домофон #1003#, на этаже домофон 91</b></div>
+                        </div>
+                            
+                        <h3 style="font-family:Arial;color: #111111;font-weight: 200;line-height: 1.2em;margin: 40px 20px;font-size: 22px;">
+                            Адрес доставки
+                        </h3>
+                        <div style="width:90%;margin:auto;">
+                            <div>Город:  <b>Москва</b></div>
+                            <div>Улица: <b>Александры Монаховой</b></div>
+                            <div>Дом: <b>88 корп.1</b></div>
+                            <div>Квартира: <b>91</b></div>
+                            
+                            <p>Оплата: <b>Оплата картой при получении заказа</b></p>
+                            <p>Комментарий к заказу: <b></b></p>
+                            <p>Стоимость доставки: <b>0</b></p>
+                        </div>
+                
+            </td>
+        </tr>
+        
+        
+        
+    </table>
+    <!-- /body -->
+    <table style="clear:both !important;width: 100%;">
+        <tr>
+            <td></td>
+            <td class="container">
+                <!-- content -->
+                <div class="content">
+                    <table style="width:100%;text-align: center;">
+                        <tr>
+                            <td align="center">
+                                <p style="font-family: Arial;color: #666666;font-size: 12px;">
+                                    
+                            
+                                <a href="https://birdsandbees.ru/menyu/" style="color: #ff0000;font-size:18px;">Новое меню!</a> |  
+                                <a href="https://birdsandbees.ru/napitki/" style="color: #ff0000;font-size:18px;">напитки, пиво</a> |  
+                                <a href="https://birdsandbees.ru/desertyi/" style="color: #ff0000;font-size:18px;">десерты</a> |  
+                                <a href="https://birdsandbees.ru/giriachie-zakuski/" style="color: #ff0000;font-size:18px;">горячие закуски</a>
+                                    
+                                </p>
+
+                                <p style="font-family: Arial;color: #666666;font-size: 12px;">
+                                    <a href="https://birdsandbees.ru" style="color: #999999;">
+                                        Птицы и пчёлы                                    </a>                                    
+                                </p>
+                               
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /content -->
+            </td>
+            <td></td>
+        </tr>
+    </table>    
+    <!-- footer -->
+
+    <!-- /footer -->
+</div>
+</body>
+</html>
+
