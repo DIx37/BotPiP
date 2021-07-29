@@ -29,8 +29,7 @@ class Modbus:
                 modbus_res = err_text
         return str(modbus_res)
 
-# Запись данных по modbus
-# def modbus_set(modbus_ip, adress, numb, type=0):
+    """Записть по протоколу modbus"""
     def write(self, adress, number, type_modbus=None):
         master = modbus_tcp.TcpMaster(host=adress, port=502)
         master.set_timeout(1.0)

@@ -358,11 +358,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "podn") == True:
         await call.answer()
-        l22_json = LJ.l5_json_read_all(L_IP22, L_Pass)
-        if l22_json[8][0] == "0":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
-        elif l22_json[8][0] == "1":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,1,0")
+        switch_rele("L5", L_IP22, L_Pass, 1)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -386,11 +382,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "rekl") == True:
         await call.answer()
-        l22_json = LJ.l5_json_read_all(L_IP22, L_Pass)
-        if l22_json[8][1] == "0":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,2,1")
-        elif l22_json[8][1] == "1":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,2,0")
+        switch_rele("L5", L_IP22, L_Pass, 2)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -414,11 +406,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "park") == True:
         await call.answer()
-        l22_json = LJ.l5_json_read_all(L_IP22, L_Pass)
-        if l22_json[8][2] == "0":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,3,1")
-        elif l22_json[8][2] == "1":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,3,0")
+        switch_rele("L5", L_IP22, L_Pass, 3)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -442,11 +430,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "ekra") == True:
         await call.answer()
-        l22_json = LJ.l5_json_read_all(L_IP22, L_Pass)
-        if l22_json[8][3] == "0":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,4,1")
-        elif l22_json[8][3] == "1":
-            requests.get(f"http://{L_IP22}/cmd.cgi?psw={L_Pass}&cmd=REL,4,0")
+        switch_rele("L5", L_IP22, L_Pass, 4)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -470,13 +454,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "basv") == True:
         await call.answer()
-        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-        print(l21_json)
-        print(l21_json[8])
-        if l21_json[8][0] == "0":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
-        elif l21_json[8][0] == "1":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,1,0")
+        switch_rele("L5", L_IP21, L_Pass, 1)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -500,11 +478,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "basn") == True:
         await call.answer()
-        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-        if l21_json[8][1] == "0":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,2,1")
-        elif l21_json[8][1] == "1":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,2,0")
+        switch_rele("L5", L_IP21, L_Pass, 2)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -528,11 +502,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "podz") == True:
         await call.answer()
-        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-        if l21_json[8][2] == "0":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,3,1")
-        elif l21_json[8][2] == "1":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,3,0")
+        switch_rele("L5", L_IP21, L_Pass, 3)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -556,11 +526,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "vodo") == True:
         await call.answer()
-        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-        if l21_json[8][3] == "0":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,4,1")
-        elif l21_json[8][3] == "1":
-            requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,4,0")
+        switch_rele("L5", L_IP21, L_Pass, 4)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -666,16 +632,10 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "mang") == True:
         await call.answer()
-        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-        if l20_json != "N/A":
-            if l20_json[8][0] == "0":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
-            elif l20_json[8][0] == "1":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,1,0")
+        switch_rele("L5", L_IP20, L_Pass, 1)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -687,16 +647,10 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "pizz") == True:
         await call.answer()
-        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-        if l20_json != "N/A":
-            if l20_json[8][1] == "0":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,2,1")
-            elif l20_json[8][1] == "1":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,2,0")
+        switch_rele("L5", L_IP20, L_Pass, 2)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -708,16 +662,10 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "ostr") == True:
         await call.answer()
-        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-        if l20_json != "N/A":
-            if l20_json[8][2] == "0":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,3,1")
-            elif l20_json[8][2] == "1":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,3,0")
+        switch_rele("L5", L_IP20, L_Pass, 3)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -729,16 +677,10 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "smok") == True:
         await call.answer()
-        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-        if l20_json != "N/A":
-            if l20_json[8][3] == "0":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,4,1")
-            elif l20_json[8][3] == "1":
-                requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,4,0")
+        switch_rele("L5", L_IP20, L_Pass, 4)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -816,7 +758,6 @@ async def update(call: CallbackQuery):
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
         await call.answer()
         l24_xml = LJ.l2_xml_read_all(L_IP24)
-        print(l24_xml)
         if l24_xml != "N/A":
             requests.get(f"http://{L_IP24}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
             time.sleep(0.5)

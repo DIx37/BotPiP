@@ -27,6 +27,22 @@ def check_user_acess(user, rele):
         result = False
     return result
 
+# Главное меню
+def main_menu(user):
+    main_menu = InlineKeyboardMarkup(row_width=2)
+    pool_menu = InlineKeyboardButton(text="Бассейн и ВП", callback_data="pool_menu")
+    main_menu.insert(pool_menu)
+    vent_menu = InlineKeyboardButton(text="Вентиляция", callback_data="vent_menu")
+    main_menu.insert(vent_menu)
+    rekup_pri_menu = InlineKeyboardButton(text="Рекуператоры и Приточки", callback_data="rekup_pri_menu")
+    main_menu.insert(rekup_pri_menu)
+    re_orang = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="re_orang")
+    main_menu.add(re_orang)
+    laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
+    main_menu.add(laurent_menu)
+    return main_menu
+
+# Бассейн и ВП
 def pool_menu(user):
     pool_menu = InlineKeyboardMarkup(row_width=2)
     if check_user_acess(user, "podn"):
@@ -68,20 +84,47 @@ def pool_menu(user):
     pool_menu.insert(update)
     return pool_menu
 
-def main_menu(user):
-    main_menu = InlineKeyboardMarkup(row_width=2)
-    pool_menu = InlineKeyboardButton(text="Бассейн и ВП", callback_data="pool_menu")
-    main_menu.insert(pool_menu)
-    vent_menu = InlineKeyboardButton(text="Вентиляция", callback_data="vent_menu")
-    main_menu.insert(vent_menu)
-    rekup_pri_menu = InlineKeyboardButton(text="Рекуператоры и Приточки", callback_data="rekup_pri_menu")
-    main_menu.insert(rekup_pri_menu)
-    re_orang = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="re_orang")
-    main_menu.add(re_orang)
-    laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
-    main_menu.add(laurent_menu)
-    return main_menu
+# Вентиляция
+def vent_menu():
+    vent_menu = InlineKeyboardMarkup(row_width=2)
+    mang = InlineKeyboardButton(text="Мангал", callback_data="mang")
+    vent_menu.insert(mang)
+    pizz = InlineKeyboardButton(text="Пицца", callback_data="pizz")
+    vent_menu.insert(pizz)
+    ostr = InlineKeyboardButton(text="Остров", callback_data="ostr")
+    vent_menu.add(ostr)
+    smok = InlineKeyboardButton(text="Смокер", callback_data="smok")
+    vent_menu.insert(smok)
+    smok80 = InlineKeyboardButton(text="Смокер 80", callback_data="smok80")
+    vent_menu.add(smok80)
+    smok100 = InlineKeyboardButton(text="Смокер 100", callback_data="smok100")
+    vent_menu.insert(smok100)
+    main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
+    vent_menu.insert(main_menu)
+    vent_menu_u = InlineKeyboardButton(text="Обновить", callback_data="vent_menu")
+    vent_menu.insert(vent_menu_u)
+    return vent_menu
 
+# Рекуператоры и Приточки
+def rekup_pri_menu():
+    rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
+    banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
+    rekup_pri_menu.insert(banketniy_zal)
+    pizz = InlineKeyboardButton(text="Подвал", callback_data="podv")
+    rekup_pri_menu.add(pizz)
+    ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhn")
+    rekup_pri_menu.insert(ostr)
+    smok = InlineKeyboardButton(text="Гостиная", callback_data="gost")
+    rekup_pri_menu.insert(smok)
+    smok80 = InlineKeyboardButton(text="Оранжерея", callback_data="oran")
+    rekup_pri_menu.insert(smok80)
+    main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
+    rekup_pri_menu.insert(main_menu)
+    rekup_pri_menu_u = InlineKeyboardButton(text="Обновить", callback_data="rekup_pri_menu")
+    rekup_pri_menu.insert(rekup_pri_menu_u)
+    return rekup_pri_menu
+
+# Оранжерея Реклама
 def re_orang(user):
     re_orang = InlineKeyboardMarkup(row_width=2)
     if check_user_acess(user, "perekl"):
@@ -102,43 +145,12 @@ def re_orang(user):
     re_orang.insert(back)
     return re_orang
 
-def vent_menu(user):
-    vent_menu = InlineKeyboardMarkup(row_width=2)
-    mang = InlineKeyboardButton(text="Мангал", callback_data="mang")
-    vent_menu.insert(mang)
-    pizz = InlineKeyboardButton(text="Пицца", callback_data="pizz")
-    vent_menu.insert(pizz)
-    ostr = InlineKeyboardButton(text="Остров", callback_data="ostr")
-    vent_menu.add(ostr)
-    smok = InlineKeyboardButton(text="Смокер", callback_data="smok")
-    vent_menu.insert(smok)
-    smok80 = InlineKeyboardButton(text="Смокер 80", callback_data="smok80")
-    vent_menu.add(smok80)
-    smok100 = InlineKeyboardButton(text="Смокер 100", callback_data="smok100")
-    vent_menu.insert(smok100)
+# Ссылки на Laurent
+def laurent_menu():
+    laurent_menu = InlineKeyboardMarkup(row_width=1)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
-    vent_menu.insert(main_menu)
-    vent_menu_u = InlineKeyboardButton(text="Обновить", callback_data="vent_menu")
-    vent_menu.insert(vent_menu_u)
-    return vent_menu
-
-def rekup_pri_menu(user):
-    rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
-    banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
-    rekup_pri_menu.insert(banketniy_zal)
-    pizz = InlineKeyboardButton(text="Подвал", callback_data="podv")
-    rekup_pri_menu.add(pizz)
-    ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhn")
-    rekup_pri_menu.insert(ostr)
-    smok = InlineKeyboardButton(text="Гостиная", callback_data="gost")
-    rekup_pri_menu.insert(smok)
-    smok80 = InlineKeyboardButton(text="Оранжерея", callback_data="oran")
-    rekup_pri_menu.insert(smok80)
-    main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
-    rekup_pri_menu.insert(main_menu)
-    rekup_pri_menu_u = InlineKeyboardButton(text="Обновить", callback_data="rekup_pri_menu")
-    rekup_pri_menu.insert(rekup_pri_menu_u)
-    return rekup_pri_menu
+    laurent_menu.insert(main_menu)
+    return laurent_menu
 
 def banketniy_zal(user):
     callback_rap = CallbackData("ustan", "temp_ust", "action", "IP")
@@ -186,12 +198,6 @@ def oran(user):
     oran_u = InlineKeyboardButton(text="Обновить", callback_data="oran")
     oran.insert(oran_u)
     return oran
-
-def laurent_menu(user):
-    laurent_menu = InlineKeyboardMarkup(row_width=1)
-    main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
-    laurent_menu.insert(main_menu)
-    return laurent_menu
 
 menu_time = InlineKeyboardMarkup(row_width=2)
 update = InlineKeyboardButton(text="Понедельник", callback_data="pon")
