@@ -124,8 +124,8 @@ def vent_menu(user):
 
 def rekup_pri_menu(user):
     rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
-    bank = InlineKeyboardButton(text="Банкетный зал", callback_data="bank")
-    rekup_pri_menu.insert(bank)
+    banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
+    rekup_pri_menu.insert(banketniy_zal)
     pizz = InlineKeyboardButton(text="Подвал", callback_data="podv")
     rekup_pri_menu.add(pizz)
     ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhn")
@@ -140,7 +140,7 @@ def rekup_pri_menu(user):
     rekup_pri_menu.insert(rekup_pri_menu_u)
     return rekup_pri_menu
 
-def bank(user):
+def banketniy_zal(user):
     callback_rap = CallbackData("ustan", "temp_ust", "action", "IP")
     bank = InlineKeyboardMarkup(row_width=2)
     temp_ust_now = int(MR.modbus_get(P_IP30, 41023, float))
@@ -151,7 +151,7 @@ def bank(user):
     bank.insert(ust_plus)
     rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
     bank.add(rekup_pri_menu)
-    bank_u = InlineKeyboardButton(text="Обновить", callback_data="bank")
+    bank_u = InlineKeyboardButton(text="Обновить", callback_data="banketniy_zal")
     bank.insert(bank_u)
     return bank
 

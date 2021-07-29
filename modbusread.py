@@ -10,7 +10,39 @@ from loguru import logger
 import platform
 import config
 
-logger.add(config.path_bot + "BotPiP.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
+class Modbus:
+    """Работа с протоколом modbus"""
+    def __init__(self, ip=None, adress=None, type=None):
+
+        self.ip = ip
+        self.adress = adress
+        self.type = type
+    
+    def read(self):
+        master = modbus_tcp.TcpMaster(host=self.ip, port=502)
+        master.set_timeout(1.0)
+        try:
+            if type == float:
+                modbus_res = master.execute(1,cst.READ_INPUT_REGISTERS, self.adress, 2)
+                modbus_res = tofloat(modbus_res)
+            elif type == "holding":
+                modbus_res = master.execute(1,cst.READ_HOLDING_REGISTERS, self.adress, 1)
+                modbus_res = modbus_res[0]
+            else:
+                modbus_res = master.execute(1,cst.READ_COILS, self.adress, 1)
+                modbus_res = modbus_res[0]
+        except Exception as err_text:
+            if str(err_text) == "timed out":
+                modbus_res = "N/A"
+            elif str(err_text) == "[WinError 10054] Удаленный хост принудительно разорвал существующее подключение":
+                modbus_res = "WinError 10054"
+            else:
+                modbus_res = err_text
+        return modbus_res
+
+    def write(self):
+        pass
+
 
 # Запрос данных
 @logger.catch
