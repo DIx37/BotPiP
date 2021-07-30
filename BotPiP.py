@@ -317,7 +317,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=banz + podv + kuhn + gost + oran)
         await call.message.edit_reply_markup(reply_markup=kb.rekup_pri_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(banz + podv + kuhn + gost + oran)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -337,7 +336,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=laurent_menu)
         await call.message.edit_reply_markup(reply_markup=kb.laurent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(laurent_menu)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -368,9 +366,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -392,9 +387,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -416,9 +408,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -440,9 +429,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -464,9 +450,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -488,9 +471,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -512,9 +492,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -536,9 +513,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -577,9 +551,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -618,9 +589,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_w + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_w)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -729,7 +697,6 @@ async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "re_orang") == True:
         await call.answer()
         await call.message.edit_text(text="Подсматриеваем за камерой")
-        cs.screen_f()
         l24_xml = LJ.l2_xml_read_all(L_IP24)
         if l24_xml != "N/A":
             if l24_xml[3][0] == "0":
@@ -737,6 +704,7 @@ async def update(call: CallbackQuery):
             elif l24_xml[3][0] == "1":
                 await call.message.edit_text(text="Отключен режим автоматического переключения каналов")
             await call.message.edit_reply_markup(reply_markup=kb.re_orang(call.from_user.id))
+            cs.screen_f()
             res = await bot.send_photo(photo = open(config.path_bot + 'screen0.jpg', 'rb'), chat_id=call.from_user.id)
             time.sleep(5)
             await bot.delete_message(chat_id=call.from_user.id, message_id = res.message_id)
@@ -873,13 +841,12 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_bank)
         message_bank += banketniy_zal.read(41100, "holding") + "   Мощность Э. Калор.\n"
         await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
 @dp.callback_query_handler(text="podv")
@@ -1128,17 +1095,59 @@ async def update(call: CallbackQuery):
         await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
-callback_rap = CallbackData("ustan", "temp_ust", "action", "IP")
-
-@dp.callback_query_handler(callback_rap.filter(action=["ust_minus", "ust_plus"]))
+callback_rap = CallbackData("set", "action", "number", "IP")
+@dp.callback_query_handler(callback_rap.filter(action=["pusk", "stop", "dist_mest", "ust_plus", "ust_minus", "set_speed_ventP_plus", "set_speed_ventP_minus", "set_speed_ventV_plus", "set_speed_ventV_minus", "sbros_error", "stop_vv", "start_vv"]))
 @logger.catch
 async def update(call: CallbackQuery, callback_data: dict):
     if check_user_acess(call.from_user.id, "temp_ust_plus") == True:
         await call.answer()
-        if callback_data["action"] == "ust_plus":
-            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["temp_ust"]), float)
+        if callback_data["action"] == "pusk":
+            MR.modbus_set(callback_data["IP"], 15362, 1)
+            time.sleep(2)
+            MR.modbus_set(callback_data["IP"], 15362, 0)
+            time.sleep(1)
+        elif callback_data["action"] == "stop":
+            MR.modbus_set(callback_data["IP"], 15363, 0)
+            time.sleep(2)
+            MR.modbus_set(callback_data["IP"], 15363, 1)
+            time.sleep(1)
+#        elif callback_data["action"] == "dist_mest":
+#            MR.modbus_set(callback_data["IP"], 15360, 1)
+#            time.sleep(2)
+#            MR.modbus_set(callback_data["IP"], 15360, 0)
+        elif callback_data["action"] == "sbros_error":
+            MR.modbus_set(callback_data["IP"], 15364, 1)
+            time.sleep(2)
+            MR.modbus_set(callback_data["IP"], 15364, 0)
+            time.sleep(1)
+        elif callback_data["action"] == "stop_vv":
+            MR.modbus_set(callback_data["IP"], 15366, 1)
+        elif callback_data["action"] == "start_vv":
+            MR.modbus_set(callback_data["IP"], 15366, 0)
+        elif callback_data["action"] == "set_speed_ventP_plus":
+            MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+        elif callback_data["action"] == "set_speed_ventP_minus":
+            MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+        elif callback_data["action"] == "set_speed_ventV_plus":
+            MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+        elif callback_data["action"] == "set_speed_ventV_minus":
+            MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+        elif callback_data["action"] == "ust_plus":
+            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":
-            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["temp_ust"]), float)
+            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+#            # Пуск/Стоп
+#        elif message.text.lower() == "бз. пус/сто" and acess_status < 2:
+#            try:
+#                mget = modbus_get("172.16.1.30", 14340)
+#                if mget == 0:
+#                    modbus_set("172.16.1.30", 15362, 1)
+#                    time.sleep(2)
+#                    modbus_set("172.16.1.30", 15362, 0)
+#                elif mget == 1:
+#                    modbus_set("172.16.1.30", 15363, 0)
+#                    time.sleep(2)
+#                    modbus_set("172.16.1.30", 15363, 1)
         message_bank=f"Банкетный зал:{space}\n"
         await call.message.edit_text(text=message_bank)
         pust = banketniy_zal.read(14340)
@@ -1197,13 +1206,12 @@ async def update(call: CallbackQuery, callback_data: dict):
         await call.message.edit_text(text=message_bank)
         message_bank += banketniy_zal.read(41100, "holding") + "   Мощность Э. Калор.\n"
         await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
 @dp.callback_query_handler(text="time")

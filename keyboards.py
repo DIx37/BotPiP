@@ -7,12 +7,19 @@ import datetime as dt
 from sqllite import SQLighter
 import re
 import modbusread as MR
+from modbus import Modbus
 
+# Переменные
 P_IP30 = config.Pixel_IP30
 P_IP31 = config.Pixel_IP31
 P_IP32 = config.Pixel_IP32
 P_IP33 = config.Pixel_IP33
 P_IP34 = config.Pixel_IP34
+banketniy_zal = Modbus(P_IP30)
+podval = Modbus(P_IP31)
+kuhnya = Modbus(P_IP32)
+gostinaya = Modbus(P_IP33)
+oranjereya = Modbus(P_IP34)
 L_IP24 = config.Laurent_IP_Pool24
 
 # Подключение к БД
@@ -85,7 +92,7 @@ def pool_menu(user):
     return pool_menu
 
 # Вентиляция
-def vent_menu():
+def vent_menu(user):
     vent_menu = InlineKeyboardMarkup(row_width=2)
     mang = InlineKeyboardButton(text="Мангал", callback_data="mang")
     vent_menu.insert(mang)
@@ -106,7 +113,7 @@ def vent_menu():
     return vent_menu
 
 # Рекуператоры и Приточки
-def rekup_pri_menu():
+def rekup_pri_menu(user):
     rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
     banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
     rekup_pri_menu.insert(banketniy_zal)
@@ -146,26 +153,105 @@ def re_orang(user):
     return re_orang
 
 # Ссылки на Laurent
-def laurent_menu():
+def laurent_menu(user):
     laurent_menu = InlineKeyboardMarkup(row_width=1)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
     laurent_menu.insert(main_menu)
     return laurent_menu
 
-def banketniy_zal(user):
-    callback_rap = CallbackData("ustan", "temp_ust", "action", "IP")
-    bank = InlineKeyboardMarkup(row_width=2)
-    temp_ust_now = int(MR.modbus_get(P_IP30, 41023, float))
-    if temp_ust_now > 16:
-        ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(temp_ust=temp_ust_now - 1, action="ust_minus", IP=P_IP30))
-        bank.insert(ust_minus)
-    ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(temp_ust=temp_ust_now + 1, action="ust_plus", IP=P_IP30))
-    bank.insert(ust_plus)
+def banketniy_zal_menu(user):
+    callback_rap = CallbackData("set", "action", "number", "IP")
+    banketniy_zal_menu = InlineKeyboardMarkup(row_width=2)
+
+    pusk_stop_now = banketniy_zal.read(14340)
+    if pusk_stop_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if pusk_stop_now == "0":
+            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP30))
+            banketniy_zal_menu.insert(pusk_stop)
+        elif pusk_stop_now == "1":
+            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP30))
+            banketniy_zal_menu.insert(pusk_stop)
+
+#    dist_mest_now = banketniy_zal.read(14342)
+#    if dist_mest_now == "WinError 10054" or dist_mest_now == "N/A":
+#        pass
+#    else:
+#        if dist_mest_now == "0":
+#            dist_mest = InlineKeyboardButton(text="Местно", callback_data=callback_rap.new(number="None", action="dist_mest", IP=P_IP30))
+#            banketniy_zal_menu.insert(dist_mest)
+#        elif dist_mest_now == "1":
+#            dist_mest = InlineKeyboardButton(text="Дистанционно", callback_data=callback_rap.new(number="None", action="dist_mest", IP=P_IP30))
+#            banketniy_zal_menu.insert(dist_mest)
+
+    sbros_error_now = banketniy_zal.read(14342)
+    if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
+        pass
+    else:
+        if sbros_error_now == "1":
+            sbros_error = InlineKeyboardButton(text="Сбросить аварию", callback_data=callback_rap.new(number="None", action="sbros_error", IP=P_IP30))
+            banketniy_zal_menu.add(sbros_error)
+
+    stop_start_vv_now = banketniy_zal.read(15366)
+    if stop_start_vv_now == "WinError 10054" or stop_start_vv_now == "N/A":
+        pass
+    else:
+        if stop_start_vv_now == "0":
+            stop_vv = InlineKeyboardButton(text="Остановить ВВ", callback_data=callback_rap.new(number="None", action="stop_vv", IP=P_IP30))
+            banketniy_zal_menu.add(stop_vv)
+        elif stop_start_vv_now == "1":
+            start_vv = InlineKeyboardButton(text="Включить ВВ", callback_data=callback_rap.new(number="None", action="start_vv", IP=P_IP30))
+            banketniy_zal_menu.add(start_vv)
+
+    temp_ust_now = banketniy_zal.read(41023, "float", "int")
+    if temp_ust_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if temp_ust_now > 16:
+            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP30))
+            banketniy_zal_menu.add(ust_minus)
+        if temp_ust_now < 30:
+            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP30))
+            banketniy_zal_menu.insert(ust_plus)
+
+    set_speed_ventP_now = banketniy_zal.read(41993, "holding", "int")
+    if set_speed_ventP_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventP_now < 400:
+            set_speed_ventP_now = 400
+        if set_speed_ventP_now > 400:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP30))
+            banketniy_zal_menu.add(set_speed_ventP)
+        if set_speed_ventP_now < 1000:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP30))
+            if set_speed_ventP_now == 400:
+                banketniy_zal_menu.add(set_speed_ventP)
+            else:
+                banketniy_zal_menu.insert(set_speed_ventP)
+
+    set_speed_ventV_now = banketniy_zal.read(41992, "holding", "int")
+    if set_speed_ventV_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventV_now < 400:
+            set_speed_ventV_now = 400
+        if set_speed_ventV_now > 400:
+            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventV_now - 100, action="set_speed_ventV_minus", IP=P_IP30))
+            banketniy_zal_menu.add(set_speed_ventV)
+        if set_speed_ventV_now < 1000:
+            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventV_now + 100, action="set_speed_ventV_plus", IP=P_IP30))
+            if set_speed_ventV_now == 400:
+                banketniy_zal_menu.add(set_speed_ventV)
+            else:
+                banketniy_zal_menu.insert(set_speed_ventV)
+
     rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
-    bank.add(rekup_pri_menu)
-    bank_u = InlineKeyboardButton(text="Обновить", callback_data="banketniy_zal")
-    bank.insert(bank_u)
-    return bank
+    banketniy_zal_menu.add(rekup_pri_menu)
+    banketniy_zal_menu_u = InlineKeyboardButton(text="Обновить", callback_data="banketniy_zal")
+    banketniy_zal_menu.insert(banketniy_zal_menu_u)
+    return banketniy_zal_menu
 
 def podv(user):
     podv = InlineKeyboardMarkup(row_width=2)

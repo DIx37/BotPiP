@@ -7,7 +7,7 @@ class Modbus:
         self.ip = ip
 
     """Чтение протокола modbus"""
-    def read(self, adress, type_modbus=None):
+    def read(self, adress, type_modbus=None, type_number=None):
         master = modbus_tcp.TcpMaster(host=self.ip, port=502)
         master.set_timeout(1.0)
         try:
@@ -20,6 +20,10 @@ class Modbus:
             else:
                 modbus_res = master.execute(1,cst.READ_COILS, adress, 1)
                 modbus_res = modbus_res[0]
+            if type_number == "int":
+                modbus_res = int(modbus_res)
+            else:
+                modbus_res = str(modbus_res)
         except Exception as err_text:
             if str(err_text) == "timed out":
                 modbus_res = "N/A"
@@ -27,20 +31,17 @@ class Modbus:
                 modbus_res = "WinError 10054"
             else:
                 modbus_res = err_text
-        return str(modbus_res)
+        return modbus_res
 
     """Записть по протоколу modbus"""
     def write(self, adress, number, type_modbus=None):
         master = modbus_tcp.TcpMaster(host=adress, port=502)
         master.set_timeout(1.0)
-        try:
-            if type_modbus == "float":
-                set_numb_float = 16640 + number * 8
-                master.execute(1,cst.WRITE_MULTIPLE_REGISTERS, adress, output_value=(0, set_numb_float))
-            else:
-                master.execute(1,cst.WRITE_SINGLE_REGISTER, adress, output_value=number)
-        except Exception as err:
-            print("Это ошибка функции modbus_set" + err)
+        if type_modbus == "float":
+            set_numb_float = 16640 + number * 8
+            master.execute(1,cst.WRITE_MULTIPLE_REGISTERS, adress, output_value=(0, set_numb_float))
+        else:
+            master.execute(1,cst.WRITE_SINGLE_REGISTER, adress, output_value=number)
 
 """Функция преобразования двух адресов в число с плавающей запятой"""
 def tofloat(getDI):

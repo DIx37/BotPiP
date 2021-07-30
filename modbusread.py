@@ -22,7 +22,7 @@ class Modbus:
         master = modbus_tcp.TcpMaster(host=self.ip, port=502)
         master.set_timeout(1.0)
         try:
-            if type == float:
+            if type == "float":
                 modbus_res = master.execute(1,cst.READ_INPUT_REGISTERS, self.adress, 2)
                 modbus_res = tofloat(modbus_res)
             elif type == "holding":
@@ -50,7 +50,7 @@ def modbus_get(modbus_ip, adress, type=0):
     master = modbus_tcp.TcpMaster(host=modbus_ip, port=502)
     master.set_timeout(1.0)
     try:
-        if type == float:
+        if type == "float":
             modbus_res = master.execute(1,cst.READ_INPUT_REGISTERS, adress, 2)
             modbus_res = tofloat(modbus_res)
         elif type == "holding":
@@ -73,7 +73,7 @@ def modbus_set(modbus_ip, adress, numb, type=0):
     master = modbus_tcp.TcpMaster(host=modbus_ip, port=502)
     master.set_timeout(1.0)
     try:
-        if type == float:
+        if type == "float":
             set_numb_float = 16640 + numb * 8
             master.execute(1,cst.WRITE_MULTIPLE_REGISTERS, adress, output_value=(0, set_numb_float))
         else:
@@ -83,12 +83,12 @@ def modbus_set(modbus_ip, adress, numb, type=0):
 
 # Запись уставки
 def set_temp_ust(modbus_ip, math):
-    temp_ust = int(modbus_get(modbus_ip, 41023, float))
+    temp_ust = int(modbus_get(modbus_ip, 41023, "float"))
     if math == 0:
         temp_ust = temp_ust - 1
     elif math == 1:
         temp_ust = temp_ust + 1
-    modbus_set(modbus_ip, 41984, temp_ust, float)
+    modbus_set(modbus_ip, 41984, temp_ust, "float")
 
 # Функция преобразования двух адресов в число с плавающей запятой
 def tofloat(getDI):
