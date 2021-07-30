@@ -174,17 +174,6 @@ def banketniy_zal_menu(user):
             pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP30))
             banketniy_zal_menu.insert(pusk_stop)
 
-#    dist_mest_now = banketniy_zal.read(14342)
-#    if dist_mest_now == "WinError 10054" or dist_mest_now == "N/A":
-#        pass
-#    else:
-#        if dist_mest_now == "0":
-#            dist_mest = InlineKeyboardButton(text="Местно", callback_data=callback_rap.new(number="None", action="dist_mest", IP=P_IP30))
-#            banketniy_zal_menu.insert(dist_mest)
-#        elif dist_mest_now == "1":
-#            dist_mest = InlineKeyboardButton(text="Дистанционно", callback_data=callback_rap.new(number="None", action="dist_mest", IP=P_IP30))
-#            banketniy_zal_menu.insert(dist_mest)
-
     sbros_error_now = banketniy_zal.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
         pass
@@ -277,13 +266,88 @@ def gost(user):
     gost.insert(gost_u)
     return gost
 
-def oran(user):
-    oran = InlineKeyboardMarkup(row_width=2)
+def oranjereya_menu(user):
+    callback_rap = CallbackData("set", "action", "number", "IP")
+    oranjereya_menu_menu = InlineKeyboardMarkup(row_width=2)
+
+    pusk_stop_now = oranjereya.read(14340)
+    if pusk_stop_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if pusk_stop_now == "0":
+            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP34))
+            oranjereya_menu_menu.insert(pusk_stop)
+        elif pusk_stop_now == "1":
+            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP34))
+            oranjereya_menu_menu.insert(pusk_stop)
+
+    sbros_error_now = oranjereya.read(14342)
+    if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
+        pass
+    else:
+        if sbros_error_now == "1":
+            sbros_error = InlineKeyboardButton(text="Сбросить аварию", callback_data=callback_rap.new(number="None", action="sbros_error", IP=P_IP34))
+            oranjereya_menu_menu.add(sbros_error)
+
+    stop_start_vv_now = oranjereya.read(15366)
+    if stop_start_vv_now == "WinError 10054" or stop_start_vv_now == "N/A":
+        pass
+    else:
+        if stop_start_vv_now == "0":
+            stop_vv = InlineKeyboardButton(text="Остановить ВВ", callback_data=callback_rap.new(number="None", action="stop_vv", IP=P_IP34))
+            oranjereya_menu_menu.add(stop_vv)
+        elif stop_start_vv_now == "1":
+            start_vv = InlineKeyboardButton(text="Включить ВВ", callback_data=callback_rap.new(number="None", action="start_vv", IP=P_IP34))
+            oranjereya_menu_menu.add(start_vv)
+
+    temp_ust_now = oranjereya.read(41023, "float", "int")
+    if temp_ust_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if temp_ust_now > 16:
+            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP34))
+            oranjereya_menu_menu.add(ust_minus)
+        if temp_ust_now < 30:
+            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP34))
+            oranjereya_menu_menu.insert(ust_plus)
+
+    set_speed_ventP_now = oranjereya.read(41993, "holding", "int")
+    if set_speed_ventP_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventP_now < 400:
+            set_speed_ventP_now = 400
+        if set_speed_ventP_now > 400:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP34))
+            oranjereya_menu_menu.add(set_speed_ventP)
+        if set_speed_ventP_now < 1000:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP34))
+            if set_speed_ventP_now == 400:
+                oranjereya_menu_menu.add(set_speed_ventP)
+            else:
+                oranjereya_menu_menu.insert(set_speed_ventP)
+
+    set_speed_ventV_now = oranjereya.read(41992, "holding", "int")
+    if set_speed_ventV_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventV_now < 400:
+            set_speed_ventV_now = 400
+        if set_speed_ventV_now > 400:
+            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventV_now - 100, action="set_speed_ventV_minus", IP=P_IP34))
+            oranjereya_menu_menu.add(set_speed_ventV)
+        if set_speed_ventV_now < 1000:
+            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventV_now + 100, action="set_speed_ventV_plus", IP=P_IP34))
+            if set_speed_ventV_now == 400:
+                oranjereya_menu_menu.add(set_speed_ventV)
+            else:
+                oranjereya_menu_menu.insert(set_speed_ventV)
+
     rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
-    oran.insert(rekup_pri_menu)
-    oran_u = InlineKeyboardButton(text="Обновить", callback_data="oran")
-    oran.insert(oran_u)
-    return oran
+    oranjereya_menu_menu.add(rekup_pri_menu)
+    oranjereya_menu_menu_u = InlineKeyboardButton(text="Обновить", callback_data="banketniy_zal")
+    oranjereya_menu_menu.insert(oranjereya_menu_menu_u)
+    return oranjereya_menu_menu
 
 menu_time = InlineKeyboardMarkup(row_width=2)
 update = InlineKeyboardButton(text="Понедельник", callback_data="pon")
