@@ -1,21 +1,22 @@
 # -- coding: utf-8 --
-from aiogram.types import Message, CallbackQuery, InputMediaPhoto
+from aiogram.types import Message, CallbackQuery
+#from aiogram.types import Message, CallbackQuery, InputMediaPhoto
 from aiogram import Bot, Dispatcher, executor, types
+from aiogram.utils.callback_data import CallbackData
 from sqllite import SQLighter
 from loguru import logger
+import cameraScreen as cs
+from modbus import Modbus
 import LaurentJSON as LJ
+import modbusread as MR
+from message import Msg
 import keyboards as kb
 import requests
 import weather
 import config
+import utils
 import time
 import re
-import modbusread as MR
-import cameraScreen as cs
-from aiogram.utils.callback_data import CallbackData
-import utils
-from modbus import Modbus
-from message import Msg
 
 # Переменные
 banketniy_zal = Modbus(config.Pixel_IP30)
