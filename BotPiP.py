@@ -759,7 +759,6 @@ async def update(call: CallbackQuery):
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
         await call.answer()
         l24_xml = LJ.l2_xml_read_all(L_IP24)
-        print(l24_xml)
         if l24_xml != "N/A":
             if l24_xml[3][0] == "0":
                 requests.get(f"http://{L_IP24}/cmd.cgi?psw={L_Pass}&cmd=OUT,1,1")
