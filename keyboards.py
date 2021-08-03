@@ -117,16 +117,16 @@ def rekup_pri_menu(user):
     rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
     banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
     rekup_pri_menu.insert(banketniy_zal)
-    pizz = InlineKeyboardButton(text="Подвал", callback_data="podv")
+    pizz = InlineKeyboardButton(text="Подвал", callback_data="podval")
     rekup_pri_menu.add(pizz)
-    ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhn")
-    rekup_pri_menu.insert(ostr)
-    smok = InlineKeyboardButton(text="Гостиная", callback_data="gost")
-    rekup_pri_menu.insert(smok)
-    smok80 = InlineKeyboardButton(text="Оранжерея", callback_data="oran")
-    rekup_pri_menu.insert(smok80)
+    ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhnya")
+    rekup_pri_menu.add(ostr)
+    smok = InlineKeyboardButton(text="Гостиная", callback_data="gostinaya")
+    rekup_pri_menu.add(smok)
+    smok80 = InlineKeyboardButton(text="Оранжерея", callback_data="oranjereya")
+    rekup_pri_menu.add(smok80)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
-    rekup_pri_menu.insert(main_menu)
+    rekup_pri_menu.add(main_menu)
     rekup_pri_menu_u = InlineKeyboardButton(text="Обновить", callback_data="rekup_pri_menu")
     rekup_pri_menu.insert(rekup_pri_menu_u)
     return rekup_pri_menu
@@ -242,29 +242,173 @@ def banketniy_zal_menu(user):
     banketniy_zal_menu.insert(banketniy_zal_menu_u)
     return banketniy_zal_menu
 
-def podv(user):
-    podv = InlineKeyboardMarkup(row_width=2)
-    rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
-    podv.insert(rekup_pri_menu)
-    podv_u = InlineKeyboardButton(text="Обновить", callback_data="podv")
-    podv.insert(podv_u)
-    return podv
+def podval_menu(user):
+    callback_rap = CallbackData("set", "action", "number", "IP")
+    podval_menu = InlineKeyboardMarkup(row_width=2)
 
-def kuhn(user):
-    kuhn = InlineKeyboardMarkup(row_width=2)
-    rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
-    kuhn.insert(rekup_pri_menu)
-    kuhn_u = InlineKeyboardButton(text="Обновить", callback_data="kuhn")
-    kuhn.insert(kuhn_u)
-    return kuhn
+    pusk_stop_now = podval.read(14340)
+    if pusk_stop_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if pusk_stop_now == "0":
+            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP31))
+            podval_menu.insert(pusk_stop)
+        elif pusk_stop_now == "1":
+            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP31))
+            podval_menu.insert(pusk_stop)
 
-def gost(user):
-    gost = InlineKeyboardMarkup(row_width=2)
+    sbros_error_now = podval.read(14342)
+    if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
+        pass
+    else:
+        if sbros_error_now == "1":
+            sbros_error = InlineKeyboardButton(text="Сбросить аварию", callback_data=callback_rap.new(number="None", action="sbros_error", IP=P_IP31))
+            podval_menu.add(sbros_error)
+
+    temp_ust_now = podval.read(41023, "float", "int")
+    if temp_ust_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if temp_ust_now > 16:
+            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP31))
+            podval_menu.add(ust_minus)
+        if temp_ust_now < 30:
+            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP31))
+            podval_menu.insert(ust_plus)
+
+    set_speed_ventP_now = podval.read(41993, "holding", "int")
+    if set_speed_ventP_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventP_now < 400:
+            set_speed_ventP_now = 400
+        if set_speed_ventP_now > 400:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP31))
+            podval_menu.add(set_speed_ventP)
+        if set_speed_ventP_now < 1000:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP31))
+            if set_speed_ventP_now == 400:
+                podval_menu.add(set_speed_ventP)
+            else:
+                podval_menu.insert(set_speed_ventP)
+
     rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
-    gost.insert(rekup_pri_menu)
-    gost_u = InlineKeyboardButton(text="Обновить", callback_data="gost")
-    gost.insert(gost_u)
-    return gost
+    podval_menu.add(rekup_pri_menu)
+    podval_menu_u = InlineKeyboardButton(text="Обновить", callback_data="podval")
+    podval_menu.insert(podval_menu_u)
+    return podval_menu
+
+def kuhnya_menu(user):
+    callback_rap = CallbackData("set", "action", "number", "IP")
+    kuhnya_menu = InlineKeyboardMarkup(row_width=2)
+
+    pusk_stop_now = kuhnya.read(14340)
+    if pusk_stop_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if pusk_stop_now == "0":
+            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP32))
+            kuhnya_menu.insert(pusk_stop)
+        elif pusk_stop_now == "1":
+            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP32))
+            kuhnya_menu.insert(pusk_stop)
+
+    sbros_error_now = kuhnya.read(14342)
+    if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
+        pass
+    else:
+        if sbros_error_now == "1":
+            sbros_error = InlineKeyboardButton(text="Сбросить аварию", callback_data=callback_rap.new(number="None", action="sbros_error", IP=P_IP32))
+            kuhnya_menu.add(sbros_error)
+
+    temp_ust_now = kuhnya.read(41023, "float", "int")
+    if temp_ust_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if temp_ust_now > 16:
+            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP32))
+            kuhnya_menu.add(ust_minus)
+        if temp_ust_now < 30:
+            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP32))
+            kuhnya_menu.insert(ust_plus)
+
+    set_speed_ventP_now = kuhnya.read(41993, "holding", "int")
+    if set_speed_ventP_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventP_now < 400:
+            set_speed_ventP_now = 400
+        if set_speed_ventP_now > 400:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP32))
+            kuhnya_menu.add(set_speed_ventP)
+        if set_speed_ventP_now < 1000:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP32))
+            if set_speed_ventP_now == 400:
+                kuhnya_menu.add(set_speed_ventP)
+            else:
+                kuhnya_menu.insert(set_speed_ventP)
+
+    rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
+    kuhnya_menu.add(rekup_pri_menu)
+    kuhnya_menu_u = InlineKeyboardButton(text="Обновить", callback_data="kuhnya")
+    kuhnya_menu.insert(kuhnya_menu_u)
+    return kuhnya_menu
+
+def gostinaya_menu(user):
+    callback_rap = CallbackData("set", "action", "number", "IP")
+    gostinaya_menu = InlineKeyboardMarkup(row_width=2)
+
+    pusk_stop_now = gostinaya.read(14340)
+    if pusk_stop_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if pusk_stop_now == "0":
+            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP33))
+            gostinaya_menu.insert(pusk_stop)
+        elif pusk_stop_now == "1":
+            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP33))
+            gostinaya_menu.insert(pusk_stop)
+
+    sbros_error_now = gostinaya.read(14342)
+    if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
+        pass
+    else:
+        if sbros_error_now == "1":
+            sbros_error = InlineKeyboardButton(text="Сбросить аварию", callback_data=callback_rap.new(number="None", action="sbros_error", IP=P_IP33))
+            gostinaya_menu.add(sbros_error)
+
+    temp_ust_now = gostinaya.read(41023, "float", "int")
+    if temp_ust_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if temp_ust_now > 16:
+            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP33))
+            gostinaya_menu.add(ust_minus)
+        if temp_ust_now < 30:
+            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP33))
+            gostinaya_menu.insert(ust_plus)
+
+    set_speed_ventP_now = gostinaya.read(41993, "holding", "int")
+    if set_speed_ventP_now == "WinError 10054" or temp_ust_now == "N/A":
+        pass
+    else:
+        if set_speed_ventP_now < 400:
+            set_speed_ventP_now = 400
+        if set_speed_ventP_now > 400:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP33))
+            gostinaya_menu.add(set_speed_ventP)
+        if set_speed_ventP_now < 1000:
+            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP33))
+            if set_speed_ventP_now == 400:
+                gostinaya_menu.add(set_speed_ventP)
+            else:
+                gostinaya_menu.insert(set_speed_ventP)
+
+    rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
+    gostinaya_menu.add(rekup_pri_menu)
+    gostinaya_menu_u = InlineKeyboardButton(text="Обновить", callback_data="gostinaya")
+    gostinaya_menu.insert(gostinaya_menu_u)
+    return gostinaya_menu
 
 def oranjereya_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
@@ -345,7 +489,7 @@ def oranjereya_menu(user):
 
     rekup_pri_menu = InlineKeyboardButton(text="Назад", callback_data="rekup_pri_menu")
     oranjereya_menu_menu.add(rekup_pri_menu)
-    oranjereya_menu_menu_u = InlineKeyboardButton(text="Обновить", callback_data="banketniy_zal")
+    oranjereya_menu_menu_u = InlineKeyboardButton(text="Обновить", callback_data="oranjereya")
     oranjereya_menu_menu.insert(oranjereya_menu_menu_u)
     return oranjereya_menu_menu
 

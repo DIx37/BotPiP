@@ -23,7 +23,7 @@ podval = Modbus(config.Pixel_IP31)
 kuhnya = Modbus(config.Pixel_IP32)
 gostinaya = Modbus(config.Pixel_IP33)
 oranjereya = Modbus(config.Pixel_IP34)
-#P_IP30 = config.Pixel_IP30
+P_IP30 = config.Pixel_IP30
 P_IP31 = config.Pixel_IP31
 P_IP32 = config.Pixel_IP32
 P_IP33 = config.Pixel_IP33
@@ -849,250 +849,243 @@ async def update(call: CallbackQuery):
         await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
-@dp.callback_query_handler(text="podv")
+@dp.callback_query_handler(text="podval")
 @logger.catch
 async def update(call: CallbackQuery):
-    if check_user_acess(call.from_user.id, "podv") == True:
+    if check_user_acess(call.from_user.id, "podval") == True:
         await call.answer()
-        message_bank=f"Подвал:{space}\n"
-        await call.message.edit_text(text=message_bank)
-        pust = str(MR.modbus_get(P_IP31, 14340))
+        message_podval=f"Подвал:{space}\n"
+        await call.message.edit_text(text=message_podval)
+        pust = podval.read(14340)
         if pust == "0":
-            message_bank += utils.smile(pust) + "   Стоп\n"
+            message_podval += utils.smile(pust) + "   Стоп\n"
         elif pust == "1":
-            message_bank += utils.smile(pust) + "   Пуск\n"
+            message_podval += utils.smile(pust) + "   Пуск\n"
         else:
-            message_bank += "N/A   Пуск/Стоп\n"
-        await call.message.edit_text(text=message_bank)
-        zile = str(MR.modbus_get(P_IP31, 14336))
+            message_podval += "N/A   Пуск/Стоп\n"
+        await call.message.edit_text(text=message_podval)
+        zile = podval.read(14336)
         if zile == "0":
-            message_bank += "☀️" + "   Лето\n"
+            message_podval += "☀️" + "   Лето\n"
         elif zile == "1":
-            message_bank += "❄️" + "   Зима\n"
+            message_podval += "❄️" + "   Зима\n"
         else:
-            message_bank += "N/A   Зима/Лето\n"
-        await call.message.edit_text(text=message_bank)
-        dime = str(MR.modbus_get(P_IP31, 14337))
+            message_podval += "N/A   Зима/Лето\n"
+        await call.message.edit_text(text=message_podval)
+        dime = podval.read(14337)
         if dime == "0":
-            message_bank += utils.smile(dime) + "   Мест\n"
+            message_podval += utils.smile(dime) + "   Мест\n"
         elif dime == "1":
-            message_bank += utils.smile(dime) + "   Дист\n"
+            message_podval += utils.smile(dime) + "   Дист\n"
         else:
-            message_bank += "N/A   Дист/Мест\n"
-        await call.message.edit_text(text=message_bank)
-        avar = str(MR.modbus_get(P_IP31, 14342))
+            message_podval += "N/A   Дист/Мест\n"
+        await call.message.edit_text(text=message_podval)
+        avar = podval.read(14342)
         if avar == "1":
-            message_bank += "❌" + "   Авария\n"
-            await call.message.edit_text(text=message_bank)
-        blok = str(MR.modbus_get(P_IP31, 14339))
+            message_podval += "❌" + "   Авария\n"
+            await call.message.edit_text(text=message_podval)
+        blok = podval.read(14339)
         if blok == "1":
-            message_bank += "❌" + "   Блокировка\n"
-            await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP31, 41023, float)) + " C   Уставка t\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP31, 40995, float)) + " C   t Канала\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP31, 40993, float)) + " C   t Наружная\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP31, 40997, float)) + " C   t Обр. воды\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP31, 41106, "holding")) + "   Скорость ВП\n"
-        await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
-        logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
+            message_podval += "❌" + "   Блокировка\n"
+            await call.message.edit_text(text=message_podval)
+        message_podval += podval.read(41023, "float") + " C   Уставка t\n"
+        await call.message.edit_text(text=message_podval)
+        message_podval += podval.read(40995, "float") + " C   t Канала\n"
+        await call.message.edit_text(text=message_podval)
+        message_podval += podval.read(40993, "float") + " C   t Наружная\n"
+        await call.message.edit_text(text=message_podval)
+        message_podval += podval.read(40997, "float") + " C   t Обр. воды\n"
+        await call.message.edit_text(text=message_podval)
+        message_podval += podval.read(41106, "holding") + "   Скорость ВП\n"
+        await call.message.edit_text(text=message_podval)
+        await call.message.edit_reply_markup(reply_markup=kb.podval_menu(call.from_user.id))
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.podval_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
-@dp.callback_query_handler(text="kuhn")
+@dp.callback_query_handler(text="kuhnya")
 @logger.catch
 async def update(call: CallbackQuery):
-    if check_user_acess(call.from_user.id, "kuhn") == True:
+    if check_user_acess(call.from_user.id, "kuhnya") == True:
         await call.answer()
-        message_bank=f"Кухня:{space}\n"
-        await call.message.edit_text(text=message_bank)
-        pust = str(MR.modbus_get(P_IP32, 14340))
+        message_kuhnya=f"Кухня:{space}\n"
+        await call.message.edit_text(text=message_kuhnya)
+        pust = kuhnya.read(14340)
         if pust == "0":
-            message_bank += utils.smile(pust) + "   Стоп\n"
+            message_kuhnya += utils.smile(pust) + "   Стоп\n"
         elif pust == "1":
-            message_bank += utils.smile(pust) + "   Пуск\n"
+            message_kuhnya += utils.smile(pust) + "   Пуск\n"
         else:
-            message_bank += "N/A   Пуск/Стоп\n"
-        await call.message.edit_text(text=message_bank)
-        zile = str(MR.modbus_get(P_IP32, 14336))
+            message_kuhnya += "N/A   Пуск/Стоп\n"
+        await call.message.edit_text(text=message_kuhnya)
+        zile = kuhnya.read(14336)
         if zile == "0":
-            message_bank += "☀️" + "   Лето\n"
+            message_kuhnya += "☀️" + "   Лето\n"
         elif zile == "1":
-            message_bank += "❄️" + "   Зима\n"
+            message_kuhnya += "❄️" + "   Зима\n"
         else:
-            message_bank += "N/A   Зима/Лето\n"
-        await call.message.edit_text(text=message_bank)
-        dime = str(MR.modbus_get(P_IP32, 14337))
+            message_kuhnya += "N/A   Зима/Лето\n"
+        await call.message.edit_text(text=message_kuhnya)
+        dime = kuhnya.read(14337)
         if dime == "0":
-            message_bank += utils.smile(dime) + "   Мест\n"
+            message_kuhnya += utils.smile(dime) + "   Мест\n"
         elif dime == "1":
-            message_bank += utils.smile(dime) + "   Дист\n"
+            message_kuhnya += utils.smile(dime) + "   Дист\n"
         else:
-            message_bank += "N/A   Дист/Мест\n"
-        await call.message.edit_text(text=message_bank)
-        avar = str(MR.modbus_get(P_IP32, 14342))
+            message_kuhnya += "N/A   Дист/Мест\n"
+        await call.message.edit_text(text=message_kuhnya)
+        avar = kuhnya.read(14342)
         if avar == "1":
-            message_bank += "❌" + "   Авария\n"
-            await call.message.edit_text(text=message_bank)
-        blok = str(MR.modbus_get(P_IP32, 14339))
+            message_kuhnya += "❌" + "   Авария\n"
+            await call.message.edit_text(text=message_kuhnya)
+        blok = kuhnya.read(14339)
         if blok == "1":
-            message_bank += "❌" + "   Блокировка\n"
-            await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP32, 41023, float)) + " C   Уставка t\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP32, 40995, float)) + " C   t Канала\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP32, 40993, float)) + " C   t Наружная\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP32, 40997, float)) + " C   t Обр. воды\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP32, 41106, "holding")) + "   Скорость ВП\n"
-        await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
-        logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
+            message_kuhnya += "❌" + "   Блокировка\n"
+            await call.message.edit_text(text=message_kuhnya)
+        message_kuhnya += kuhnya.read(41023, "float") + " C   Уставка t\n"
+        await call.message.edit_text(text=message_kuhnya)
+        message_kuhnya += kuhnya.read(40995, "float") + " C   t Канала\n"
+        await call.message.edit_text(text=message_kuhnya)
+        message_kuhnya += kuhnya.read(40993, "float") + " C   t Наружная\n"
+        await call.message.edit_text(text=message_kuhnya)
+        message_kuhnya += kuhnya.read(40997, "float") + " C   t Обр. воды\n"
+        await call.message.edit_text(text=message_kuhnya)
+        message_kuhnya += kuhnya.read(41106, "holding") + "   Скорость ВП\n"
+        await call.message.edit_text(text=message_kuhnya)
+        await call.message.edit_reply_markup(reply_markup=kb.kuhnya_menu(call.from_user.id))
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.kuhnya_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
-@dp.callback_query_handler(text="gost")
+@dp.callback_query_handler(text="gostinaya")
 @logger.catch
 async def update(call: CallbackQuery):
-    if check_user_acess(call.from_user.id, "gost") == True:
+    if check_user_acess(call.from_user.id, "gostinaya") == True:
         await call.answer()
-        message_bank=f"Гостиная:{space}\n"
-        await call.message.edit_text(text=message_bank)
-        pust = str(MR.modbus_get(P_IP33, 14340))
+        message_gostinaya=f"Гостиная:{space}\n"
+        await call.message.edit_text(text=message_gostinaya)
+        pust = gostinaya.read(14340)
         if pust == "0":
-            message_bank += utils.smile(pust) + "   Стоп\n"
+            message_gostinaya += utils.smile(pust) + "   Стоп\n"
         elif pust == "1":
-            message_bank += utils.smile(pust) + "   Пуск\n"
+            message_gostinaya += utils.smile(pust) + "   Пуск\n"
         else:
-            message_bank += "N/A   Пуск/Стоп\n"
-        await call.message.edit_text(text=message_bank)
-        zile = str(MR.modbus_get(P_IP33, 14336))
+            message_gostinaya += "N/A   Пуск/Стоп\n"
+        await call.message.edit_text(text=message_gostinaya)
+        zile = gostinaya.read(14336)
         if zile == "0":
-            message_bank += "☀️" + "   Лето\n"
+            message_gostinaya += "☀️" + "   Лето\n"
         elif zile == "1":
-            message_bank += "❄️" + "   Зима\n"
+            message_gostinaya += "❄️" + "   Зима\n"
         else:
-            message_bank += "N/A   Зима/Лето\n"
-        await call.message.edit_text(text=message_bank)
-        dime = str(MR.modbus_get(P_IP33, 14337))
+            message_gostinaya += "N/A   Зима/Лето\n"
+        await call.message.edit_text(text=message_gostinaya)
+        dime = gostinaya.read(14337)
         if dime == "0":
-            message_bank += utils.smile(dime) + "   Мест\n"
+            message_gostinaya += utils.smile(dime) + "   Мест\n"
         elif dime == "1":
-            message_bank += utils.smile(dime) + "   Дист\n"
+            message_gostinaya += utils.smile(dime) + "   Дист\n"
         else:
-            message_bank += "N/A   Дист/Мест\n"
-        await call.message.edit_text(text=message_bank)
-        avar = str(MR.modbus_get(P_IP33, 14342))
+            message_gostinaya += "N/A   Дист/Мест\n"
+        await call.message.edit_text(text=message_gostinaya)
+        avar = gostinaya.read(14342)
         if avar == "1":
-            message_bank += "❌" + "   Авария\n"
-            await call.message.edit_text(text=message_bank)
-        blok = str(MR.modbus_get(P_IP33, 14339))
+            message_gostinaya += "❌" + "   Авария\n"
+            await call.message.edit_text(text=message_gostinaya)
+        blok = gostinaya.read(14339)
         if blok == "1":
-            message_bank += "❌" + "   Блокировка\n"
-            await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP33, 41023, float)) + " C   Уставка t\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP33, 40995, float)) + " C   t Канала\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP33, 40993, float)) + " C   t Наружная\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP33, 40997, float)) + " C   t Обр. воды\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP33, 41106, "holding")) + "   Скорость ВП\n"
-        await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
-        logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
+            message_gostinaya += "❌" + "   Блокировка\n"
+            await call.message.edit_text(text=message_gostinaya)
+        message_gostinaya += gostinaya.read(41023, "float") + " C   Уставка t\n"
+        await call.message.edit_text(text=message_gostinaya)
+        message_gostinaya += gostinaya.read(40995, "float") + " C   t Канала\n"
+        await call.message.edit_text(text=message_gostinaya)
+        message_gostinaya += gostinaya.read(40993, "float") + " C   t Наружная\n"
+        await call.message.edit_text(text=message_gostinaya)
+        message_gostinaya += gostinaya.read(40997, "float") + " C   t Обр. воды\n"
+        await call.message.edit_text(text=message_gostinaya)
+        message_gostinaya += gostinaya.read(41106, "holding") + "   Скорость ВП\n"
+        await call.message.edit_text(text=message_gostinaya)
+        await call.message.edit_reply_markup(reply_markup=kb.gostinaya_menu(call.from_user.id))
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.gostinaya_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
-@dp.callback_query_handler(text="oran")
+@dp.callback_query_handler(text="oranjereya")
 @logger.catch
 async def update(call: CallbackQuery):
-    if check_user_acess(call.from_user.id, "oran") == True:
+    if check_user_acess(call.from_user.id, "oranjereya") == True:
         await call.answer()
-        message_bank=f"Оранжерея:{space}\n"
-        await call.message.edit_text(text=message_bank)
+        message_oranjereya=f"Оранжерея:{space}\n"
+        await call.message.edit_text(text=message_oranjereya)
         pust = str(MR.modbus_get(P_IP34, 14340))
         if pust == "0":
-            message_bank += utils.smile(pust) + "   Стоп\n"
+            message_oranjereya += utils.smile(pust) + "   Стоп\n"
         elif pust == "1":
-            message_bank += utils.smile(pust) + "   Пуск\n"
+            message_oranjereya += utils.smile(pust) + "   Пуск\n"
         else:
-            message_bank += "N/A   Пуск/Стоп\n"
-        await call.message.edit_text(text=message_bank)
+            message_oranjereya += "N/A   Пуск/Стоп\n"
+        await call.message.edit_text(text=message_oranjereya)
         zile = str(MR.modbus_get(P_IP34, 14336))
         if zile == "0":
-            message_bank += "☀️" + "   Лето\n"
+            message_oranjereya += "☀️" + "   Лето\n"
         elif zile == "1":
-            message_bank += "❄️" + "   Зима\n"
+            message_oranjereya += "❄️" + "   Зима\n"
         else:
-            message_bank += "N/A   Зима/Лето\n"
-        await call.message.edit_text(text=message_bank)
+            message_oranjereya += "N/A   Зима/Лето\n"
+        await call.message.edit_text(text=message_oranjereya)
         dime = str(MR.modbus_get(P_IP34, 14337))
         if dime == "0":
-            message_bank += utils.smile(dime) + "   Мест\n"
+            message_oranjereya += utils.smile(dime) + "   Мест\n"
         elif dime == "1":
-            message_bank += utils.smile(dime) + "   Дист\n"
+            message_oranjereya += utils.smile(dime) + "   Дист\n"
         else:
-            message_bank += "N/A   Дист/Мест\n"
-        await call.message.edit_text(text=message_bank)
+            message_oranjereya += "N/A   Дист/Мест\n"
+        await call.message.edit_text(text=message_oranjereya)
         avar = str(MR.modbus_get(P_IP34, 14342))
         if avar == "1":
-            message_bank += "❌" + "   Авария\n"
-            await call.message.edit_text(text=message_bank)
+            message_oranjereya += "❌" + "   Авария\n"
+            await call.message.edit_text(text=message_oranjereya)
         blok = str(MR.modbus_get(P_IP34, 14339))
         if blok == "1":
-            message_bank += "❌" + "   Блокировка\n"
-            await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41023, float)) + " C   Уставка t\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 40995, float)) + " C   t Канала\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 40993, float)) + " C   t Наружная\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 40997, float)) + " C   t Обр. воды\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41001, float)) + " C   t Вытяжки\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 40999, float)) + " C   t Помещения\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 15366)) + "   Остановка ВВ\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41106, "holding")) + "   Скорость ВП\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41107, "holding")) + "   Скорость ВВ\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41103, "holding")) + "   Мощность Рекуп.\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41099, "holding")) + "   Мощность В. Калор.\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
-        await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+            message_oranjereya += "❌" + "   Блокировка\n"
+            await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41023, float)) + " C   Уставка t\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 40995, float)) + " C   t Канала\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 40993, float)) + " C   t Наружная\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 40997, float)) + " C   t Обр. воды\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41001, float)) + " C   t Вытяжки\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 40999, float)) + " C   t Помещения\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 15366)) + "   Остановка ВВ\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41106, "holding")) + "   Скорость ВП\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41107, "holding")) + "   Скорость ВВ\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41103, "holding")) + "   Мощность Рекуп.\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41099, "holding")) + "   Мощность В. Калор.\n"
+        await call.message.edit_text(text=message_oranjereya)
+        message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
+        await call.message.edit_text(text=message_oranjereya)
+        await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_bank)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и НЕ получил доступ")
 
 callback_rap = CallbackData("set", "action", "number", "IP")
@@ -1101,112 +1094,423 @@ callback_rap = CallbackData("set", "action", "number", "IP")
 async def update(call: CallbackQuery, callback_data: dict):
     if check_user_acess(call.from_user.id, "temp_ust_plus") == True:
         await call.answer()
-        if callback_data["action"] == "pusk":
-            MR.modbus_set(callback_data["IP"], 15362, 1)
-            time.sleep(2)
-            MR.modbus_set(callback_data["IP"], 15362, 0)
-            time.sleep(1)
-        elif callback_data["action"] == "stop":
-            MR.modbus_set(callback_data["IP"], 15363, 0)
-            time.sleep(2)
-            MR.modbus_set(callback_data["IP"], 15363, 1)
-            time.sleep(1)
-#        elif callback_data["action"] == "dist_mest":
-#            MR.modbus_set(callback_data["IP"], 15360, 1)
-#            time.sleep(2)
-#            MR.modbus_set(callback_data["IP"], 15360, 0)
-        elif callback_data["action"] == "sbros_error":
-            MR.modbus_set(callback_data["IP"], 15364, 1)
-            time.sleep(2)
-            MR.modbus_set(callback_data["IP"], 15364, 0)
-            time.sleep(1)
-        elif callback_data["action"] == "stop_vv":
-            MR.modbus_set(callback_data["IP"], 15366, 1)
-        elif callback_data["action"] == "start_vv":
-            MR.modbus_set(callback_data["IP"], 15366, 0)
-        elif callback_data["action"] == "set_speed_ventP_plus":
-            MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
-        elif callback_data["action"] == "set_speed_ventP_minus":
-            MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
-        elif callback_data["action"] == "set_speed_ventV_plus":
-            MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
-        elif callback_data["action"] == "set_speed_ventV_minus":
-            MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
-        elif callback_data["action"] == "ust_plus":
-            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
-        elif callback_data["action"] == "ust_minus":
-            MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
-#            # Пуск/Стоп
-#        elif message.text.lower() == "бз. пус/сто" and acess_status < 2:
-#            try:
-#                mget = modbus_get("172.16.1.30", 14340)
-#                if mget == 0:
-#                    modbus_set("172.16.1.30", 15362, 1)
-#                    time.sleep(2)
-#                    modbus_set("172.16.1.30", 15362, 0)
-#                elif mget == 1:
-#                    modbus_set("172.16.1.30", 15363, 0)
-#                    time.sleep(2)
-#                    modbus_set("172.16.1.30", 15363, 1)
-        message_bank=f"Банкетный зал:{space}\n"
-        await call.message.edit_text(text=message_bank)
-        pust = banketniy_zal.read(14340)
-        if pust == "0":
-            message_bank += utils.smile(pust) + "   Стоп\n"
-        elif pust == "1":
-            message_bank += utils.smile(pust) + "   Пуск\n"
-        else:
-            message_bank += "N/A   Пуск/Стоп\n"
-        await call.message.edit_text(text=message_bank)
-        zile = banketniy_zal.read(14336)
-        if zile == "0":
-            message_bank += "☀️" + "   Лето\n"
-        elif zile == "1":
-            message_bank += "❄️" + "   Зима\n"
-        else:
-            message_bank += "N/A   Зима/Лето\n"
-        await call.message.edit_text(text=message_bank)
-        dime = banketniy_zal.read(14337)
-        if dime == "0":
-            message_bank += utils.smile(dime) + "   Мест\n"
-        elif dime == "1":
-            message_bank += utils.smile(dime) + "   Дист\n"
-        else:
-            message_bank += "N/A   Дист/Мест\n"
-        await call.message.edit_text(text=message_bank)
-        avar = banketniy_zal.read(14342)
-        if avar == "1":
-            message_bank += "❌" + "   Авария\n"
+        if callback_data["IP"] == P_IP30:
+            if callback_data["action"] == "pusk":
+                MR.modbus_set(callback_data["IP"], 15362, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15362, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop":
+                MR.modbus_set(callback_data["IP"], 15363, 0)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15363, 1)
+                time.sleep(1)
+    #        elif callback_data["action"] == "dist_mest":
+    #            MR.modbus_set(callback_data["IP"], 15360, 1)
+    #            time.sleep(2)
+    #            MR.modbus_set(callback_data["IP"], 15360, 0)
+            elif callback_data["action"] == "sbros_error":
+                MR.modbus_set(callback_data["IP"], 15364, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15364, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 1)
+            elif callback_data["action"] == "start_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 0)
+            elif callback_data["action"] == "set_speed_ventP_plus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventP_minus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_plus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_minus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "ust_plus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            elif callback_data["action"] == "ust_minus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            message_bank=f"Банкетный зал:{space}\n"
             await call.message.edit_text(text=message_bank)
-        blok = banketniy_zal.read(14339)
-        if blok == "1":
-            message_bank += "❌" + "   Блокировка\n"
+            pust = banketniy_zal.read(14340)
+            if pust == "0":
+                message_bank += utils.smile(pust) + "   Стоп\n"
+            elif pust == "1":
+                message_bank += utils.smile(pust) + "   Пуск\n"
+            else:
+                message_bank += "N/A   Пуск/Стоп\n"
             await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41023, "float") + " C   Уставка t\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(40995, "float") + " C   t Канала\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(40993, "float") + " C   t Наружная\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(40997, "float") + " C   t Обр. воды\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41001, "float") + " C   t Вытяжки\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(40999, "float") + " C   t Помещения\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(15366) + "   Остановка ВВ\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41106, "holding") + "   Скорость ВП\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41107, "holding") + "   Скорость ВВ\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41103, "holding") + "   Мощность Рекуп.\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41099, "holding") + "   Мощность В. Калор.\n"
-        await call.message.edit_text(text=message_bank)
-        message_bank += banketniy_zal.read(41100, "holding") + "   Мощность Э. Калор.\n"
-        await call.message.edit_text(text=message_bank)
-        await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
+            zile = banketniy_zal.read(14336)
+            if zile == "0":
+                message_bank += "☀️" + "   Лето\n"
+            elif zile == "1":
+                message_bank += "❄️" + "   Зима\n"
+            else:
+                message_bank += "N/A   Зима/Лето\n"
+            await call.message.edit_text(text=message_bank)
+            dime = banketniy_zal.read(14337)
+            if dime == "0":
+                message_bank += utils.smile(dime) + "   Мест\n"
+            elif dime == "1":
+                message_bank += utils.smile(dime) + "   Дист\n"
+            else:
+                message_bank += "N/A   Дист/Мест\n"
+            await call.message.edit_text(text=message_bank)
+            avar = banketniy_zal.read(14342)
+            if avar == "1":
+                message_bank += "❌" + "   Авария\n"
+                await call.message.edit_text(text=message_bank)
+            blok = banketniy_zal.read(14339)
+            if blok == "1":
+                message_bank += "❌" + "   Блокировка\n"
+                await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41023, "float") + " C   Уставка t\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(40995, "float") + " C   t Канала\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(40993, "float") + " C   t Наружная\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(40997, "float") + " C   t Обр. воды\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41001, "float") + " C   t Вытяжки\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(40999, "float") + " C   t Помещения\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(15366) + "   Остановка ВВ\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41106, "holding") + "   Скорость ВП\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41107, "holding") + "   Скорость ВВ\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41103, "holding") + "   Мощность Рекуп.\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41099, "holding") + "   Мощность В. Калор.\n"
+            await call.message.edit_text(text=message_bank)
+            message_bank += banketniy_zal.read(41100, "holding") + "   Мощность Э. Калор.\n"
+            await call.message.edit_text(text=message_bank)
+            await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
+        elif callback_data["IP"] == P_IP31:
+            if callback_data["action"] == "pusk":
+                MR.modbus_set(callback_data["IP"], 15362, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15362, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop":
+                MR.modbus_set(callback_data["IP"], 15363, 0)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15363, 1)
+                time.sleep(1)
+            elif callback_data["action"] == "sbros_error":
+                MR.modbus_set(callback_data["IP"], 15364, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15364, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 1)
+            elif callback_data["action"] == "start_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 0)
+            elif callback_data["action"] == "set_speed_ventP_plus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventP_minus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_plus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_minus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "ust_plus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            elif callback_data["action"] == "ust_minus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            message_podval=f"Подвал:{space}\n"
+            await call.message.edit_text(text=message_podval)
+            pust = podval.read(14340)
+            if pust == "0":
+                message_podval += utils.smile(pust) + "   Стоп\n"
+            elif pust == "1":
+                message_podval += utils.smile(pust) + "   Пуск\n"
+            else:
+                message_podval += "N/A   Пуск/Стоп\n"
+            await call.message.edit_text(text=message_podval)
+            zile = podval.read(14336)
+            if zile == "0":
+                message_podval += "☀️" + "   Лето\n"
+            elif zile == "1":
+                message_podval += "❄️" + "   Зима\n"
+            else:
+                message_podval += "N/A   Зима/Лето\n"
+            await call.message.edit_text(text=message_podval)
+            dime = podval.read(14337)
+            if dime == "0":
+                message_podval += utils.smile(dime) + "   Мест\n"
+            elif dime == "1":
+                message_podval += utils.smile(dime) + "   Дист\n"
+            else:
+                message_podval += "N/A   Дист/Мест\n"
+            await call.message.edit_text(text=message_podval)
+            avar = podval.read(14342)
+            if avar == "1":
+                message_podval += "❌" + "   Авария\n"
+                await call.message.edit_text(text=message_podval)
+            blok = podval.read(14339)
+            if blok == "1":
+                message_podval += "❌" + "   Блокировка\n"
+                await call.message.edit_text(text=message_podval)
+            message_podval += podval.read(41023, "float") + " C   Уставка t\n"
+            await call.message.edit_text(text=message_podval)
+            message_podval += podval.read(40995, "float") + " C   t Канала\n"
+            await call.message.edit_text(text=message_podval)
+            message_podval += podval.read(40993, "float") + " C   t Наружная\n"
+            await call.message.edit_text(text=message_podval)
+            message_podval += podval.read(40997, "float") + " C   t Обр. воды\n"
+            await call.message.edit_text(text=message_podval)
+            message_podval += podval.read(41106, "holding") + "   Скорость ВП\n"
+            await call.message.edit_text(text=message_podval)
+            await call.message.edit_reply_markup(reply_markup=kb.podval_menu(call.from_user.id))
+        elif callback_data["IP"] == P_IP32:
+            if callback_data["action"] == "pusk":
+                MR.modbus_set(callback_data["IP"], 15362, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15362, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop":
+                MR.modbus_set(callback_data["IP"], 15363, 0)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15363, 1)
+                time.sleep(1)
+            elif callback_data["action"] == "sbros_error":
+                MR.modbus_set(callback_data["IP"], 15364, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15364, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 1)
+            elif callback_data["action"] == "start_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 0)
+            elif callback_data["action"] == "set_speed_ventP_plus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventP_minus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_plus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_minus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "ust_plus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            elif callback_data["action"] == "ust_minus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            message_kuhnya=f"Кухня:{space}\n"
+            await call.message.edit_text(text=message_kuhnya)
+            pust = kuhnya.read(14340)
+            if pust == "0":
+                message_kuhnya += utils.smile(pust) + "   Стоп\n"
+            elif pust == "1":
+                message_kuhnya += utils.smile(pust) + "   Пуск\n"
+            else:
+                message_kuhnya += "N/A   Пуск/Стоп\n"
+            await call.message.edit_text(text=message_kuhnya)
+            zile = kuhnya.read(14336)
+            if zile == "0":
+                message_kuhnya += "☀️" + "   Лето\n"
+            elif zile == "1":
+                message_kuhnya += "❄️" + "   Зима\n"
+            else:
+                message_kuhnya += "N/A   Зима/Лето\n"
+            await call.message.edit_text(text=message_kuhnya)
+            dime = kuhnya.read(14337)
+            if dime == "0":
+                message_kuhnya += utils.smile(dime) + "   Мест\n"
+            elif dime == "1":
+                message_kuhnya += utils.smile(dime) + "   Дист\n"
+            else:
+                message_kuhnya += "N/A   Дист/Мест\n"
+            await call.message.edit_text(text=message_kuhnya)
+            avar = kuhnya.read(14342)
+            if avar == "1":
+                message_kuhnya += "❌" + "   Авария\n"
+                await call.message.edit_text(text=message_kuhnya)
+            blok = kuhnya.read(14339)
+            if blok == "1":
+                message_kuhnya += "❌" + "   Блокировка\n"
+                await call.message.edit_text(text=message_kuhnya)
+            message_kuhnya += kuhnya.read(41023, "float") + " C   Уставка t\n"
+            await call.message.edit_text(text=message_kuhnya)
+            message_kuhnya += kuhnya.read(40995, "float") + " C   t Канала\n"
+            await call.message.edit_text(text=message_kuhnya)
+            message_kuhnya += kuhnya.read(40993, "float") + " C   t Наружная\n"
+            await call.message.edit_text(text=message_kuhnya)
+            message_kuhnya += kuhnya.read(40997, "float") + " C   t Обр. воды\n"
+            await call.message.edit_text(text=message_kuhnya)
+            message_kuhnya += kuhnya.read(41106, "holding") + "   Скорость ВП\n"
+            await call.message.edit_text(text=message_kuhnya)
+            await call.message.edit_reply_markup(reply_markup=kb.kuhnya_menu(call.from_user.id))
+        elif callback_data["IP"] == P_IP33:
+            if callback_data["action"] == "pusk":
+                MR.modbus_set(callback_data["IP"], 15362, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15362, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop":
+                MR.modbus_set(callback_data["IP"], 15363, 0)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15363, 1)
+                time.sleep(1)
+            elif callback_data["action"] == "sbros_error":
+                MR.modbus_set(callback_data["IP"], 15364, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15364, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 1)
+            elif callback_data["action"] == "start_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 0)
+            elif callback_data["action"] == "set_speed_ventP_plus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventP_minus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_plus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_minus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "ust_plus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            elif callback_data["action"] == "ust_minus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            message_gostinaya=f"Гостиная:{space}\n"
+            await call.message.edit_text(text=message_gostinaya)
+            pust = gostinaya.read(14340)
+            if pust == "0":
+                message_gostinaya += utils.smile(pust) + "   Стоп\n"
+            elif pust == "1":
+                message_gostinaya += utils.smile(pust) + "   Пуск\n"
+            else:
+                message_gostinaya += "N/A   Пуск/Стоп\n"
+            await call.message.edit_text(text=message_gostinaya)
+            zile = gostinaya.read(14336)
+            if zile == "0":
+                message_gostinaya += "☀️" + "   Лето\n"
+            elif zile == "1":
+                message_gostinaya += "❄️" + "   Зима\n"
+            else:
+                message_gostinaya += "N/A   Зима/Лето\n"
+            await call.message.edit_text(text=message_gostinaya)
+            dime = gostinaya.read(14337)
+            if dime == "0":
+                message_gostinaya += utils.smile(dime) + "   Мест\n"
+            elif dime == "1":
+                message_gostinaya += utils.smile(dime) + "   Дист\n"
+            else:
+                message_gostinaya += "N/A   Дист/Мест\n"
+            await call.message.edit_text(text=message_gostinaya)
+            avar = gostinaya.read(14342)
+            if avar == "1":
+                message_gostinaya += "❌" + "   Авария\n"
+                await call.message.edit_text(text=message_gostinaya)
+            blok = gostinaya.read(14339)
+            if blok == "1":
+                message_gostinaya += "❌" + "   Блокировка\n"
+                await call.message.edit_text(text=message_gostinaya)
+            message_gostinaya += gostinaya.read(41023, "float") + " C   Уставка t\n"
+            await call.message.edit_text(text=message_gostinaya)
+            message_gostinaya += gostinaya.read(40995, "float") + " C   t Канала\n"
+            await call.message.edit_text(text=message_gostinaya)
+            message_gostinaya += gostinaya.read(40993, "float") + " C   t Наружная\n"
+            await call.message.edit_text(text=message_gostinaya)
+            message_gostinaya += gostinaya.read(40997, "float") + " C   t Обр. воды\n"
+            await call.message.edit_text(text=message_gostinaya)
+            message_gostinaya += gostinaya.read(41106, "holding") + "   Скорость ВП\n"
+            await call.message.edit_text(text=message_gostinaya)
+            await call.message.edit_reply_markup(reply_markup=kb.gostinaya_menu(call.from_user.id))
+        elif callback_data["IP"] == P_IP34:
+            if callback_data["action"] == "pusk":
+                MR.modbus_set(callback_data["IP"], 15362, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15362, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop":
+                MR.modbus_set(callback_data["IP"], 15363, 0)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15363, 1)
+                time.sleep(1)
+            elif callback_data["action"] == "sbros_error":
+                MR.modbus_set(callback_data["IP"], 15364, 1)
+                time.sleep(2)
+                MR.modbus_set(callback_data["IP"], 15364, 0)
+                time.sleep(1)
+            elif callback_data["action"] == "stop_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 1)
+            elif callback_data["action"] == "start_vv":
+                MR.modbus_set(callback_data["IP"], 15366, 0)
+            elif callback_data["action"] == "set_speed_ventP_plus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventP_minus":
+                MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_plus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "set_speed_ventV_minus":
+                MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            elif callback_data["action"] == "ust_plus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            elif callback_data["action"] == "ust_minus":
+                MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
+            message_oranjereya=f"Оранжерея:{space}\n"
+            await call.message.edit_text(text=message_oranjereya)
+            pust = str(MR.modbus_get(P_IP34, 14340))
+            if pust == "0":
+                message_oranjereya += utils.smile(pust) + "   Стоп\n"
+            elif pust == "1":
+                message_oranjereya += utils.smile(pust) + "   Пуск\n"
+            else:
+                message_oranjereya += "N/A   Пуск/Стоп\n"
+            await call.message.edit_text(text=message_oranjereya)
+            zile = str(MR.modbus_get(P_IP34, 14336))
+            if zile == "0":
+                message_oranjereya += "☀️" + "   Лето\n"
+            elif zile == "1":
+                message_oranjereya += "❄️" + "   Зима\n"
+            else:
+                message_oranjereya += "N/A   Зима/Лето\n"
+            await call.message.edit_text(text=message_oranjereya)
+            dime = str(MR.modbus_get(P_IP34, 14337))
+            if dime == "0":
+                message_oranjereya += utils.smile(dime) + "   Мест\n"
+            elif dime == "1":
+                message_oranjereya += utils.smile(dime) + "   Дист\n"
+            else:
+                message_oranjereya += "N/A   Дист/Мест\n"
+            await call.message.edit_text(text=message_oranjereya)
+            avar = str(MR.modbus_get(P_IP34, 14342))
+            if avar == "1":
+                message_oranjereya += "❌" + "   Авария\n"
+                await call.message.edit_text(text=message_oranjereya)
+            blok = str(MR.modbus_get(P_IP34, 14339))
+            if blok == "1":
+                message_oranjereya += "❌" + "   Блокировка\n"
+                await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41023, float)) + " C   Уставка t\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 40995, float)) + " C   t Канала\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 40993, float)) + " C   t Наружная\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 40997, float)) + " C   t Обр. воды\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41001, float)) + " C   t Вытяжки\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 40999, float)) + " C   t Помещения\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 15366)) + "   Остановка ВВ\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41106, "holding")) + "   Скорость ВП\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41107, "holding")) + "   Скорость ВВ\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41103, "holding")) + "   Мощность Рекуп.\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41099, "holding")) + "   Мощность В. Калор.\n"
+            await call.message.edit_text(text=message_oranjereya)
+            message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
+            await call.message.edit_text(text=message_oranjereya)
+            await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
     else:
         await call.answer()
@@ -1285,5 +1589,6 @@ if __name__ == '__main__':
             executor.start_polling(dp, skip_updates=True)
             time.sleep(5)
         except Exception as err:
+            logger.error("Критическая ошибка")
             logger.error(err)
             time.sleep(10) # В случае падения
