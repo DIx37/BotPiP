@@ -28,8 +28,14 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
     elif L_Version == "L5":
         if LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "0":
+            print(L_Version)
+            print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
+            print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
         if LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "1":
+            print(L_Version)
+            print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
+            print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
 
 @logger.catch

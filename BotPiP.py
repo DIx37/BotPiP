@@ -357,7 +357,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "podn") == True:
         await call.answer()
-        switch_rele("L5", L_IP22, L_Pass, 1)
+        LJ.switch_rele("L5", L_IP22, L_Pass, 1)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -378,7 +378,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "rekl") == True:
         await call.answer()
-        switch_rele("L5", L_IP22, L_Pass, 2)
+        LJ.switch_rele("L5", L_IP22, L_Pass, 2)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -399,7 +399,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "park") == True:
         await call.answer()
-        switch_rele("L5", L_IP22, L_Pass, 3)
+        LJ.switch_rele("L5", L_IP22, L_Pass, 3)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -420,7 +420,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "ekra") == True:
         await call.answer()
-        switch_rele("L5", L_IP22, L_Pass, 4)
+        LJ.switch_rele("L5", L_IP22, L_Pass, 4)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -441,7 +441,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "basv") == True:
         await call.answer()
-        switch_rele("L5", L_IP21, L_Pass, 1)
+        LJ.switch_rele("L5", L_IP21, L_Pass, 1)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -462,7 +462,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "basn") == True:
         await call.answer()
-        switch_rele("L5", L_IP21, L_Pass, 2)
+        LJ.switch_rele("L5", L_IP21, L_Pass, 2)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -483,7 +483,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "podz") == True:
         await call.answer()
-        switch_rele("L5", L_IP21, L_Pass, 3)
+        LJ.switch_rele("L5", L_IP21, L_Pass, 3)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -504,7 +504,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "vodo") == True:
         await call.answer()
-        switch_rele("L5", L_IP21, L_Pass, 4)
+        LJ.switch_rele("L5", L_IP21, L_Pass, 4)
         await call.message.edit_text(text="Обновляю")
         message_w = message_pool_sun_f()
         await call.message.edit_text(text=message_w)
@@ -601,7 +601,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "mang") == True:
         await call.answer()
-        switch_rele("L5", L_IP20, L_Pass, 1)
+        LJ.switch_rele("L5", L_IP20, L_Pass, 1)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
@@ -616,7 +616,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "pizz") == True:
         await call.answer()
-        switch_rele("L5", L_IP20, L_Pass, 2)
+        LJ.switch_rele("L5", L_IP20, L_Pass, 2)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
@@ -631,7 +631,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "ostr") == True:
         await call.answer()
-        switch_rele("L5", L_IP20, L_Pass, 3)
+        LJ.switch_rele("L5", L_IP20, L_Pass, 3)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
@@ -646,7 +646,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     if check_user_acess(call.from_user.id, "smok") == True:
         await call.answer()
-        switch_rele("L5", L_IP20, L_Pass, 4)
+        LJ.switch_rele("L5", L_IP20, L_Pass, 4)
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
