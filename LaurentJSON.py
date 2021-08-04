@@ -24,7 +24,7 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
     if L_Version == "L2":
         if LJ.l2_xml_read_all(L_IP)[3][L_Rele - 1] == "0":
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
-        if LJ.l2_xml_read_all(L_IP)[3][L_Rele - 1] == "1":
+        elif LJ.l2_xml_read_all(L_IP)[3][L_Rele - 1] == "1":
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
     elif L_Version == "L5":
         if LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "0":
@@ -32,7 +32,7 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
             print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
             print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
-        if LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "1":
+        elif LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "1":
             print(L_Version)
             print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
             print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
