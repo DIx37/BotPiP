@@ -278,9 +278,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_pool_sun + message_l22 + message_l21)
         await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(message_pool_sun)
-        logger.info(message_l21)
-        logger.info(message_l22)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -667,7 +664,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")
@@ -685,7 +681,6 @@ async def update(call: CallbackQuery):
         await call.message.edit_text(text=message_l20_f())
         await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
         logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
-        logger.info(l20_json)
     else:
         await call.answer()
         await call.message.edit_text(text=f"<b>ДОСТУП ЗАПРЕЩЁН!</b>\n\n{call.from_user.first_name}, хватит тыкать кнопки!")

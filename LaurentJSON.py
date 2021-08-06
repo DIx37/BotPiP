@@ -1,15 +1,16 @@
 from loguru import logger
+import LaurentJSON as LJ
 import platform
 import requests
 import json
 import re
-import LaurentJSON as LJ
 
 # Включение логирования
 if platform.system() == "Windows":
     logger.add("log\LaurentJSON.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 else:
     logger.add("/home/bots/BotPiP/log/LaurentJSON.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
+
 
 @logger.catch
 def check_ip(L_IP):
@@ -18,6 +19,7 @@ def check_ip(L_IP):
     except Exception as err:
         result = 404
     return result
+
 
 @logger.catch
 def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
@@ -37,6 +39,7 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
             print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
             print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
             requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
+
 
 @logger.catch
 def l5_json_read_all(L_IP, L_Pass):
@@ -93,7 +96,8 @@ def l5_json_read_all(L_IP, L_Pass):
         result = "N/A"
         return result
 
-#l5_json_read_all("172.16.1.22", "Laurent")
+# l5_json_read_all("172.16.1.22", "Laurent")
+
 
 @logger.catch
 def l2_xml_read_all(L_IP):
@@ -101,7 +105,7 @@ def l2_xml_read_all(L_IP):
     if CheckIP == 200:
         raw_html = requests.get(f"http://{L_IP}/state.xml")
         content_html = raw_html.content
-        decode_html = content_html.decode('utf-8').replace(u'\u2212','-')
+        decode_html = content_html.decode('utf-8').replace(u'\u2212', '-')
         match_systime = re.findall("<systime>(.*?)</systime>", str(decode_html))
         systime = match_systime[0]
         match_rele = re.findall("<rele>(.*?)</rele>", str(decode_html))

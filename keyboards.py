@@ -25,14 +25,16 @@ L_IP24 = config.Laurent_IP_Pool24
 # Подключение к БД
 db = SQLighter(config.path_bot + "BotPiP.db")
 
+
 def check_user_acess(user, rele):
-    if bool(len(db.check_user_acess(user))) == True:
+    if bool(len(db.check_user_acess(user))):
         user_acess = db.check_user_acess(user)[0][3]
         result = re.findall(rele + ",", str(user_acess))
         result = bool(len(result))
     else:
         result = False
     return result
+
 
 # Главное меню
 def main_menu(user):
@@ -48,6 +50,7 @@ def main_menu(user):
     laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
     main_menu.add(laurent_menu)
     return main_menu
+
 
 # Бассейн и ВП
 def pool_menu(user):
@@ -91,6 +94,7 @@ def pool_menu(user):
     pool_menu.insert(update)
     return pool_menu
 
+
 # Вентиляция
 def vent_menu(user):
     vent_menu = InlineKeyboardMarkup(row_width=2)
@@ -112,6 +116,7 @@ def vent_menu(user):
     vent_menu.insert(vent_menu_u)
     return vent_menu
 
+
 # Рекуператоры и Приточки
 def rekup_pri_menu(user):
     rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
@@ -130,6 +135,7 @@ def rekup_pri_menu(user):
     rekup_pri_menu_u = InlineKeyboardButton(text="Обновить", callback_data="rekup_pri_menu")
     rekup_pri_menu.insert(rekup_pri_menu_u)
     return rekup_pri_menu
+
 
 # Оранжерея Реклама
 def re_orang(user):
@@ -152,12 +158,14 @@ def re_orang(user):
     re_orang.insert(back)
     return re_orang
 
+
 # Ссылки на Laurent
 def laurent_menu(user):
     laurent_menu = InlineKeyboardMarkup(row_width=1)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
     laurent_menu.insert(main_menu)
     return laurent_menu
+
 
 def banketniy_zal_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
@@ -242,6 +250,7 @@ def banketniy_zal_menu(user):
     banketniy_zal_menu.insert(banketniy_zal_menu_u)
     return banketniy_zal_menu
 
+
 def podval_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
     podval_menu = InlineKeyboardMarkup(row_width=2)
@@ -297,6 +306,7 @@ def podval_menu(user):
     podval_menu_u = InlineKeyboardButton(text="Обновить", callback_data="podval")
     podval_menu.insert(podval_menu_u)
     return podval_menu
+
 
 def kuhnya_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
@@ -354,6 +364,7 @@ def kuhnya_menu(user):
     kuhnya_menu.insert(kuhnya_menu_u)
     return kuhnya_menu
 
+
 def gostinaya_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
     gostinaya_menu = InlineKeyboardMarkup(row_width=2)
@@ -409,6 +420,7 @@ def gostinaya_menu(user):
     gostinaya_menu_u = InlineKeyboardButton(text="Обновить", callback_data="gostinaya")
     gostinaya_menu.insert(gostinaya_menu_u)
     return gostinaya_menu
+
 
 def oranjereya_menu(user):
     callback_rap = CallbackData("set", "action", "number", "IP")
@@ -492,6 +504,7 @@ def oranjereya_menu(user):
     oranjereya_menu_menu_u = InlineKeyboardButton(text="Обновить", callback_data="oranjereya")
     oranjereya_menu_menu.insert(oranjereya_menu_menu_u)
     return oranjereya_menu_menu
+
 
 menu_time = InlineKeyboardMarkup(row_width=2)
 update = InlineKeyboardButton(text="Понедельник", callback_data="pon")
