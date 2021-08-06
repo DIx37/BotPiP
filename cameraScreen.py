@@ -5,16 +5,6 @@ from aiogram.utils import executor
 from loguru import logger
 import config
 
-# bot = Bot(token=config.ErrorBot_TOKEN)
-# dp = Dispatcher(bot)
-
-# async def send_error(Screen):
-#    await bot.send_photo(config.DIx_ID, Screen)
-
-# @logger.catch
-# def se(text):
-#    executor.start(dp, send_error(text))
-
 login = "admin"
 password = "QazWsx12"
 ip = "172.16.2.205:554"
