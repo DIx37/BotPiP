@@ -23,10 +23,10 @@ class SQLighter:
         with self.connection:
             return self.cursor.execute("SELECT * FROM `BotTime` WHERE `DayOfWeek` = ? AND `Hour` = ? AND `Minutes` = ?", (DayOfWeek, Hour, Minutes)).fetchall()
 
-    def add_time(self, DayOfWeek, Hour, Minutes, Rele, OnOrOff):
+    def add_time(self, DayOfWeek, Hour, Minutes, Rele, OnOrOff, s_a_s):
         """Добавление нового письма в базу"""
         with self.connection:
-            return self.cursor.execute("INSERT INTO `BotTime` (`DayOfWeek`, `Hour`, `Minutes`, `Rele`, `OnOrOff`) VALUES(?,?,?,?,?)", (DayOfWeek, Hour, Minutes, Rele, OnOrOff))
+            return self.cursor.execute("INSERT INTO `BotTime` (`DayOfWeek`, `Hour`, `Minutes`, `Rele`, `OnOrOff`) VALUES(?,?,?,?,?,?)", (DayOfWeek, Hour, Minutes, Rele, OnOrOff, s_a_s))
 
     def del_time(self, id):
         """Добавление нового письма в базу"""
@@ -38,16 +38,30 @@ class SQLighter:
         with self.connection:
             return self.cursor.execute("SELECT * FROM `Weather`").fetchall()
 
-    def update_weather_bottime(self, Sunrise_h, Sunrise_m, Sunset_h, Sunset_m):
+#    def get_sas(self, s_a_s):
+#        with self.connection:
+#            return self.cursor.execute("SELECT * FROM `BotTime` WHERE `s_a_s` = ?", (s_a_s)).fetchall()
+
+    def update_sas(self, Sunrise_h, Sunrise_m, Sunset_h, Sunset_m):
         with self.connection:
-            Rele = "rekl"
+            s_a_s = 1
             OnOrOff = 0
-            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunrise_h, Rele, OnOrOff))
-            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunrise_m, Rele, OnOrOff))
-            Rele = "rekl"
+            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `s_a_s` = ? AND `OnOrOff` = ?", (Sunrise_h, OnOrOff, s_a_s))
+            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `s_a_s` = ? AND `OnOrOff` = ?", (Sunrise_m, OnOrOff, s_a_s))
             OnOrOff = 1
-            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunset_h, Rele, OnOrOff))
-            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunset_m, Rele, OnOrOff))
+            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `s_a_s` = ? AND `OnOrOff` = ?", (Sunset_h, OnOrOff, s_a_s))
+            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `s_a_s` = ? AND `OnOrOff` = ?", (Sunset_m, OnOrOff, s_a_s))
+
+#    def update_weather_bottime(self, Sunrise_h, Sunrise_m, Sunset_h, Sunset_m):
+#        with self.connection:
+#            Rele = "rekl"
+#            OnOrOff = 0
+#            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunrise_h, Rele, OnOrOff))
+#            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunrise_m, Rele, OnOrOff))
+#            Rele = "rekl"
+#            OnOrOff = 1
+#            self.cursor.execute("UPDATE `BotTime` SET `Hour` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunset_h, Rele, OnOrOff))
+#            self.cursor.execute("UPDATE `BotTime` SET `Minutes` = ? WHERE `Rele` = ? AND `OnOrOff` = ?", (Sunset_m, Rele, OnOrOff))
 
     def update_weather(self, Date, Sunrise_h, Sunrise_m, Sunset_h, Sunset_m):
         id = 1

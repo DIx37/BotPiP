@@ -42,6 +42,11 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
 
 
 @logger.catch
+def set_rele(L_IP, L_Pass, L_Rele, L_Set):
+    requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}")
+
+
+@logger.catch
 def l5_json_read_all(L_IP, L_Pass):
     CheckIP = check_ip(L_IP)
     if CheckIP == 200:
