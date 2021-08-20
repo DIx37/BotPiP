@@ -21,50 +21,43 @@ L_IP22 = config.Laurent_IP_Pool22
 L_Pass = config.Laurent_Pass
 
 @logger.catch
-def set_sunrise_and_sunset_bd():
-    now = dt.datetime.now()
-    Date = now.strftime("%D")
-    s_a_s = weather.check_weather()
-    db.update_weather(Date, s_a_s[5], s_a_s[6], s_a_s[7], s_a_s[8])
-#    db.update_weather_bottime(s_a_s[5], s_a_s[6], s_a_s[7], s_a_s[8])
-    logger.info(f"Добавил в базу время рассвета {s_a_s[5]}:{s_a_s[6]} и заката {s_a_s[7]}:{s_a_s[8]}")
-
-@logger.catch
 def main_f():
     t_start = time.monotonic()
     moscow_tz = timezone('Europe/Moscow')
     d = moscow_tz.localize(datetime.now()).strftime("%w")
     h = moscow_tz.localize(datetime.now()).strftime("%H")
     m = moscow_tz.localize(datetime.now()).strftime("%M")
+#    h = "01"
+#    m = "00"
     if h == "01" and "00":
-        set_sunrise_and_sunset_bd()
         s_a_s = weather.check_weather()
         db.update_sas(s_a_s[5], s_a_s[6], s_a_s[7], s_a_s[8])
+        logger.info(f"Добавил в базу время рассвета {s_a_s[5]}:{s_a_s[6]} и заката {s_a_s[7]}:{s_a_s[8]}")
     for rele_in_db in db.get_pool_time_all(d, h, m):
         rele = rele_in_db[4]
         turnOnOff = rele_in_db[5]
-        if rele == "podn":
+        if rele == "pod_navesom":
             L_IP = L_IP22
             rele = "1"
-        elif rele == "rekl":
+        elif rele == "reklama":
             L_IP = L_IP22
             rele = "2"
         elif rele == "park":
             L_IP = L_IP22
             rele = "3"
-        elif rele == "ekra":
+        elif rele == "ekran":
             L_IP = L_IP22
             rele = "4"
-        elif rele == "basv":
+        elif rele == "pool_up":
             L_IP = L_IP21
             rele = "1"
-        elif rele == "basn":
+        elif rele == "pool_down":
             L_IP = L_IP21
             rele = "2"
-        elif rele == "podz":
+        elif rele == "pod_zontami":
             L_IP = L_IP21
             rele = "3"
-        elif rele == "vodo":
+        elif rele == "vodopad":
             L_IP = L_IP21
             rele = "4"
         LJ.set_rele(L_IP, L_Pass, rele, turnOnOff)

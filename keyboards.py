@@ -1,11 +1,11 @@
 import config
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+#from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.callback_data import CallbackData
 import LaurentJSON as LJ
-import datetime as dt
+#import datetime as dt
 from sqllite import SQLighter
-import re
+#import re
 import modbusread as MR
 from modbus import Modbus
 
@@ -26,66 +26,61 @@ L_IP24 = config.Laurent_IP_Pool24
 db = SQLighter(config.path_bot + "BotPiP.db")
 
 
-def check_user_acess(user, rele):
-    if bool(len(db.check_user_acess(user))):
-        user_acess = db.check_user_acess(user)[0][3]
-        result = re.findall(rele + ",", str(user_acess))
-        result = bool(len(result))
-    else:
-        result = False
-    return result
-
-
 # Главное меню
 def main_menu(user):
     main_menu = InlineKeyboardMarkup(row_width=2)
-    pool_menu = InlineKeyboardButton(text="Бассейн и ВП", callback_data="pool_menu")
-    main_menu.insert(pool_menu)
-    vent_menu = InlineKeyboardButton(text="Вентиляция", callback_data="vent_menu")
-    main_menu.insert(vent_menu)
-    rekup_pri_menu = InlineKeyboardButton(text="Рекуператоры и Приточки", callback_data="rekup_pri_menu")
-    main_menu.insert(rekup_pri_menu)
-    re_orang = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="re_orang")
-    main_menu.add(re_orang)
-    laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
-    main_menu.add(laurent_menu)
+    if db.check_user_acess(user, "pool_menu", "pool_menu"):
+        pool_menu = InlineKeyboardButton(text="Бассейн и ВП", callback_data="pool_menu")
+        main_menu.insert(pool_menu)
+    if db.check_user_acess(user, "vent_menu", "vent_menu"):
+        vent_menu = InlineKeyboardButton(text="Вентиляция", callback_data="vent_menu")
+        main_menu.insert(vent_menu)
+    if db.check_user_acess(user, "rekup_pri_menu", "rekup_pri_menu"):
+        rekup_pri_menu = InlineKeyboardButton(text="Рекуператоры и Приточки", callback_data="rekup_pri_menu")
+        main_menu.insert(rekup_pri_menu)
+    if db.check_user_acess(user, "ad_orangereya", "ad_orangereya"):
+        ad_orangeteya = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="ad_orangeteya")
+        main_menu.add(ad_orangeteya)
+    if db.check_user_acess(user, "laurent_menu", "laurent_menu"):
+        laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
+        main_menu.add(laurent_menu)
     return main_menu
 
 
 # Бассейн и ВП
 def pool_menu(user):
     pool_menu = InlineKeyboardMarkup(row_width=2)
-    if check_user_acess(user, "podn"):
-        re = InlineKeyboardButton(text="Под навесом", callback_data="podn")
-        pool_menu.insert(re)
-    if check_user_acess(user, "rekl"):
-        pa2 = InlineKeyboardButton(text="Реклама", callback_data="rekl")
-        pool_menu.insert(pa2)
-    if check_user_acess(user, "park"):
-        pa3 = InlineKeyboardButton(text="Парк", callback_data="park")
-        pool_menu.insert(pa3)
-    if check_user_acess(user, "ekra"):
-        ek = InlineKeyboardButton(text="Экран", callback_data="ekra")
-        pool_menu.insert(ek)
-    if check_user_acess(user, "basv"):
-        new1 = InlineKeyboardButton(text="Бассейн верх", callback_data="basv")
-        pool_menu.insert(new1)
-    if check_user_acess(user, "basn"):
-        new2 = InlineKeyboardButton(text="Бассейн низ", callback_data="basn")
-        pool_menu.insert(new2)
-    if check_user_acess(user, "podz"):
-        new3 = InlineKeyboardButton(text="Под зонтами", callback_data="podz")
-        pool_menu.insert(new3)
-    if check_user_acess(user, "vodo"):
-        new4 = InlineKeyboardButton(text="Водопад", callback_data="vodo")
-        pool_menu.insert(new4)
-    if check_user_acess(user, "ibav"):
-        new5 = InlineKeyboardButton(text="Имп. Бас. верх", callback_data="ibav")
-        pool_menu.insert(new5)
-    if check_user_acess(user, "iban"):
-        new6 = InlineKeyboardButton(text="Имп. Бас. низ", callback_data="iban")
-        pool_menu.insert(new6)
-    if check_user_acess(user, "time"):
+    if db.check_user_acess(user, "pool_menu", "pod_navesom"):
+        pod_navesom = InlineKeyboardButton(text="Под навесом", callback_data="pod_navesom")
+        pool_menu.insert(pod_navesom)
+    if db.check_user_acess(user, "pool_menu", "reklama"):
+        reklama = InlineKeyboardButton(text="Реклама", callback_data="reklama")
+        pool_menu.insert(reklama)
+    if db.check_user_acess(user, "pool_menu", "park"):
+        park = InlineKeyboardButton(text="Парк", callback_data="park")
+        pool_menu.insert(park)
+    if db.check_user_acess(user, "pool_menu", "ekran"):
+        ekran = InlineKeyboardButton(text="Экран", callback_data="ekran")
+        pool_menu.insert(ekran)
+    if db.check_user_acess(user, "pool_menu", "pool_up"):
+        pool_up = InlineKeyboardButton(text="Бассейн верх", callback_data="pool_up")
+        pool_menu.insert(pool_up)
+    if db.check_user_acess(user, "pool_menu", "pool_down"):
+        pool_down = InlineKeyboardButton(text="Бассейн низ", callback_data="pool_down")
+        pool_menu.insert(pool_down)
+    if db.check_user_acess(user, "pool_menu", "pod_zontami"):
+        pod_zontami = InlineKeyboardButton(text="Под зонтами", callback_data="pod_zontami")
+        pool_menu.insert(pod_zontami)
+    if db.check_user_acess(user, "pool_menu", "vodopad"):
+        vodopad = InlineKeyboardButton(text="Водопад", callback_data="vodopad")
+        pool_menu.insert(vodopad)
+    if db.check_user_acess(user, "pool_menu", "imp_pool_up"):
+        imp_pool_up = InlineKeyboardButton(text="Имп. Бас. верх", callback_data="imp_pool_up")
+        pool_menu.insert(imp_pool_up)
+    if db.check_user_acess(user, "pool_menu", "imp_pool_down"):
+        imp_pool_down = InlineKeyboardButton(text="Имп. Бас. низ", callback_data="imp_pool_down")
+        pool_menu.insert(imp_pool_down)
+    if db.check_user_acess(user, "pool_menu", "time"):
         time = InlineKeyboardButton(text="Время", callback_data="time")
         pool_menu.insert(time)
     back = InlineKeyboardButton(text="Назад", callback_data="main_menu")
@@ -98,18 +93,24 @@ def pool_menu(user):
 # Вентиляция
 def vent_menu(user):
     vent_menu = InlineKeyboardMarkup(row_width=2)
-    mang = InlineKeyboardButton(text="Мангал", callback_data="mang")
-    vent_menu.insert(mang)
-    pizz = InlineKeyboardButton(text="Пицца", callback_data="pizz")
-    vent_menu.insert(pizz)
-    ostr = InlineKeyboardButton(text="Остров", callback_data="ostr")
-    vent_menu.add(ostr)
-    smok = InlineKeyboardButton(text="Смокер", callback_data="smok")
-    vent_menu.insert(smok)
-    smok80 = InlineKeyboardButton(text="Смокер 80", callback_data="smok80")
-    vent_menu.add(smok80)
-    smok100 = InlineKeyboardButton(text="Смокер 100", callback_data="smok100")
-    vent_menu.insert(smok100)
+    if db.check_user_acess(user, "vent_menu", "mangal"):
+        mangal = InlineKeyboardButton(text="Мангал", callback_data="mangal")
+        vent_menu.insert(mangal)
+    if db.check_user_acess(user, "vent_menu", "pizza"):
+        pizza = InlineKeyboardButton(text="Пицца", callback_data="pizza")
+        vent_menu.insert(pizza)
+    if db.check_user_acess(user, "vent_menu", "ostrov"):
+        ostrov = InlineKeyboardButton(text="Остров", callback_data="ostrov")
+        vent_menu.add(ostrov)
+    if db.check_user_acess(user, "vent_menu", "smoker"):
+        smoker = InlineKeyboardButton(text="Смокер", callback_data="smoker")
+        vent_menu.insert(smoker)
+    if db.check_user_acess(user, "vent_menu", "smoker_80"):
+        smoker_80 = InlineKeyboardButton(text="Смокер 80", callback_data="smoker_80")
+        vent_menu.add(smoker_80)
+    if db.check_user_acess(user, "vent_menu", "smoker_100"):
+        smoker_100 = InlineKeyboardButton(text="Смокер 100", callback_data="smoker_100")
+        vent_menu.insert(smoker_100)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
     vent_menu.insert(main_menu)
     vent_menu_u = InlineKeyboardButton(text="Обновить", callback_data="vent_menu")
@@ -120,16 +121,21 @@ def vent_menu(user):
 # Рекуператоры и Приточки
 def rekup_pri_menu(user):
     rekup_pri_menu = InlineKeyboardMarkup(resize_keyboard=False, row_width=2)
-    banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
-    rekup_pri_menu.insert(banketniy_zal)
-    pizz = InlineKeyboardButton(text="Подвал", callback_data="podval")
-    rekup_pri_menu.add(pizz)
-    ostr = InlineKeyboardButton(text="Кухня", callback_data="kuhnya")
-    rekup_pri_menu.add(ostr)
-    smok = InlineKeyboardButton(text="Гостиная", callback_data="gostinaya")
-    rekup_pri_menu.add(smok)
-    smok80 = InlineKeyboardButton(text="Оранжерея", callback_data="oranjereya")
-    rekup_pri_menu.add(smok80)
+    if db.check_user_acess(user, "rekup_pri_menu", "banketniy_zal"):
+        banketniy_zal = InlineKeyboardButton(text="Банкетный зал", callback_data="banketniy_zal")
+        rekup_pri_menu.insert(banketniy_zal)
+    if db.check_user_acess(user, "rekup_pri_menu", "podval"):
+        podval = InlineKeyboardButton(text="Подвал", callback_data="podval")
+        rekup_pri_menu.add(podval)
+    if db.check_user_acess(user, "rekup_pri_menu", "kuhnya"):
+        kuhnya = InlineKeyboardButton(text="Кухня", callback_data="kuhnya")
+        rekup_pri_menu.add(kuhnya)
+    if db.check_user_acess(user, "rekup_pri_menu", "gostinaya"):
+        gostinaya = InlineKeyboardButton(text="Гостиная", callback_data="gostinaya")
+        rekup_pri_menu.add(gostinaya)
+    if db.check_user_acess(user, "rekup_pri_menu", "oranjereya"):
+        oranjereya = InlineKeyboardButton(text="Оранжерея", callback_data="oranjereya")
+        rekup_pri_menu.add(oranjereya)
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
     rekup_pri_menu.add(main_menu)
     rekup_pri_menu_u = InlineKeyboardButton(text="Обновить", callback_data="rekup_pri_menu")
@@ -138,25 +144,25 @@ def rekup_pri_menu(user):
 
 
 # Оранжерея Реклама
-def re_orang(user):
-    re_orang = InlineKeyboardMarkup(row_width=2)
-    if check_user_acess(user, "perekl"):
+def ad_orangereya(user):
+    ad_orangereya = InlineKeyboardMarkup(row_width=2)
+    if db.check_user_acess(user, "ad_orangereya", "perekl"):
         po_time = InlineKeyboardButton(text="Переключить", callback_data="perekl")
-        re_orang.add(po_time)
-    if check_user_acess(user, "po_time"):
+        ad_orangereya.add(po_time)
+    if db.check_user_acess(user, "ad_orangereya", "po_time"):
         l24_xml = LJ.l2_xml_read_all(L_IP24)
         print(l24_xml[3][0])
         if l24_xml[3][0] == "0":
             po_time = InlineKeyboardButton(text="Отключить режим по времени", callback_data="po_time")
-            re_orang.add(po_time)
+            ad_orangereya.add(po_time)
         elif l24_xml[3][0] == "1":
             po_time = InlineKeyboardButton(text="Включить режим по времени", callback_data="po_time")
-            re_orang.add(po_time)
+            ad_orangereya.add(po_time)
     back = InlineKeyboardButton(text="Назад", callback_data="main_menu")
-    re_orang.add(back)
-    back = InlineKeyboardButton(text="Обновить", callback_data="re_orang")
-    re_orang.insert(back)
-    return re_orang
+    ad_orangereya.add(back)
+    back = InlineKeyboardButton(text="Обновить", callback_data="ad_orangereya")
+    ad_orangereya.insert(back)
+    return ad_orangereya
 
 
 # Ссылки на Laurent
