@@ -74,7 +74,7 @@ def message_l20_f():
         l20_message += utils.smile(l20_json[8][3]) + " <b>Смокер</b>\n"
         l20_message += "Скорость: " + str(l20_json[14][3]["vlt"]) + "\n\n"
     else:
-        l20_message = " <b>Вентиляция</b>\n"
+        l20_message = f" <b>Вентиляция</b>{space}\n"
         l20_message += utils.smile("N/A") + " <b>Мангал</b>\n"
         l20_message += "Скорость: N/A\n\n"
         l20_message += utils.smile("N/A") + " <b>Пицца</b>\n"
@@ -123,7 +123,7 @@ def message_l22_f():
 
 """ Формирование сообщения о установленном времени перключения реле """
 @logger.catch
-def time_message(DayOfWeek):
+def pool_time_message(DayOfWeek):
     get_pool_time_DayOfWeek = db.get_pool_time_DayOfWeek(DayOfWeek)
     time_message = ""
     for rele in get_pool_time_DayOfWeek:
@@ -160,138 +160,6 @@ def time_message(DayOfWeek):
         time_message = "Нет настроек"
     return time_message
 
-""" Формирование сообщения о установленном времени перключения реле """
-""" Нужно переделать """
-@logger.catch
-def time_message2(DayOfWeek):
-    get_pool_time_DayOfWeek = db.get_pool_time_DayOfWeek(DayOfWeek)
-    i = 0
-    time_message = ""
-    while i < len(get_pool_time_DayOfWeek):
-        if str(get_pool_time_DayOfWeek[i][4]) == "rekl":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Реклама</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "par2":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Парк</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "par3":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Парк Периметр</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "ekra":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Экран</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "podz":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Под зонтами</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "vodo":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Водопад</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "basv":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Бассейн верх</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        elif str(get_pool_time_DayOfWeek[i][4]) == "basn":
-            time_message += "ID: " + str(get_pool_time_DayOfWeek[i][0]) + "\n"
-            time_message += "<b>Бассейн низ</b>\n"
-            time_message += get_pool_time_DayOfWeek[i][2] + ":" + get_pool_time_DayOfWeek[i][3] + "\n"
-            if str(get_pool_time_DayOfWeek[i][5]) == "0":
-                time_message += "Отключение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По рассвету\n"
-            elif str(get_pool_time_DayOfWeek[i][5]) == "1":
-                time_message += "Включение\n"
-                if str(get_pool_time_DayOfWeek[i][6]) == "1":
-                    time_message += "По закату\n"
-            if int(get_pool_time_DayOfWeek[i][5]) < 0 or int(get_pool_time_DayOfWeek[i][5]) > 0:
-                time_message += "Коррекция времени на:\n"
-                time_message += get_pool_time_DayOfWeek[i][7] + "\n\n"
-        i += 1
-    if len(time_message) == 0:
-        time_message = "Нет настроек"
-    return time_message
 
 """ Добавление в базу времени переключения реле """
 """ Нужно переделать """
@@ -369,6 +237,7 @@ def l24_xml_f():
 @dp.message_handler(commands=['add'])
 @logger.catch
 async def send_welcome(message: types.Message):
+    logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
     await message.answer(text=add_time(message.text),
                          reply_markup=kb.menu_time)
 
@@ -376,6 +245,7 @@ async def send_welcome(message: types.Message):
 @dp.message_handler(commands=['del'])
 @logger.catch
 async def send_welcome(message: types.Message):
+    logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
     del_time(message.text)
     await message.answer(text="Удалено",
                          reply_markup=kb.menu_time)
@@ -384,14 +254,19 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 @logger.catch
 async def main_vent(message: Message):
+    logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
     await message.answer(text=message_pool_sun_f() + message_l22_f() + message_l21_f(), reply_markup=kb.main_menu(message.from_user.id))
+
 
 """ Меню бассейна """
 @dp.callback_query_handler(text="pool_menu")
 @logger.catch
 async def update(call: CallbackQuery):
+#    print(call.message)
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
-    await call.message.edit_text(text="Обновляю")
+    msg = await call.message.edit_text(text="Обновляю")
+#    print(msg)
     message_pool_sun = message_pool_sun_f()
     await call.message.edit_text(text=message_pool_sun)
     message_l22 = message_l22_f()
@@ -399,21 +274,21 @@ async def update(call: CallbackQuery):
     message_l21 = message_l21_f()
     await call.message.edit_text(text=message_pool_sun + message_l22 + message_l21)
     await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 """ Меню вентиляции """
 @dp.callback_query_handler(text="vent_menu")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     await call.message.edit_text(text=message_l20_f())
     await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 """ Меню рекуператоров и приточек """
 @dp.callback_query_handler(text="rekup_pri_menu")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     banz = f"<b>Рекуператоры и Приточки</b>{space}\n" + utils.smile(str(banketniy_zal.read(14340))) + " Банкетный Зал\n"
     await call.message.edit_text(text=banz)
@@ -426,11 +301,11 @@ async def update(call: CallbackQuery):
     oran = utils.smile(str(MR.modbus_get(P_IP34, 14340))) + " Оранжерея\n"
     await call.message.edit_text(text=banz + podv + kuhn + gost + oran)
     await call.message.edit_reply_markup(reply_markup=kb.rekup_pri_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 @dp.callback_query_handler(text="laurent_menu")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     laurent_menu = f"<a href='http://172.16.1.20/protect'>172.16.1.20 Вентиляция</a>{space}\n\n"
     laurent_menu += "\n<a href='http://172.16.1.21/protect'>172.16.1.21 Бассейн Подвал</a>\n\n"
     laurent_menu += "\n<a href='http://172.16.1.22/protect'>172.16.1.22 Бассейн</a>\n\n"
@@ -439,22 +314,82 @@ async def update(call: CallbackQuery):
     await call.answer()
     await call.message.edit_text(text=laurent_menu)
     await call.message.edit_reply_markup(reply_markup=kb.laurent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 @dp.callback_query_handler(text="main_menu")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     await call.message.edit_text(text=f"Главное меню{space}\n .")
     await call.answer()
     await call.message.edit_reply_markup(reply_markup=kb.main_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
-@dp.callback_query_handler(text="pod_navesom")
+"""Всё что ниже объединить в одну функцию"""
+@dp.callback_query_handler(text=["pod_navesom", "reklama", "park", "ekran", "pool_up", "pool_down", "pod_zontami", "vodopad", "imp_pool_up", "imp_pool_down"])
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
-    LJ.switch_rele("L5", L_IP22, L_Pass, 1)
+    if str(call.data) == "pod_navesom":
+        result = LJ.switch_rele("L5", L_IP22, L_Pass, 1)
+    elif str(call.data) == "reklama":
+        result = LJ.switch_rele("L5", L_IP22, L_Pass, 2)
+    elif str(call.data) == "park":
+        result = LJ.switch_rele("L5", L_IP22, L_Pass, 3)
+    elif str(call.data) == "ekran":
+        result = LJ.switch_rele("L5", L_IP22, L_Pass, 4)
+    elif str(call.data) == "pool_up":
+        result = LJ.switch_rele("L5", L_IP21, L_Pass, 1)
+    elif str(call.data) == "pool_down":
+        result = LJ.switch_rele("L5", L_IP21, L_Pass, 2)
+    elif str(call.data) == "pod_zontami":
+        result = LJ.switch_rele("L5", L_IP21, L_Pass, 3)
+    elif str(call.data) == "vodopad":
+        result = LJ.switch_rele("L5", L_IP21, L_Pass, 4)
+    elif str(call.data) == "imp_pool_up":
+        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
+        if l21_json != "N/A":
+            if l21_json[8][0] == "0":
+                await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n\n\n-= 3 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n💣\n-= 2 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n💣\n-= 1 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="💣")
+                time.sleep(2)
+                await call.message.edit_text(text="💥")
+                time.sleep(2)
+                await call.message.edit_text(text=f"{call.from_user.first_name}, ну вот что ты наделал?")
+                time.sleep(2)
+            elif l21_json[8][0] == "1":
+                LJ.set_rele(L_IP21, L_Pass, 1, 0)
+                time.sleep(0.5)
+                LJ.set_rele(L_IP21, L_Pass, 1, 1)
+        else:
+            result = 404
+    elif str(call.data) == "imp_pool_down":
+        l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
+        if l21_json != "N/A":
+            if l21_json[8][1] == "0":
+                await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n\n\n-= 3 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n💣\n-= 2 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n💣\n-= 1 =-")
+                time.sleep(1)
+                await call.message.edit_text(text="💣")
+                time.sleep(2)
+                await call.message.edit_text(text="💥")
+                time.sleep(2)
+                await call.message.edit_text(text=f"{call.from_user.first_name}, ну вот что ты наделал?")
+                time.sleep(2)
+            elif l21_json[8][1] == "1":
+                LJ.set_rele(L_IP21, L_Pass, 2, 0)
+                time.sleep(0.5)
+                LJ.set_rele(L_IP21, L_Pass, 2, 0)
+        else:
+            result = 404
     await call.message.edit_text(text="Обновляю")
     message_w = message_pool_sun_f()
     await call.message.edit_text(text=message_w)
@@ -462,241 +397,46 @@ async def update(call: CallbackQuery):
     await call.message.edit_text(text=message_w + message_l22)
     message_l21 = message_l21_f()
     await call.message.edit_text(text=message_w + message_l22 + message_l21)
+    if result == 404:
+        await call.message.edit_text(text=message_w + message_l22 + message_l21 + "\n<b>ВНИМАНИЕ!</b>\nМодуль недоступен, попробуйте ещё раз")
     await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
-@dp.callback_query_handler(text="reklama")
+
+@dp.callback_query_handler(text=["mangal", "pizza", "ostrov", "smoker", "smoker_80", "smoker_100"])
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP22, L_Pass, 2)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="park")
-@logger.catch
-async def update(call: CallbackQuery):
     await call.answer()
-    LJ.switch_rele("L5", L_IP22, L_Pass, 3)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="ekran")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP22, L_Pass, 4)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="pool_up")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP21, L_Pass, 1)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="pool_down")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP21, L_Pass, 2)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="pod_zontami")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP21, L_Pass, 3)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="vodopad")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP21, L_Pass, 4)
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="imp_pool_up")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-    if l21_json[8][0] == "0":
-        await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n\n\n-= 3 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n💣\n-= 2 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="Бассейн верх выключен, импульс невозможен\n💣\n-= 1 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="💣")
-        time.sleep(2)
-        await call.message.edit_text(text="💥")
-        time.sleep(2)
-        await call.message.edit_text(text=f"{call.from_user.first_name}, ну вот что ты наделал?")
-        time.sleep(2)
-    elif l21_json[8][0] == "1":
-        requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,1,0")
-        time.sleep(0.5)
-        requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="imp_pool_down")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    l21_json = LJ.l5_json_read_all(L_IP21, L_Pass)
-    if l21_json[8][1] == "0":
-        await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n\n\n-= 3 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n💣\n-= 2 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="Бассейн низ выключен, импульс невозможен\n💣\n-= 1 =-")
-        time.sleep(1)
-        await call.message.edit_text(text="💣")
-        time.sleep(2)
-        await call.message.edit_text(text="💥")
-        time.sleep(2)
-        await call.message.edit_text(text=f"{call.from_user.first_name}, ну вот что ты наделал?")
-        time.sleep(2)
-    elif l21_json[8][1] == "1":
-        requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,2,0")
-        time.sleep(0.5)
-        requests.get(f"http://{L_IP21}/cmd.cgi?psw={L_Pass}&cmd=REL,2,1")
-    await call.message.edit_text(text="Обновляю")
-    message_w = message_pool_sun_f()
-    await call.message.edit_text(text=message_w)
-    message_l22 = message_l22_f()
-    await call.message.edit_text(text=message_w + message_l22)
-    message_l21 = message_l21_f()
-    await call.message.edit_text(text=message_w + message_l22 + message_l21)
-    await call.message.edit_reply_markup(reply_markup=kb.pool_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="mangal")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP20, L_Pass, 1)
+    if str(call.data) == "mangal":
+        result = LJ.switch_rele("L5", L_IP20, L_Pass, 1)
+    elif str(call.data) == "pizza":
+        result = LJ.switch_rele("L5", L_IP20, L_Pass, 2)
+    elif str(call.data) == "ostrov":
+        result = LJ.switch_rele("L5", L_IP20, L_Pass, 3)
+    elif str(call.data) == "smoker":
+        result = LJ.switch_rele("L5", L_IP20, L_Pass, 4)
+    elif str(call.data) == "smoker_80":
+        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
+        if l20_json != "N/A":
+            LJ.set_rele(L_IP20, L_Pass, 4, 1)
+            requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,20")
+            result = LJ.switch_rele("L5", L_IP20, L_Pass, 1)
+    elif str(call.data) == "smoker_100":
+        l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
+        if l20_json != "N/A":
+            LJ.set_rele(L_IP20, L_Pass, 4, 1)
+            requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,0")
+            result = LJ.switch_rele("L5", L_IP20, L_Pass, 1)
     await call.message.edit_text(text=message_l20_f())
+    if result == 404:
+        await call.message.edit_text(text=message_l20_f() + "\n<b>ВНИМАНИЕ!</b>\nМодуль недоступен, попробуйте ещё раз")
     await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
-@dp.callback_query_handler(text="pizza")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP20, L_Pass, 2)
-    await call.message.edit_text(text=message_l20_f())
-    await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="ostrov")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP20, L_Pass, 3)
-    await call.message.edit_text(text=message_l20_f())
-    await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="smoker")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    LJ.switch_rele("L5", L_IP20, L_Pass, 4)
-    await call.message.edit_text(text=message_l20_f())
-    await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="smoker_80")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-    if l20_json != "N/A":
-        requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,4,1")
-        requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,20")
-    await call.message.edit_text(text=message_l20_f())
-    await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
-
-@dp.callback_query_handler(text="smoker_100")
-@logger.catch
-async def update(call: CallbackQuery):
-    await call.answer()
-    l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
-    if l20_json != "N/A":
-        requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=REL,4,1")
-        requests.get("http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,0")
-    await call.message.edit_text(text=message_l20_f())
-    await call.message.edit_reply_markup(reply_markup=kb.vent_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 @dp.callback_query_handler(text="ad_orangereya")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     await call.message.edit_text(text="Подсматриеваем за камерой")
     l24_xml = LJ.l2_xml_read_all(L_IP24)
@@ -713,19 +453,19 @@ async def update(call: CallbackQuery):
     else:
         message_l24 = "Недоступен"
         await call.message.edit_text(text=message_l24)
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     logger.info(l24_xml)
+
 
 @dp.callback_query_handler(text="perekl")
 @logger.catch
 async def update(call: CallbackQuery):
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     l24_xml = LJ.l2_xml_read_all(L_IP24)
     if l24_xml != "N/A":
-        requests.get(f"http://{L_IP24}/cmd.cgi?psw={L_Pass}&cmd=REL,1,1")
+        LJ.set_rele(L_IP24, L_Pass, 1, 1)
         time.sleep(0.5)
-        requests.get(f"http://{L_IP24}/cmd.cgi?psw={L_Pass}&cmd=REL,1,0")
+        LJ.set_rele(L_IP24, L_Pass, 1, 0)
         if l24_xml[3][0] == "0":
             await call.message.edit_text(text="Включен режим автоматического переключения каналов")
         elif l24_xml[3][0] == "1":
@@ -739,13 +479,12 @@ async def update(call: CallbackQuery):
     else:
         message_l24 = "Недоступен"
         await call.message.edit_text(text=message_l24)
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     logger.info(l24_xml)
 
 @dp.callback_query_handler(text="po_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data) + " и получил доступ")
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     l24_xml = LJ.l2_xml_read_all(L_IP24)
     if l24_xml != "N/A":
@@ -759,12 +498,12 @@ async def update(call: CallbackQuery):
     else:
         message_l24 = "Недоступен"
         await call.message.edit_text(text=message_l24)
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     logger.info(l24_xml)
 
 @dp.callback_query_handler(text="banketniy_zal")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     message_bank=f"Банкетный зал:{space}\n"
     await call.message.edit_text(text=message_bank)
@@ -825,11 +564,11 @@ async def update(call: CallbackQuery):
     message_bank += banketniy_zal.read(41100, "holding") + "   Мощность Э. Калор.\n"
     await call.message.edit_text(text=message_bank)
     await call.message.edit_reply_markup(reply_markup=kb.banketniy_zal_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 @dp.callback_query_handler(text="podval")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     message_podval=f"Подвал:{space}\n"
     await call.message.edit_text(text=message_podval)
@@ -880,6 +619,7 @@ async def update(call: CallbackQuery):
 @dp.callback_query_handler(text="kuhnya")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     message_kuhnya=f"Кухня:{space}\n"
     await call.message.edit_text(text=message_kuhnya)
@@ -930,6 +670,7 @@ async def update(call: CallbackQuery):
 @dp.callback_query_handler(text="gostinaya")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     message_gostinaya=f"Гостиная:{space}\n"
     await call.message.edit_text(text=message_gostinaya)
@@ -980,6 +721,7 @@ async def update(call: CallbackQuery):
 @dp.callback_query_handler(text="oranjereya")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     message_oranjereya=f"Оранжерея:{space}\n"
     await call.message.edit_text(text=message_oranjereya)
@@ -1040,12 +782,12 @@ async def update(call: CallbackQuery):
     message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
     await call.message.edit_text(text=message_oranjereya)
     await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
 callback_rap = CallbackData("set", "action", "number", "IP")
 @dp.callback_query_handler(callback_rap.filter(action=["pusk", "stop", "dist_mest", "ust_plus", "ust_minus", "set_speed_ventP_plus", "set_speed_ventP_minus", "set_speed_ventV_plus", "set_speed_ventV_minus", "sbros_error", "stop_vv", "start_vv"]))
 @logger.catch
 async def update(call: CallbackQuery, callback_data: dict):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     if callback_data["IP"] == P_IP30:
         if callback_data["action"] == "pusk":
@@ -1464,71 +1206,70 @@ async def update(call: CallbackQuery, callback_data: dict):
         message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
         await call.message.edit_text(text=message_oranjereya)
         await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
 
-@dp.callback_query_handler(text="time")
+@dp.callback_query_handler(text="pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     await call.message.edit_text(text="Выберите день недели для отображения настроек на выбранный день.\nДля удаление наберите:\n<code>/del id</code>.\nДля добавления наберите:\n<code>/add ДеньНедели Реле Час Минута Вкл/Выкл</code>\nНапример:\n<code>/add 1 rekl 10 00 1</code>\nДень недели 1-7\nРеле:\nРеклама - <code>rekl</code>\nПарк - <code>par2</code>\nПарк периметр - <code>par3</code>\nЭкран - <code>ekra</code>\nПод зонтами - <code>new1</code>\nВодопад - <code>new2</code>\nБассейн верх - <code>new3</code>\nБассейн низ - <code>new4</code>")
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
-    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="pon")
+@dp.callback_query_handler(text="pon_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(0))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(0))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="vto")
+@dp.callback_query_handler(text="vto_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(1))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(1))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="sre")
+@dp.callback_query_handler(text="sre_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(2))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(2))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="che")
+@dp.callback_query_handler(text="che_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(3))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(3))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="pya")
+@dp.callback_query_handler(text="pya_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(4))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(4))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="sub")
+@dp.callback_query_handler(text="sub_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(5))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(5))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
-@dp.callback_query_handler(text="vos")
+@dp.callback_query_handler(text="vos_pool_time")
 @logger.catch
 async def update(call: CallbackQuery):
-    await call.answer()
-    await call.message.edit_text(text=time_message(6))
-    await call.message.edit_reply_markup(reply_markup=kb.menu_time)
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+    await call.message.edit_text(text=pool_time_message(6))
+    await call.message.edit_reply_markup(reply_markup=kb.menu_pool_time)
 
 # Запускаем лонг поллинг
 if __name__ == '__main__':

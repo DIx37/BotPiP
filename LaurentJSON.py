@@ -1,7 +1,8 @@
+from sqllite import SQLighter
 from loguru import logger
-import LaurentJSON as LJ
 import platform
 import requests
+import config
 import json
 import re
 
@@ -11,6 +12,9 @@ if platform.system() == "Windows":
 else:
     logger.add("/home/bots/BotPiP/log/LaurentJSON.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 
+
+# Подключение к БД
+db = SQLighter(config.path_bot + "BotPiP.db")
 
 @logger.catch
 def check_ip(L_IP):
@@ -24,27 +28,58 @@ def check_ip(L_IP):
 @logger.catch
 def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
     if L_Version == "L2":
-        if LJ.l2_xml_read_all(L_IP)[3][L_Rele - 1] == "0":
-            requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
-        elif LJ.l2_xml_read_all(L_IP)[3][L_Rele - 1] == "1":
-            requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
+        l2_xml = l2_xml_read_all(L_IP)
+        if l2_xml != "N/A":
+            if l2_xml_read_all(L_IP)[3][L_Rele - 1] == "0":
+                set_rele(L_IP, L_Pass, L_Rele, 1)
+            elif l2_xml_read_all(L_IP)[3][L_Rele - 1] == "1":
+                set_rele(L_IP, L_Pass, L_Rele, 0)
+        else:
+            result = 404
+            logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
+            return result
     elif L_Version == "L5":
-        if LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "0":
-            print(L_Version)
-            print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
-            print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
-            requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},1")
-        elif LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "1":
-            print(L_Version)
-            print(LJ.l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1])
-            print(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
-            requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},0")
+        l5_json = l5_json_read_all(L_IP, L_Pass)
+        if l5_json != "N/A":
+            if l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "0":
+                set_rele(L_IP, L_Pass, L_Rele, 1)
+            elif l5_json_read_all(L_IP, L_Pass)[8][L_Rele - 1] == "1":
+                set_rele(L_IP, L_Pass, L_Rele, 0)
+        else:
+            result = 404
+            logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
+            return result
 
 
 @logger.catch
 def set_rele(L_IP, L_Pass, L_Rele, L_Set):
-    requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}")
+    try:
+        result = requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}", timeout=1).status_code
+        db.update_rele_status(L_IP, L_Rele, L_Set)
+    except Exception as err:
+        result = 404
+        logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
+    return result
 
+
+@logger.catch
+def set_out(L_IP, L_Pass, L_Rele, L_Set):
+    try:
+        result = requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}", timeout=1).status_code
+    except Exception as err:
+        result = 404
+        logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
+    return result
+
+
+@logger.catch
+def set_pwn(L_IP, L_Pass, L_Rele, L_Set):
+    try:
+        result = requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}", timeout=1).status_code
+    except Exception as err:
+        result = 404
+        logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
+    return result
 
 @logger.catch
 def l5_json_read_all(L_IP, L_Pass):
@@ -99,6 +134,7 @@ def l5_json_read_all(L_IP, L_Pass):
                 impl_io)
     else:
         result = "N/A"
+        logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
         return result
 
 # l5_json_read_all("172.16.1.22", "Laurent")
@@ -138,4 +174,5 @@ def l2_xml_read_all(L_IP):
         return systime, rele, in_, out, adc1, adc2, temp, count1, count2, count3, count4, pwm
     else:
         result = "N/A"
+        logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")
         return result

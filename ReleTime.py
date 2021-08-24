@@ -29,7 +29,7 @@ def main_f():
     m = moscow_tz.localize(datetime.now()).strftime("%M")
 #    h = "01"
 #    m = "00"
-    if h == "01" and "00":
+    if h == "01" and m == "00":
         s_a_s = weather.check_weather()
         db.update_sas(s_a_s[5], s_a_s[6], s_a_s[7], s_a_s[8])
         logger.info(f"Добавил в базу время рассвета {s_a_s[5]}:{s_a_s[6]} и заката {s_a_s[7]}:{s_a_s[8]}")
