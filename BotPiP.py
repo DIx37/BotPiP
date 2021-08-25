@@ -321,10 +321,10 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
-#    if str(call.data) == "BotPiP":
-    text=CB.status(call.data)
-    print(text)
-    await call.message.edit_text(text=text)
+    if str(call.data) != "control_bot_menu":
+        text=str(CB.status(call.data))
+        print(text)
+        await call.message.edit_text(text=text)
     await call.message.edit_reply_markup(reply_markup=kb.control_bot_menu(call.from_user.id))
 
 @dp.callback_query_handler(text="main_menu")
