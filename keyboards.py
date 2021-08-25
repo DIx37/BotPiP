@@ -180,8 +180,6 @@ def laurent_menu(user):
 def control_bot_menu(user):
     control_bot_menu = InlineKeyboardMarkup(row_width=2)
     if db.check_user_acess(user, "control_bot_menu", "control_bot_menu"):
-        BotPiP = InlineKeyboardButton(text="BotPiP", callback_data="BotPiP")
-        control_bot_menu.insert(BotPiP)
         ReleTime = InlineKeyboardButton(text="ReleTime", callback_data="ReleTime")
         control_bot_menu.insert(ReleTime)
         DeliveryBot = InlineKeyboardButton(text="DeliveryBot", callback_data="DeliveryBot")
