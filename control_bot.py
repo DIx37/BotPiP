@@ -8,18 +8,19 @@ def status(proc):
         status = os.popen(f"service {proc} status | grep -v grep | grep 'running' | wc -l").read()
     except Exception:
         status = "N/A"
+    print(status)
     return status
 
 def stop(proc):
     try:
         stop = os.popen(f"systemctl stop {proc}.service").read()
     except Exception:
-        status = "N/A"
+        stop = "N/A"
     return stop
 
 def start(proc):
     try:
         start = os.popen(f"systemctl start {proc}.service").read()
     except Exception:
-        status = "N/A"
+        start = "N/A"
     return start
