@@ -102,9 +102,36 @@ def check_weather():
         sunset_m = s["sunset"].strftime("%M")
         return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m
     elif settings_weather == "OpenWeatherMap":
-        req = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={Weather_TOKEN}&units=metric&lang=ru")
-        data = req.json()
-        return data
+        code_to_smile = {
+            "Clear": " \U00002600",
+            "Clouds": " \U00002601",
+            "Rain": " \U00002614",
+            "Drizzle": " \U00002614",
+            "Thunderstorm": " \U000026A1",
+            "Snow": " \U0001F328",
+            "Mist": " \U0001F32B"
+            }
+        try:
+            req = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={Weather_TOKEN}&units=metric&lang=ru")
+            weather = req.json()
+            if weather["weather"][0]["main"] in code_to_smile:
+                wd = code_to_smile[weather["weather"][0]["main"]]
+                weather_weather = weather["weather"][0]["description"].title() + wd
+            else:
+                weather_weather = weather["weather"][0]["description"].title()
+            temp = str(weather["main"]["temp"])
+            feels_like = str(weather["main"]["feels_like"])
+            humidity = str(weather["main"]["humidity"])
+            pressure = str(weather["main"]["pressure"])
+            wind_speed = str(weather["wind"]["speed"])
+        except Exception:
+            weather_weather = "N/A"
+            temp = "N/A"
+            feels_like = "N/A"
+            humidity = "N/A"
+            pressure = "N/A"
+            wind_speed = "N/A"
+        return weather_weather, temp, feels_like, humidity, pressure, wind_speed
     elif settings_weather == "off":
         temp_ul = "N/A"
         aptmp = "N/A"

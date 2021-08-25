@@ -21,16 +21,6 @@ import time
 #import re
 from pprint import pprint
 
-code_to_smile = {
-    "Clear": " \U00002600",
-    "Clouds": " \U00002601",
-    "Rain": " \U00002614",
-    "Drizzle": " \U00002614",
-    "Thunderstorm": " \U000026A1",
-    "Snow": " \U0001F328",
-    "Mist": " \U0001F32B"
-}
-
 # Переменные
 banketniy_zal = Modbus(config.Pixel_IP30)
 podval = Modbus(config.Pixel_IP31)
@@ -62,17 +52,12 @@ logger.add(config.config_bot + "BotPiP.log", format="{time} {level} {message}", 
 @logger.catch
 def message_pool_sun_f():
     weather = Weather.check_weather()
-    if weather["weather"][0]["main"] in code_to_smile:
-        wd = code_to_smile[weather["weather"][0]["main"]]
-        weather_weather = weather["weather"][0]["description"].title() + wd
-    else:
-        weather_weather = weather["weather"][0]["description"].title()
-    message_pool = "<b>Погода</b> - " + weather_weather + f"{space}\n"
+    message_pool = "<b>Погода</b> - " + weather[0] + f"{space}\n"
 #    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunrise"])))
 #    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunset"])))
-    message_pool += "<b>Температура</b> " + str(weather["main"]["temp"]) + " C°, <b>как</b> " + str(weather["main"]["feels_like"]) + " C°\n"
-    message_pool += "<b>Влажность:</b> " + str(weather["main"]["humidity"]) + "%, <b>Давление:</b> " + str(weather["main"]["pressure"]) + "\n"
-    message_pool += "<b>Скорость ветра:</b> " + str(weather["wind"]["speed"]) + " м/с\n"
+    message_pool += "<b>Температура</b> " + weather[1] + " C°, <b>как</b> " + weather[2] + " C°\n"
+    message_pool += "<b>Влажность:</b> " + weather[3] + "%, <b>Давление:</b> " + weather[4] + "\n"
+    message_pool += "<b>Скорость ветра:</b> " + weather[4] + " м/с\n"
 #    message_pool += "<b>Рассвет</b> в " + weaher[5] + ":" + weaher[6] + ", <b>Закат</b> в " + weaher[7] + ":" + weaher[8] + "\n\n"
     return message_pool
 
