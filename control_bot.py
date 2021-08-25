@@ -6,10 +6,9 @@ import os
 def status(proc):
     try:
         status = os.popen(f"service {proc} status | grep -v grep | grep 'running' | wc -l").read()
+        status = status[0:1]
     except Exception:
         status = "N/A"
-    print(status)
-    print(status[0:1])
     return status
 
 def stop(proc):
