@@ -321,15 +321,15 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
-    BotPiP = utils.smile(str(CB.status(call.data))) + " BotPiP\n"
+    BotPiP = utils.smile(str(CB.status("BotPiP"))) + " BotPiP\n"
     await call.message.edit_text(text=BotPiP)
-    ReleTime = utils.smile(str(CB.status(call.data))) + " ReleTime\n"
+    ReleTime = utils.smile(str(CB.status("ReleTime"))) + " ReleTime\n"
     await call.message.edit_text(text=BotPiP + ReleTime)
-    DeliveryBot = utils.smile(str(CB.status(call.data))) + " DeliveryBot\n"
+    DeliveryBot = utils.smile(str(CB.status("DeliveryBot"))) + " DeliveryBot\n"
     await call.message.edit_text(text=BotPiP + ReleTime + DeliveryBot)
-    EmailOrderWritter = utils.smile(str(CB.status(call.data))) + " EmailOrderWritter\n"
+    EmailOrderWritter = utils.smile(str(CB.status("EmailOrderWritter"))) + " EmailOrderWritter\n"
     await call.message.edit_text(text=BotPiP + ReleTime + DeliveryBot + EmailOrderWritter)
-    Get_ntv = utils.smile(str(CB.status(call.data))) + " Get_ntv\n"
+    Get_ntv = utils.smile(str(CB.status("Get_ntv"))) + " Get_ntv\n"
     await call.message.edit_text(text=BotPiP + ReleTime + DeliveryBot + EmailOrderWritter + Get_ntv)
     if str(call.data) != "control_bot_menu":
         if str(CB.status(call.data)) == "0":
