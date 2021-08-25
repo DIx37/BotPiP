@@ -327,7 +327,7 @@ async def update(call: CallbackQuery):
                 CB.start(call.data)
             elif str(CB.status(call.data)) == "1":
                 CB.stop(call.data)
-        elif str(call.data) != "BotPiP":
+        elif str(call.data) == "BotPiP":
             CB.restart(call.data)
     BotPiP = utils.smile(str(CB.status("BotPiP"))) + " BotPiP\n"
     await call.message.edit_text(text=BotPiP)
