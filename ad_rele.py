@@ -1,6 +1,6 @@
 import LaurentJSON as LJ
-import time
 import config
+import time
 
 L_IP24 = config.Laurent_IP_Pool24
 L_Pass = config.Laurent_Pass

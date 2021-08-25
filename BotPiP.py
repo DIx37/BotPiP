@@ -1,17 +1,17 @@
 # -- coding: utf-8 --
-from aiogram.types import Message, CallbackQuery
 #from aiogram.types import Message, CallbackQuery, InputMediaPhoto
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.utils.callback_data import CallbackData
+from aiogram.types import Message, CallbackQuery
 from sqllite import SQLighter
 from loguru import logger
 import cameraScreen as cs
 from modbus import Modbus
 import LaurentJSON as LJ
-import modbusread as MR
 #from message import Msg
-import keyboards as kb
 import control_bot as CB
+import modbusread as MR
+import keyboards as kb
 import requests
 import weather
 import config
@@ -25,18 +25,18 @@ podval = Modbus(config.Pixel_IP31)
 kuhnya = Modbus(config.Pixel_IP32)
 gostinaya = Modbus(config.Pixel_IP33)
 oranjereya = Modbus(config.Pixel_IP34)
-P_IP30 = config.Pixel_IP30
-P_IP31 = config.Pixel_IP31
-P_IP32 = config.Pixel_IP32
-P_IP33 = config.Pixel_IP33
-P_IP34 = config.Pixel_IP34
 L_IP20 = config.Laurent_IP_Pool20
 L_IP21 = config.Laurent_IP_Pool21
 L_IP22 = config.Laurent_IP_Pool22
 L_IP24 = config.Laurent_IP_Pool24
 L_Pass = config.Laurent_Pass
+P_IP30 = config.Pixel_IP30
+P_IP31 = config.Pixel_IP31
+P_IP32 = config.Pixel_IP32
+P_IP33 = config.Pixel_IP33
+P_IP34 = config.Pixel_IP34
 ControlPiP_TOKEN = config.ControlPiP_TOKEN
-space = "                                                                                                    "
+space = 100 * " "
 
 # Иннициализуем бота
 bot = Bot(token=ControlPiP_TOKEN, parse_mode="HTML")
@@ -44,7 +44,7 @@ dp = Dispatcher(bot)
 
 # Подключение к БД
 db = SQLighter(config.path_bot + "BotPiP.db")
-logger.add(config.path_bot + "BotPiP.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
+logger.add(config.config_bot + "BotPiP.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 
 """ Формирование сообщения о погоде """
 @logger.catch
@@ -316,20 +316,17 @@ async def update(call: CallbackQuery):
     await call.message.edit_text(text=laurent_menu)
     await call.message.edit_reply_markup(reply_markup=kb.laurent_menu(call.from_user.id))
 
-@dp.callback_query_handler(text=["control_bot_menu", "BotPiP", "ReleTime", "DeliveryBot", "EmailOrderWritter", "Get_ntv"])
+@dp.callback_query_handler(text=["control_bot_menu", "ReleTime", "DeliveryBot", "EmailOrderWritter", "Get_ntv"])
 @logger.catch
 async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     if str(call.data) != "control_bot_menu":
-        if str(call.data) != "BotPiP":
-            if str(CB.status(call.data)) == "0":
-                CB.start(call.data)
-            elif str(CB.status(call.data)) == "1":
-                CB.stop(call.data)
-        elif str(call.data) == "BotPiP":
-            CB.restart(call.data)
-    BotPiP = utils.smile(str(CB.status("BotPiP"))) + " BotPiP\n"
+        if str(CB.status(call.data)) == "0":
+            CB.start(call.data)
+        elif str(CB.status(call.data)) == "1":
+            CB.stop(call.data)
+    BotPiP = utils.smile(str(CB.status("BotPiP"))) + f" BotPiP{space}\n"
     await call.message.edit_text(text=BotPiP)
     ReleTime = utils.smile(str(CB.status("ReleTime"))) + " ReleTime\n"
     await call.message.edit_text(text=BotPiP + ReleTime)
@@ -349,7 +346,6 @@ async def update(call: CallbackQuery):
     await call.message.edit_text(text=f"Главное меню{space}\n .")
     await call.message.edit_reply_markup(reply_markup=kb.main_menu(call.from_user.id))
 
-"""Всё что ниже объединить в одну функцию"""
 @dp.callback_query_handler(text=["pod_navesom", "reklama", "park", "ekran", "pool_up", "pool_down", "pod_zontami", "vodopad", "imp_pool_up", "imp_pool_down"])
 @logger.catch
 async def update(call: CallbackQuery):
@@ -820,11 +816,13 @@ async def update(call: CallbackQuery, callback_data: dict):
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15362, 0)
             time.sleep(1)
+            db.update_rele_status(P_IP30, "1", Stop_start = "1")
         elif callback_data["action"] == "stop":
             MR.modbus_set(callback_data["IP"], 15363, 0)
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
+            db.update_rele_status(P_IP30, "1", Stop_start = "0")
     #        elif callback_data["action"] == "dist_mest":
     #            MR.modbus_set(callback_data["IP"], 15360, 1)
     #            time.sleep(2)
@@ -840,12 +838,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15366, 0)
         elif callback_data["action"] == "set_speed_ventP_plus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP30, "1", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventP_minus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP30, "1", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_plus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP30, "1", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_minus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP30, "1", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "ust_plus":
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":
@@ -915,11 +917,13 @@ async def update(call: CallbackQuery, callback_data: dict):
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15362, 0)
             time.sleep(1)
+            db.update_rele_status(P_IP31, "2", Stop_start = "1")
         elif callback_data["action"] == "stop":
             MR.modbus_set(callback_data["IP"], 15363, 0)
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
+            db.update_rele_status(P_IP31, "2", Stop_start = "0")
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -931,12 +935,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15366, 0)
         elif callback_data["action"] == "set_speed_ventP_plus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP31, "2", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventP_minus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP31, "2", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_plus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP31, "2", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_minus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP31, "2", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "ust_plus":
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":
@@ -992,11 +1000,13 @@ async def update(call: CallbackQuery, callback_data: dict):
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15362, 0)
             time.sleep(1)
+            db.update_rele_status(P_IP32, "3", Stop_start = "1")
         elif callback_data["action"] == "stop":
             MR.modbus_set(callback_data["IP"], 15363, 0)
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
+            db.update_rele_status(P_IP32, "3", Stop_start = "0")
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1008,12 +1018,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15366, 0)
         elif callback_data["action"] == "set_speed_ventP_plus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP32, "3", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventP_minus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP32, "3", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_plus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP32, "3", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_minus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP32, "3", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "ust_plus":
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":
@@ -1069,11 +1083,13 @@ async def update(call: CallbackQuery, callback_data: dict):
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15362, 0)
             time.sleep(1)
+            db.update_rele_status(P_IP33, "4", Stop_start = "1")
         elif callback_data["action"] == "stop":
             MR.modbus_set(callback_data["IP"], 15363, 0)
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
+            db.update_rele_status(P_IP33, "4", Stop_start = "0")
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1085,12 +1101,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15366, 0)
         elif callback_data["action"] == "set_speed_ventP_plus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP33, "4", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventP_minus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP33, "4", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_plus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP33, "4", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_minus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP33, "4", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "ust_plus":
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":
@@ -1146,11 +1166,13 @@ async def update(call: CallbackQuery, callback_data: dict):
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15362, 0)
             time.sleep(1)
+            db.update_rele_status(P_IP34, "5", Stop_start = "1")
         elif callback_data["action"] == "stop":
             MR.modbus_set(callback_data["IP"], 15363, 0)
             time.sleep(2)
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
+            db.update_rele_status(P_IP34, "5", Stop_start = "0")
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1162,12 +1184,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15366, 0)
         elif callback_data["action"] == "set_speed_ventP_plus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP34, "5", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventP_minus":
             MR.modbus_set(callback_data["IP"], 41993, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP34, "5", Speed_VP = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_plus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP34, "5", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "set_speed_ventV_minus":
             MR.modbus_set(callback_data["IP"], 41992, int(callback_data["number"]), "holding")
+            db.update_rele_status(P_IP34, "5", Speed_VV = round(int(callback_data["number"]) / 10))
         elif callback_data["action"] == "ust_plus":
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         elif callback_data["action"] == "ust_minus":

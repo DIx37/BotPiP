@@ -1,5 +1,10 @@
 import modbus_tk.modbus_tcp as modbus_tcp
 import modbus_tk.defines as cst
+import config
+from loguru import logger
+
+# Подключение к БД
+logger.add(config.config_bot + "modbus.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 
 class Modbus:
     """Работа с протоколом modbus"""

@@ -1,19 +1,15 @@
+from datetime import datetime as dt
 from sqllite import SQLighter
-from datetime import datetime
 from loguru import logger
 from pytz import timezone
 import LaurentJSON as LJ
-import datetime as dt
-#import schedule
-#import platform
-import requests
 import weather
 import config
 import time
 
 # Подключение к БД
 db = SQLighter(config.path_bot + "BotPiP.db")
-logger.add(config.path_bot + "ReleTime.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
+logger.add(config.config_bot + "ReleTime.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 
 # Переменные
 L_IP21 = config.Laurent_IP_Pool21
@@ -24,9 +20,9 @@ L_Pass = config.Laurent_Pass
 def main_f():
     t_start = time.monotonic()
     moscow_tz = timezone('Europe/Moscow')
-    d = moscow_tz.localize(datetime.now()).strftime("%w")
-    h = moscow_tz.localize(datetime.now()).strftime("%H")
-    m = moscow_tz.localize(datetime.now()).strftime("%M")
+    d = moscow_tz.localize(dt.now()).strftime("%w")
+    h = moscow_tz.localize(dt.now()).strftime("%H")
+    m = moscow_tz.localize(dt.now()).strftime("%M")
 #    h = "01"
 #    m = "00"
     if h == "01" and m == "00":
@@ -61,12 +57,10 @@ def main_f():
             L_IP = L_IP21
             rele = "4"
         LJ.set_rele(L_IP, L_Pass, rele, turnOnOff)
-        requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{rele},{turnOnOff}")
         logger.info(f"Переключил реле по адресу http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{rele},{turnOnOff}")
     while time.monotonic() - t_start <= 40:
         pass
 
-#schedule.every().day.at("01:00").do(set_sunrise_and_sunset_bd)
 
 # Запускаем лонг поллинг
 if __name__ == '__main__':

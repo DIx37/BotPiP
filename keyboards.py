@@ -39,8 +39,8 @@ def main_menu(user):
         rekup_pri_menu = InlineKeyboardButton(text="Рекуператоры и Приточки", callback_data="rekup_pri_menu")
         main_menu.insert(rekup_pri_menu)
     if db.check_user_acess(user, "ad_orangereya", "ad_orangereya"):
-        ad_orangeteya = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="ad_orangeteya")
-        main_menu.add(ad_orangeteya)
+        ad_orangereya = InlineKeyboardButton(text="Оранжерея Реклама", callback_data="ad_orangereya")
+        main_menu.add(ad_orangereya)
     if db.check_user_acess(user, "laurent_menu", "laurent_menu"):
         laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
         main_menu.add(laurent_menu)

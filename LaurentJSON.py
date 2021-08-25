@@ -55,7 +55,7 @@ def switch_rele(L_Version, L_IP, L_Pass, L_Rele):
 def set_rele(L_IP, L_Pass, L_Rele, L_Set):
     try:
         result = requests.get(f"http://{L_IP}/cmd.cgi?psw={L_Pass}&cmd=REL,{L_Rele},{L_Set}", timeout=1).status_code
-        db.update_rele_status(L_IP, L_Rele, L_Set)
+        db.update_rele_status(L_IP, L_Rele, Stop_start = L_Set)
     except Exception as err:
         result = 404
         logger.error("Код ошибки: " + str(result) + ", реле " + L_IP + " недоступно")

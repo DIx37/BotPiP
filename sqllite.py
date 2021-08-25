@@ -61,14 +61,17 @@ class SQLighter:
                     self.cursor.execute(f"UPDATE `PoolTime` SET `Hour` = '{Result_h}' WHERE `id` = '{time_sas[0]}'")
                     self.cursor.execute(f"UPDATE `PoolTime` SET `Minutes` = '{Resilt_m}' WHERE `id` = '{time_sas[0]}'")
 
-    def update_rele_status(self, L_IP, N_Rele, Stop_start, Speed_VV = None, Speed_VP = None):
+    def update_rele_status(self, L_IP, N_Rele, Stop_start = None, Speed_VV = None, Speed_VP = None):
         """Обновление статуса реле"""
         print(L_IP)
         print(N_Rele)
         with self.connection:
-            self.cursor.execute(f"UPDATE `ReleStatus` SET `Stop_start` = '{Stop_start}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
-            self.cursor.execute(f"UPDATE `ReleStatus` SET `Speed_VV` = '{Speed_VV}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
-            self.cursor.execute(f"UPDATE `ReleStatus` SET `Speed_VP` = '{Speed_VP}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
+            if Stop_start:
+                self.cursor.execute(f"UPDATE `ReleStatus` SET `Stop_start` = '{Stop_start}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
+            if Speed_VV:
+                self.cursor.execute(f"UPDATE `ReleStatus` SET `Speed_VV` = '{Speed_VV}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
+            if Speed_VP:
+                self.cursor.execute(f"UPDATE `ReleStatus` SET `Speed_VP` = '{Speed_VP}' WHERE `IP` = '{L_IP}' AND `N_Rele` = '{N_Rele}'")
 
     def close(self):
         """Закрываем соединение с БД"""
