@@ -321,7 +321,7 @@ async def update(call: CallbackQuery):
 async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
-    time.sleep(2)
+    time.sleep(3)
     BotPiP = utils.smile(str(CB.status("BotPiP"))) + " BotPiP\n"
     await call.message.edit_text(text=BotPiP)
     ReleTime = utils.smile(str(CB.status("ReleTime"))) + " ReleTime\n"
