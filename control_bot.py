@@ -24,3 +24,10 @@ def start(proc):
     except Exception:
         start = "N/A"
     return start
+
+def restart(proc):
+    try:
+        start = os.popen(f"systemctl restart {proc}.service").read()
+    except Exception:
+        start = "N/A"
+    return start

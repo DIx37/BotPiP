@@ -322,10 +322,13 @@ async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     if str(call.data) != "control_bot_menu":
-        if str(CB.status(call.data)) == "0":
-            CB.start(call.data)
-        elif str(CB.status(call.data)) == "1":
-            CB.stop(call.data)
+        if str(call.data) != "BotPiP":
+            if str(CB.status(call.data)) == "0":
+                CB.start(call.data)
+            elif str(CB.status(call.data)) == "1":
+                CB.stop(call.data)
+        elif str(call.data) != "BotPiP":
+            CB.restart(call.data)
     BotPiP = utils.smile(str(CB.status("BotPiP"))) + " BotPiP\n"
     await call.message.edit_text(text=BotPiP)
     ReleTime = utils.smile(str(CB.status("ReleTime"))) + " ReleTime\n"
