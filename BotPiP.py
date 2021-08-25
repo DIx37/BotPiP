@@ -11,6 +11,7 @@ import LaurentJSON as LJ
 import modbusread as MR
 #from message import Msg
 import keyboards as kb
+import control_bot as CB
 import requests
 import weather
 import config
@@ -306,14 +307,23 @@ async def update(call: CallbackQuery):
 @logger.catch
 async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
     laurent_menu = f"<a href='http://172.16.1.20/protect'>172.16.1.20 Вентиляция</a>{space}\n\n"
     laurent_menu += "\n<a href='http://172.16.1.21/protect'>172.16.1.21 Бассейн Подвал</a>\n\n"
     laurent_menu += "\n<a href='http://172.16.1.22/protect'>172.16.1.22 Бассейн</a>\n\n"
     laurent_menu += "\n<a href='http://172.16.1.23/protect'>172.16.1.23 Серверная</a>\n\n"
     laurent_menu += "\n<a href='http://172.16.1.24/protect'>172.16.1.24 Оранжерея</a>"
-    await call.answer()
     await call.message.edit_text(text=laurent_menu)
     await call.message.edit_reply_markup(reply_markup=kb.laurent_menu(call.from_user.id))
+
+@dp.callback_query_handler(text=["control_bot_menu", "BotPiP", "ReleTime", "DeliveryBot", "EmailOrderWritter", "Get_ntv"])
+@logger.catch
+async def update(call: CallbackQuery):
+    logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
+    await call.answer()
+#    if str(call.data) == "BotPiP":
+    await call.message.edit_text(text=CB.status(call.data))
+    await call.message.edit_reply_markup(reply_markup=kb.control_bot_menu(call.from_user.id))
 
 @dp.callback_query_handler(text="main_menu")
 @logger.catch
@@ -321,7 +331,6 @@ async def update(call: CallbackQuery):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
     await call.answer()
     await call.message.edit_text(text=f"Главное меню{space}\n .")
-    await call.answer()
     await call.message.edit_reply_markup(reply_markup=kb.main_menu(call.from_user.id))
 
 """Всё что ниже объединить в одну функцию"""

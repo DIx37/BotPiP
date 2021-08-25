@@ -44,8 +44,9 @@ def main_menu(user):
     if db.check_user_acess(user, "laurent_menu", "laurent_menu"):
         laurent_menu = InlineKeyboardButton(text="Ссылки на Laurent", callback_data="laurent_menu")
         main_menu.add(laurent_menu)
-    test = InlineKeyboardButton(text="test", callback_data="test")
-    main_menu.add(test)
+    if db.check_user_acess(user, "control_bot_menu", "control_bot_menu"):
+        control_bot_menu = InlineKeyboardButton(text="Управление ботами", callback_data="control_bot_menu")
+        main_menu.add(control_bot_menu)
     return main_menu
 
 
@@ -173,6 +174,27 @@ def laurent_menu(user):
     main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
     laurent_menu.insert(main_menu)
     return laurent_menu
+
+
+# Управление ботами
+def control_bot_menu(user):
+    control_bot_menu = InlineKeyboardMarkup(row_width=2)
+    if db.check_user_acess(user, "control_bot_menu", "control_bot_menu"):
+        BotPiP = InlineKeyboardButton(text="BotPiP", callback_data="BotPiP")
+        control_bot_menu.insert(BotPiP)
+        ReleTime = InlineKeyboardButton(text="ReleTime", callback_data="ReleTime")
+        control_bot_menu.insert(ReleTime)
+        DeliveryBot = InlineKeyboardButton(text="DeliveryBot", callback_data="DeliveryBot")
+        control_bot_menu.insert(DeliveryBot)
+        EmailOrderWritter = InlineKeyboardButton(text="EmailOrderWritter", callback_data="EmailOrderWritter")
+        control_bot_menu.insert(EmailOrderWritter)
+        Get_ntv = InlineKeyboardButton(text="Get_ntv", callback_data="Get_ntv")
+        control_bot_menu.insert(Get_ntv)
+    main_menu = InlineKeyboardButton(text="Назад", callback_data="main_menu")
+    control_bot_menu.add(main_menu)
+    control_bot_menu_u = InlineKeyboardButton(text="Обновить", callback_data="control_bot_menu")
+    control_bot_menu.insert(control_bot_menu_u)
+    return control_bot_menu
 
 
 def banketniy_zal_menu(user):
