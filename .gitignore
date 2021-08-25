@@ -1,5 +1,6 @@
 __pycache__/
 log/
+test_weather.py
 Черновик.py
 config.py
 test.py

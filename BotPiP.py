@@ -8,16 +8,28 @@ from loguru import logger
 import cameraScreen as cs
 from modbus import Modbus
 import LaurentJSON as LJ
+import datetime as dt
 #from message import Msg
 import control_bot as CB
 import modbusread as MR
 import keyboards as kb
 import requests
-import weather
+import weather as Weather
 import config
 import utils
 import time
 #import re
+from pprint import pprint
+
+code_to_smile = {
+    "Clear": " \U00002600",
+    "Clouds": " \U00002601",
+    "Rain": " \U00002614",
+    "Drizzle": " \U00002614",
+    "Thunderstorm": " \U000026A1",
+    "Snow": " \U0001F328",
+    "Mist": " \U0001F32B"
+}
 
 # Переменные
 banketniy_zal = Modbus(config.Pixel_IP30)
@@ -49,16 +61,20 @@ logger.add(config.config_bot + "BotPiP.log", format="{time} {level} {message}", 
 """ Формирование сообщения о погоде """
 @logger.catch
 def message_pool_sun_f():
-    weaher = weather.check_weather()
-    message_pool = "<b>Погода</b> - " + weaher[2] + f"{space}\n"
-    message_pool += "<b>Температура</b> " + weaher[0] + " C, <b>ощущается как</b> " + weaher[1] + " C\n"
-    message_pool += "<b>Влажность</b> " + weaher[3] + ", <b>Давление</b> " + weaher[4] + "\n"
-    message_pool += "<b>Рассвет</b> в " + weaher[5] + ":" + weaher[6] + ", <b>Закат</b> в " + weaher[7] + ":" + weaher[8] + "\n\n"
-    if len(message_pool) > 0:
-        return message_pool
+    weather = Weather.check_weather()
+    if weather["weather"][0]["main"] in code_to_smile:
+        wd = code_to_smile[weather["weather"][0]["main"]]
+        weather_weather = weather["weather"][0]["description"].title() + wd
     else:
-        message_pool = "N/A\n"
-        return message_pool
+        weather_weather = weather["weather"][0]["description"].title()
+    message_pool = "<b>Погода</b> - " + weather_weather + f"{space}\n"
+#    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunrise"])))
+#    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunset"])))
+    message_pool += "<b>Температура</b> " + str(weather["main"]["temp"]) + " C°, <b>как</b> " + str(weather["main"]["feels_like"]) + " C°\n"
+    message_pool += "<b>Влажность:</b> " + str(weather["main"]["humidity"]) + "%, <b>Давление:</b> " + str(weather["main"]["pressure"]) + "\n"
+    message_pool += "<b>Скорость ветра:</b> " + str(weather["wind"]["speed"]) + " м/с\n"
+#    message_pool += "<b>Рассвет</b> в " + weaher[5] + ":" + weaher[6] + ", <b>Закат</b> в " + weaher[7] + ":" + weaher[8] + "\n\n"
+    return message_pool
 
 """ Формирование сообщения о вентиляции"""
 @logger.catch
@@ -95,13 +111,13 @@ def message_l21_f():
         message_l21 += utils.smile(l21_json[8][1]) + " Бассейн низ\n"
         message_l21 += utils.smile(l21_json[8][2]) + " Под зонтами\n"
         message_l21 += utils.smile(l21_json[8][3]) + " Водопад\n"
-        message_l21 += "<b>Температура воды</b>: " + str(l21_json[15][0]["t"]) + " C\n\n"
+        message_l21 += "<b>Температура воды</b>: " + str(l21_json[15][0]["t"]) + " C\n"
     else:
         message_l21 = utils.smile("N/A") + " Бассейн верх\n"
         message_l21 += utils.smile("N/A") + " Бассейн низ\n"
         message_l21 += utils.smile("N/A") + " Под зонтами\n"
         message_l21 += utils.smile("N/A") + " Водопад\n"
-        message_l21 += "<b>Температура воды</b>: N/A C\n\n"
+        message_l21 += "<b>Температура воды</b>: N/A C\n"
     return message_l21
 
 """ Формирование сообщения о Веревочном парке """
@@ -113,13 +129,13 @@ def message_l22_f():
         message_l22 += utils.smile(l22_json[8][1]) + " Реклама\n"
         message_l22 += utils.smile(l22_json[8][2]) + " Парк\n"
         message_l22 += utils.smile(l22_json[8][3]) + " Экран\n"
-        message_l22 += "<b>Температура воздуха</b>: " + str(l22_json[15][0]["t"]) + " C\n\n"
+        message_l22 += "<b>Температура воздуха</b>: " + str(l22_json[15][0]["t"]) + " C\n"
     else:
         message_l22 = utils.smile("N/A") + " Реклама\n"
         message_l22 += utils.smile("N/A") + " Парк\n"
         message_l22 += utils.smile("N/A") + " Парк Периметр\n"
         message_l22 += utils.smile("N/A") + " Экран\n"
-        message_l22 += "<b>Температура воздуха</b>: N/A C\n\n"
+        message_l22 += "<b>Температура воздуха</b>: N/A C\n"
     return message_l22
 
 """ Формирование сообщения о установленном времени перключения реле """

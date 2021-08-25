@@ -4,17 +4,22 @@ from astral import LocationInfo
 from astral.sun import sun
 from loguru import logger
 import requests
+import config
 import re
 
-# off, yandex, astral
-settings_weaher = "astral"
+# off, yandex, astral, OpenWeatherMap
+settings_weather = "OpenWeatherMap"
+Weather_TOKEN = config.Weather_TOKEN
+city = "moscow"
+lat = 55.560105
+lon = 37.438028
 
 #https://yandex.ru/pogoda/sosenki-novomoskovsky-administrative-district
-city = "sosenki-novomoskovsky-administrative-district"
+#city = "sosenki-novomoskovsky-administrative-district"
 
 @logger.catch
 def check_weather():
-    if settings_weaher == "yandex":
+    if settings_weather == "yandex":
         raw_html = requests.get(f"https://yandex.ru/pogoda/{city}")
         content_html = raw_html.content
         decode_html = content_html.decode('utf-8').replace(u'\u2212','-')
@@ -77,8 +82,8 @@ def check_weather():
         except Exception:
             sunset_h = "N/A"
             sunset_m = "N/A"
-        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m,
-    elif settings_weaher == "astral":
+        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m
+    elif settings_weather == "astral":
         loc = LocationInfo(timezone='Europe/Moscow', latitude = 55.560105, longitude = 37.438028)
         s = sun(loc.observer, tzinfo=loc.timezone)
 #        print(s["dawn"].strftime("%H:%M"))
@@ -95,8 +100,12 @@ def check_weather():
         sunrise_m = s["sunrise"].strftime("%M")
         sunset_h = s["sunset"].strftime("%H")
         sunset_m = s["sunset"].strftime("%M")
-        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m,
-    elif settings_weaher == "off":
+        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m
+    elif settings_weather == "OpenWeatherMap":
+        req = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={Weather_TOKEN}&units=metric&lang=ru")
+        data = req.json()
+        return data
+    elif settings_weather == "off":
         temp_ul = "N/A"
         aptmp = "N/A"
         tstm = "N/A"
@@ -106,4 +115,4 @@ def check_weather():
         sunrise_m = "N/A"
         sunset_h = "N/A"
         sunset_m = "N/A"
-        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m,
+        return temp_ul, aptmp, tstm, hum, sp, sunrise_h, sunrise_m, sunset_h, sunset_m
