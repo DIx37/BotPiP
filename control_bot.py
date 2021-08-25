@@ -28,9 +28,10 @@ def start(proc):
 
 def restart(proc):
     try:
-        stop = os.popen(f"systemctl stop {proc}.service").read()
-        time.sleep(3)
-        stop = os.popen(f"systemctl stop {proc}.service").read()
+        restart = os.popen(f"systemctl restart {proc}.service").read()
+#        stop = os.popen(f"systemctl stop {proc}.service").read()
+#        time.sleep(3)
+#        stop = os.popen(f"systemctl stop {proc}.service").read()
     except Exception:
-        start = "N/A"
-    return start
+        restart = "N/A"
+    return restart
