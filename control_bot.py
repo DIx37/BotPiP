@@ -9,6 +9,7 @@ def status(proc):
     except Exception:
         status = "N/A"
     print(status)
+    print(status[0:1])
     return status
 
 def stop(proc):
