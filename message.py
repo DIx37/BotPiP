@@ -1,20 +1,20 @@
 # -- coding: utf-8 --
 from aiogram.types import Message, CallbackQuery, InputMediaPhoto
 from aiogram import Bot, Dispatcher, executor, types
+from aiogram.utils.callback_data import CallbackData
 from sqllite import SQLighter
 from loguru import logger
+from modbus import Modbus
+import cameraScreen as cs
 import LaurentJSON as LJ
+import modbusread as MR
 import keyboards as kb
 import requests
 import weather
 import config
+import utils
 import time
 import re
-import modbusread as MR
-import cameraScreen as cs
-from aiogram.utils.callback_data import CallbackData
-import utils
-from modbus import Modbus
 
 class Msg:
     """Работа с протоколом modbus"""

@@ -1,14 +1,14 @@
-import time
-import modbus_tk
-import modbus_tk.defines as cst
 import modbus_tk.modbus_tcp as modbus_tcp
-import math
-import json
-import requests
-import datetime as dt
+import modbus_tk.defines as cst
 from loguru import logger
+import datetime as dt
+import modbus_tk
+import requests
 import platform
 import config
+import math
+import time
+import json
 
 class Modbus:
     """Работа с протоколом modbus"""
