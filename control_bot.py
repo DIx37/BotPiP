@@ -4,13 +4,22 @@ import os
 #    status = os.popen(f"systemctl status {proc}.service").read()
 #    return status
 def status(proc):
-    status = os.popen(f"service {proc} status | grep -v grep | grep 'running' | wc -l").read()
+    try:
+        status = os.popen(f"service {proc} status | grep -v grep | grep 'running' | wc -l").read()
+    except Exception:
+        status = "N/A"
     return status
 
 def stop(proc):
-    stop = os.popen(f"systemctl stop {proc}.service").read()
+    try:
+        stop = os.popen(f"systemctl stop {proc}.service").read()
+    except Exception:
+        status = "N/A"
     return stop
 
 def start(proc):
-    start = os.popen(f"systemctl start {proc}.service").read()
+    try:
+        start = os.popen(f"systemctl start {proc}.service").read()
+    except Exception:
+        status = "N/A"
     return start
