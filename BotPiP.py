@@ -52,12 +52,12 @@ logger.add(config.config_bot + "BotPiP.log", format="{time} {level} {message}", 
 @logger.catch
 def message_pool_sun_f():
     weather = Weather.check_weather()
-    message_pool = "<b>Погода</b> - " + weather[0] + f"{space}\n"
+    message_pool = "<b>Погода</b> - " + weather["weather_weather"] + f"{space}\n"
 #    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunrise"])))
 #    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunset"])))
-    message_pool += "<b>Температура</b> " + weather[1] + " C°, <b>как</b> " + weather[2] + " C°\n"
-    message_pool += "<b>Влажность:</b> " + weather[3] + "%, <b>Давление:</b> " + weather[4] + "\n"
-    message_pool += "<b>Скорость ветра:</b> " + weather[4] + " м/с\n"
+    message_pool += "<b>Температура</b> " + weather["temp"] + " C°, <b>как</b> " + weather["feels_like"] + " C°\n"
+    message_pool += "<b>Влажность:</b> " + weather["humidity"] + "%, <b>Давление:</b> " + weather["pressure"] + "\n"
+    message_pool += "<b>Скорость ветра:</b> " + weather["wind_speed"] + " м/с\n"
 #    message_pool += "<b>Рассвет</b> в " + weaher[5] + ":" + weaher[6] + ", <b>Закат</b> в " + weaher[7] + ":" + weaher[8] + "\n\n"
     return message_pool
 
@@ -492,7 +492,7 @@ async def update(call: CallbackQuery):
             await call.message.edit_text(text="Включен режим автоматического переключения каналов")
         elif l24_xml[3][0] == "1":
             await call.message.edit_text(text="ВЫключен режим автоматического переключения каналов")
-        await call.message.edit_reply_markup(reply_markup=kb.re_orang(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.ad_orangereya(call.from_user.id))
         time.sleep(5)
         cs.screen_f()
         res = await bot.send_photo(photo = open(config.path_bot + 'screen0.jpg', 'rb'), chat_id=call.from_user.id)
@@ -516,7 +516,7 @@ async def update(call: CallbackQuery):
         elif l24_xml[3][0] == "1":
             requests.get(f"http://{L_IP24}/cmd.cgi?psw={L_Pass}&cmd=OUT,1,0")
             await call.message.edit_text(text="Включен режим автоматического переключения каналов")
-        await call.message.edit_reply_markup(reply_markup=kb.re_orang(call.from_user.id))
+        await call.message.edit_reply_markup(reply_markup=kb.ad_orangereya(call.from_user.id))
     else:
         message_l24 = "Недоступен"
         await call.message.edit_text(text=message_l24)
@@ -747,7 +747,7 @@ async def update(call: CallbackQuery):
     await call.answer()
     message_oranjereya=f"Оранжерея:{space}\n"
     await call.message.edit_text(text=message_oranjereya)
-    pust = str(MR.modbus_get(P_IP34, 14340))
+    pust = oranjereya.read(14340)
     if pust == "0":
         message_oranjereya += utils.smile(pust) + "   Стоп\n"
     elif pust == "1":
@@ -755,7 +755,7 @@ async def update(call: CallbackQuery):
     else:
         message_oranjereya += "N/A   Пуск/Стоп\n"
     await call.message.edit_text(text=message_oranjereya)
-    zile = str(MR.modbus_get(P_IP34, 14336))
+    zile = oranjereya.read(14336)
     if zile == "0":
         message_oranjereya += "☀️" + "   Лето\n"
     elif zile == "1":
@@ -763,7 +763,7 @@ async def update(call: CallbackQuery):
     else:
         message_oranjereya += "N/A   Зима/Лето\n"
     await call.message.edit_text(text=message_oranjereya)
-    dime = str(MR.modbus_get(P_IP34, 14337))
+    dime = oranjereya.read(14337)
     if dime == "0":
         message_oranjereya += utils.smile(dime) + "   Мест\n"
     elif dime == "1":
@@ -771,37 +771,37 @@ async def update(call: CallbackQuery):
     else:
         message_oranjereya += "N/A   Дист/Мест\n"
     await call.message.edit_text(text=message_oranjereya)
-    avar = str(MR.modbus_get(P_IP34, 14342))
+    avar = oranjereya.read(14342)
     if avar == "1":
         message_oranjereya += "❌" + "   Авария\n"
         await call.message.edit_text(text=message_oranjereya)
-    blok = str(MR.modbus_get(P_IP34, 14339))
+    blok = oranjereya.read(14339)
     if blok == "1":
         message_oranjereya += "❌" + "   Блокировка\n"
         await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41023, float)) + " C   Уставка t\n"
+    message_oranjereya += oranjereya.read(41023, "float") + " C   Уставка t\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 40995, float)) + " C   t Канала\n"
+    message_oranjereya += oranjereya.read(40995, "float") + " C   t Канала\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 40993, float)) + " C   t Наружная\n"
+    message_oranjereya += oranjereya.read(40993, "float") + " C   t Наружная\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 40997, float)) + " C   t Обр. воды\n"
+    message_oranjereya += oranjereya.read(40997, "float") + " C   t Обр. воды\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41001, float)) + " C   t Вытяжки\n"
+    message_oranjereya += oranjereya.read(41001, "float") + " C   t Вытяжки\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 40999, float)) + " C   t Помещения\n"
+    message_oranjereya += oranjereya.read(40999, "float") + " C   t Помещения\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 15366)) + "   Остановка ВВ\n"
+    message_oranjereya += oranjereya.read(15366) + "   Остановка ВВ\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41106, "holding")) + "   Скорость ВП\n"
+    message_oranjereya += oranjereya.read(41106, "holding") + "   Скорость ВП\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41107, "holding")) + "   Скорость ВВ\n"
+    message_oranjereya += oranjereya.read(41107, "holding") + "   Скорость ВВ\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41103, "holding")) + "   Мощность Рекуп.\n"
+    message_oranjereya += oranjereya.read(41103, "holding") + "   Мощность Рекуп.\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41099, "holding")) + "   Мощность В. Калор.\n"
+    message_oranjereya += oranjereya.read(41099, "holding") + "   Мощность В. Калор.\n"
     await call.message.edit_text(text=message_oranjereya)
-    message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
+    message_oranjereya += oranjereya.read(41100, "holding") + "   Мощность Э. Калор.\n"
     await call.message.edit_text(text=message_oranjereya)
     await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
 
