@@ -23,12 +23,16 @@ def main_f():
     d = moscow_tz.localize(dt.now()).strftime("%w")
     h = moscow_tz.localize(dt.now()).strftime("%H")
     m = moscow_tz.localize(dt.now()).strftime("%M")
-#    h = "01"
-#    m = "00"
+    # h = "01"
+    # m = "00"
     if h == "01" and m == "00":
         s_a_s = weather.check_weather()
-        db.update_sas(s_a_s[5], s_a_s[6], s_a_s[7], s_a_s[8])
-        logger.info(f"Добавил в базу время рассвета {s_a_s[5]}:{s_a_s[6]} и заката {s_a_s[7]}:{s_a_s[8]}")
+        sunrise_h = s_a_s["sunrise"].strftime("%H")
+        sunrise_m = s_a_s["sunrise"].strftime("%M")
+        sunset_h = s_a_s["sunset"].strftime("%H")
+        sunset_m = s_a_s["sunset"].strftime("%M")
+        db.update_sas(sunrise_h, sunrise_m, sunset_h, sunset_m)
+        logger.info(f"Добавил в базу время восхода {sunrise_h}:{sunrise_m} и заката {sunset_h}:{sunset_m}")
     for rele_in_db in db.get_pool_time_all(d, h, m):
         rele = rele_in_db[4]
         turnOnOff = rele_in_db[5]

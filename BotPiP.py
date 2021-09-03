@@ -18,6 +18,7 @@ import weather as Weather
 import config
 import utils
 import time
+# from datetime import datetime as dt
 #import re
 from pprint import pprint
 
@@ -53,12 +54,12 @@ logger.add(config.config_bot + "BotPiP.log", format="{time} {level} {message}", 
 def message_pool_sun_f():
     weather = Weather.check_weather()
     message_pool = "<b>Погода</b> - " + weather["weather_weather"] + f"{space}\n"
-#    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunrise"])))
-#    print(str(dt.datetime.fromtimestamp(weather["sys"]["sunset"])))
     message_pool += "<b>Температура</b> " + weather["temp"] + " C°, <b>как</b> " + weather["feels_like"] + " C°\n"
     message_pool += "<b>Влажность:</b> " + weather["humidity"] + "%, <b>Давление:</b> " + weather["pressure"] + "\n"
     message_pool += "<b>Скорость ветра:</b> " + weather["wind_speed"] + " м/с\n"
-#    message_pool += "<b>Рассвет</b> в " + weaher[5] + ":" + weaher[6] + ", <b>Закат</b> в " + weaher[7] + ":" + weaher[8] + "\n\n"
+    print(weather["sunrise"].strftime("%H:%M:%S"))
+    print(weather["sunset"].strftime("%H:%M:%S"))
+    message_pool += "<b>Восход</b> в " + weather["sunrise"].strftime("%H:%M:%S") + ", <b>Закат</b> в " + weather["sunset"].strftime("%H:%M:%S") + "\n\n"
     return message_pool
 
 """ Формирование сообщения о вентиляции"""
