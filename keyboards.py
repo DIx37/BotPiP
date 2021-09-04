@@ -204,11 +204,31 @@ def banketniy_zal_menu(user):
         pass
     else:
         if pusk_stop_now == "0":
-            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP30))
+            pusk_stop = InlineKeyboardButton(text="🟢 Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP30))
             banketniy_zal_menu.insert(pusk_stop)
         elif pusk_stop_now == "1":
-            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP30))
+            pusk_stop = InlineKeyboardButton(text="🔴 Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP30))
             banketniy_zal_menu.insert(pusk_stop)
+
+    zima_leto_now = banketniy_zal.read(41991, "holding")
+    if zima_leto_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if zima_leto_now == "0":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP30))
+            banketniy_zal_menu.add(zima)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP30))
+            banketniy_zal_menu.insert(auto)
+        elif zima_leto_now == "1":
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP30))
+            banketniy_zal_menu.add(leto)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP30))
+            banketniy_zal_menu.insert(auto)
+        elif zima_leto_now == "2":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP30))
+            banketniy_zal_menu.add(zima)
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP30))
+            banketniy_zal_menu.insert(leto)
 
     sbros_error_now = banketniy_zal.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
@@ -288,11 +308,31 @@ def podval_menu(user):
         pass
     else:
         if pusk_stop_now == "0":
-            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP31))
+            pusk_stop = InlineKeyboardButton(text="🟢 Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP31))
             podval_menu.insert(pusk_stop)
         elif pusk_stop_now == "1":
-            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP31))
+            pusk_stop = InlineKeyboardButton(text="🔴 Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP31))
             podval_menu.insert(pusk_stop)
+
+    zima_leto_now = podval.read(41991, "holding")
+    if zima_leto_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if zima_leto_now == "0":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP31))
+            podval_menu.add(zima)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP31))
+            podval_menu.insert(auto)
+        elif zima_leto_now == "1":
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP31))
+            podval_menu.add(leto)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP31))
+            podval_menu.insert(auto)
+        elif zima_leto_now == "2":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP31))
+            podval_menu.add(zima)
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP31))
+            podval_menu.insert(leto)
 
     sbros_error_now = podval.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
@@ -345,11 +385,31 @@ def kuhnya_menu(user):
         pass
     else:
         if pusk_stop_now == "0":
-            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP32))
+            pusk_stop = InlineKeyboardButton(text="🟢 Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP32))
             kuhnya_menu.insert(pusk_stop)
         elif pusk_stop_now == "1":
-            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP32))
+            pusk_stop = InlineKeyboardButton(text="🔴 Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP32))
             kuhnya_menu.insert(pusk_stop)
+
+    zima_leto_now = kuhnya.read(41991, "holding")
+    if zima_leto_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if zima_leto_now == "0":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP32))
+            kuhnya_menu.add(zima)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP32))
+            kuhnya_menu.insert(auto)
+        elif zima_leto_now == "1":
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP32))
+            kuhnya_menu.add(leto)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP32))
+            kuhnya_menu.insert(auto)
+        elif zima_leto_now == "2":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP32))
+            kuhnya_menu.add(zima)
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP32))
+            kuhnya_menu.insert(leto)
 
     sbros_error_now = kuhnya.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
@@ -402,11 +462,31 @@ def gostinaya_menu(user):
         pass
     else:
         if pusk_stop_now == "0":
-            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP33))
+            pusk_stop = InlineKeyboardButton(text="🟢 Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP33))
             gostinaya_menu.insert(pusk_stop)
         elif pusk_stop_now == "1":
-            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP33))
+            pusk_stop = InlineKeyboardButton(text="🔴 Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP33))
             gostinaya_menu.insert(pusk_stop)
+
+    zima_leto_now = gostinaya.read(41991, "holding")
+    if zima_leto_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if zima_leto_now == "0":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP33))
+            gostinaya_menu.add(zima)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP33))
+            gostinaya_menu.insert(auto)
+        elif zima_leto_now == "1":
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP33))
+            gostinaya_menu.add(leto)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP33))
+            gostinaya_menu.insert(auto)
+        elif zima_leto_now == "2":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP33))
+            gostinaya_menu.add(zima)
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP33))
+            gostinaya_menu.insert(leto)
 
     sbros_error_now = gostinaya.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
@@ -459,11 +539,31 @@ def oranjereya_menu(user):
         pass
     else:
         if pusk_stop_now == "0":
-            pusk_stop = InlineKeyboardButton(text="Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP34))
+            pusk_stop = InlineKeyboardButton(text="🟢 Запустить", callback_data=callback_rap.new(number="None", action="pusk", IP=P_IP34))
             oranjereya_menu_menu.insert(pusk_stop)
         elif pusk_stop_now == "1":
-            pusk_stop = InlineKeyboardButton(text="Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP34))
+            pusk_stop = InlineKeyboardButton(text="🔴 Остановить", callback_data=callback_rap.new(number="None", action="stop", IP=P_IP34))
             oranjereya_menu_menu.insert(pusk_stop)
+
+    zima_leto_now = oranjereya.read(41991, "holding")
+    if zima_leto_now == "WinError 10054" or pusk_stop_now == "N/A":
+        pass
+    else:
+        if zima_leto_now == "0":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP34))
+            oranjereya_menu_menu.add(zima)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP34))
+            oranjereya_menu_menu.insert(auto)
+        elif zima_leto_now == "1":
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP34))
+            oranjereya_menu_menu.add(leto)
+            auto = InlineKeyboardButton(text="Авто", callback_data=callback_rap.new(number="None", action="auto", IP=P_IP34))
+            oranjereya_menu_menu.insert(auto)
+        elif zima_leto_now == "2":
+            zima = InlineKeyboardButton(text="❄️ Зима", callback_data=callback_rap.new(number="None", action="zima", IP=P_IP34))
+            oranjereya_menu_menu.add(zima)
+            leto = InlineKeyboardButton(text="☀️ Лето", callback_data=callback_rap.new(number="None", action="leto", IP=P_IP34))
+            oranjereya_menu_menu.insert(leto)
 
     sbros_error_now = oranjereya.read(14342)
     if sbros_error_now == "WinError 10054" or sbros_error_now == "N/A":
@@ -489,10 +589,10 @@ def oranjereya_menu(user):
         pass
     else:
         if temp_ust_now > 16:
-            ust_minus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP34))
+            ust_minus = InlineKeyboardButton(text="➖ Уставка t:   " + str(temp_ust_now - 1), callback_data=callback_rap.new(number=temp_ust_now - 1, action="ust_minus", IP=P_IP34))
             oranjereya_menu_menu.add(ust_minus)
         if temp_ust_now < 30:
-            ust_plus = InlineKeyboardButton(text="Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP34))
+            ust_plus = InlineKeyboardButton(text="➕ Уставка t:   " + str(temp_ust_now + 1), callback_data=callback_rap.new(number=temp_ust_now + 1, action="ust_plus", IP=P_IP34))
             oranjereya_menu_menu.insert(ust_plus)
 
     set_speed_ventP_now = oranjereya.read(41993, "holding", "int")
@@ -502,10 +602,10 @@ def oranjereya_menu(user):
         if set_speed_ventP_now < 400:
             set_speed_ventP_now = 400
         if set_speed_ventP_now > 400:
-            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP34))
+            set_speed_ventP = InlineKeyboardButton(text="➖ Скорость ВП:   " + str(round(set_speed_ventP_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventP_now - 100, action="set_speed_ventP_minus", IP=P_IP34))
             oranjereya_menu_menu.add(set_speed_ventP)
         if set_speed_ventP_now < 1000:
-            set_speed_ventP = InlineKeyboardButton(text="Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP34))
+            set_speed_ventP = InlineKeyboardButton(text="➕ Скорость ВП:   " + str(round(set_speed_ventP_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventP_now + 100, action="set_speed_ventP_plus", IP=P_IP34))
             if set_speed_ventP_now == 400:
                 oranjereya_menu_menu.add(set_speed_ventP)
             else:
@@ -518,10 +618,10 @@ def oranjereya_menu(user):
         if set_speed_ventV_now < 400:
             set_speed_ventV_now = 400
         if set_speed_ventV_now > 400:
-            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventV_now - 100, action="set_speed_ventV_minus", IP=P_IP34))
+            set_speed_ventV = InlineKeyboardButton(text="➖ Скорость ВВ:   " + str(round(set_speed_ventV_now/10 - 10)), callback_data=callback_rap.new(number=set_speed_ventV_now - 100, action="set_speed_ventV_minus", IP=P_IP34))
             oranjereya_menu_menu.add(set_speed_ventV)
         if set_speed_ventV_now < 1000:
-            set_speed_ventV = InlineKeyboardButton(text="Скорость ВВ:   " + str(round(set_speed_ventV_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventV_now + 100, action="set_speed_ventV_plus", IP=P_IP34))
+            set_speed_ventV = InlineKeyboardButton(text="➕ Скорость ВВ:   " + str(round(set_speed_ventV_now/10 + 10)), callback_data=callback_rap.new(number=set_speed_ventV_now + 100, action="set_speed_ventV_plus", IP=P_IP34))
             if set_speed_ventV_now == 400:
                 oranjereya_menu_menu.add(set_speed_ventV)
             else:

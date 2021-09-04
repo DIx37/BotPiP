@@ -8,7 +8,7 @@ from loguru import logger
 import cameraScreen as cs
 from modbus import Modbus
 import LaurentJSON as LJ
-import datetime as dt
+# import datetime as dt
 #from message import Msg
 import control_bot as CB
 import modbusread as MR
@@ -825,10 +825,16 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
             db.update_rele_status(P_IP30, "1", Stop_start = "0")
-    #        elif callback_data["action"] == "dist_mest":
-    #            MR.modbus_set(callback_data["IP"], 15360, 1)
-    #            time.sleep(2)
-    #            MR.modbus_set(callback_data["IP"], 15360, 0)
+        # elif callback_data["action"] == "dist_mest":
+        #     MR.modbus_set(callback_data["IP"], 15360, 1)
+        #     time.sleep(2)
+        #     MR.modbus_set(callback_data["IP"], 15360, 0)
+        elif callback_data["action"] == "leto":
+            MR.modbus_set(callback_data["IP"], 41991, 0)
+        elif callback_data["action"] == "zima":
+            MR.modbus_set(callback_data["IP"], 41991, 1)
+        elif callback_data["action"] == "auto":
+            MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1202,7 +1208,7 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 41984, int(callback_data["number"]), "float")
         message_oranjereya=f"Оранжерея:{space}\n"
         await call.message.edit_text(text=message_oranjereya)
-        pust = str(MR.modbus_get(P_IP34, 14340))
+        pust = oranjereya.read(14340)
         if pust == "0":
             message_oranjereya += utils.smile(pust) + "   Стоп\n"
         elif pust == "1":
@@ -1210,7 +1216,7 @@ async def update(call: CallbackQuery, callback_data: dict):
         else:
             message_oranjereya += "N/A   Пуск/Стоп\n"
         await call.message.edit_text(text=message_oranjereya)
-        zile = str(MR.modbus_get(P_IP34, 14336))
+        zile = oranjereya.read(14336)
         if zile == "0":
             message_oranjereya += "☀️" + "   Лето\n"
         elif zile == "1":
@@ -1218,7 +1224,7 @@ async def update(call: CallbackQuery, callback_data: dict):
         else:
             message_oranjereya += "N/A   Зима/Лето\n"
         await call.message.edit_text(text=message_oranjereya)
-        dime = str(MR.modbus_get(P_IP34, 14337))
+        dime = oranjereya.read(14337)
         if dime == "0":
             message_oranjereya += utils.smile(dime) + "   Мест\n"
         elif dime == "1":
@@ -1226,37 +1232,37 @@ async def update(call: CallbackQuery, callback_data: dict):
         else:
             message_oranjereya += "N/A   Дист/Мест\n"
         await call.message.edit_text(text=message_oranjereya)
-        avar = str(MR.modbus_get(P_IP34, 14342))
+        avar = oranjereya.read(14342)
         if avar == "1":
             message_oranjereya += "❌" + "   Авария\n"
             await call.message.edit_text(text=message_oranjereya)
-        blok = str(MR.modbus_get(P_IP34, 14339))
+        blok = oranjereya.read(14339)
         if blok == "1":
             message_oranjereya += "❌" + "   Блокировка\n"
             await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41023, float)) + " C   Уставка t\n"
+        message_oranjereya += oranjereya.read(41023, "float") + " C   Уставка t\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 40995, float)) + " C   t Канала\n"
+        message_oranjereya += oranjereya.read(40995, "float") + " C   t Канала\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 40993, float)) + " C   t Наружная\n"
+        message_oranjereya += oranjereya.read(40993, "float") + " C   t Наружная\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 40997, float)) + " C   t Обр. воды\n"
+        message_oranjereya += oranjereya.read(40997, "float") + " C   t Обр. воды\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41001, float)) + " C   t Вытяжки\n"
+        message_oranjereya += oranjereya.read(41001, "float") + " C   t Вытяжки\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 40999, float)) + " C   t Помещения\n"
+        message_oranjereya += oranjereya.read(40999, "float") + " C   t Помещения\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 15366)) + "   Остановка ВВ\n"
+        message_oranjereya += oranjereya.read(15366) + "   Остановка ВВ\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41106, "holding")) + "   Скорость ВП\n"
+        message_oranjereya += oranjereya.read(41106, "holding") + "   Скорость ВП\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41107, "holding")) + "   Скорость ВВ\n"
+        message_oranjereya += oranjereya.read(41107, "holding") + "   Скорость ВВ\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41103, "holding")) + "   Мощность Рекуп.\n"
+        message_oranjereya += oranjereya.read(41103, "holding") + "   Мощность Рекуп.\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41099, "holding")) + "   Мощность В. Калор.\n"
+        message_oranjereya += oranjereya.read(41099, "holding") + "   Мощность В. Калор.\n"
         await call.message.edit_text(text=message_oranjereya)
-        message_oranjereya += str(MR.modbus_get(P_IP34, 41100, "holding")) + "   Мощность Э. Калор.\n"
+        message_oranjereya += oranjereya.read(41100, "holding") + "   Мощность Э. Калор.\n"
         await call.message.edit_text(text=message_oranjereya)
         await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
 

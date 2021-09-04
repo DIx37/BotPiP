@@ -1,14 +1,14 @@
 # -- coding: utf-8 --
-from pprint import pprint
-from astral import LocationInfo
+# from pprint import pprint
+# from astral import LocationInfo
 #from logging import exception
 from astral.sun import sun
 from loguru import logger
 import requests
 import config
-import re
+# import re
 from datetime import datetime as dt
-import time
+# import time
 
 # off, yandex, astral, OpenWeatherMap
 # settings_weather = "OpenWeatherMap"
