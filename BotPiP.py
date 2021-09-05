@@ -932,6 +932,12 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
             db.update_rele_status(P_IP31, "2", Stop_start = "0")
+        elif callback_data["action"] == "leto":
+            MR.modbus_set(callback_data["IP"], 41991, 0)
+        elif callback_data["action"] == "zima":
+            MR.modbus_set(callback_data["IP"], 41991, 1)
+        elif callback_data["action"] == "auto":
+            MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1015,6 +1021,12 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
             db.update_rele_status(P_IP32, "3", Stop_start = "0")
+        elif callback_data["action"] == "leto":
+            MR.modbus_set(callback_data["IP"], 41991, 0)
+        elif callback_data["action"] == "zima":
+            MR.modbus_set(callback_data["IP"], 41991, 1)
+        elif callback_data["action"] == "auto":
+            MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1098,6 +1110,12 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
             db.update_rele_status(P_IP33, "4", Stop_start = "0")
+        elif callback_data["action"] == "leto":
+            MR.modbus_set(callback_data["IP"], 41991, 0)
+        elif callback_data["action"] == "zima":
+            MR.modbus_set(callback_data["IP"], 41991, 1)
+        elif callback_data["action"] == "auto":
+            MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
@@ -1181,6 +1199,12 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 15363, 1)
             time.sleep(1)
             db.update_rele_status(P_IP34, "5", Stop_start = "0")
+        elif callback_data["action"] == "leto":
+            MR.modbus_set(callback_data["IP"], 41991, 0)
+        elif callback_data["action"] == "zima":
+            MR.modbus_set(callback_data["IP"], 41991, 1)
+        elif callback_data["action"] == "auto":
+            MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
             MR.modbus_set(callback_data["IP"], 15364, 1)
             time.sleep(2)
