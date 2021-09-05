@@ -807,7 +807,7 @@ async def update(call: CallbackQuery):
     await call.message.edit_reply_markup(reply_markup=kb.oranjereya_menu(call.from_user.id))
 
 callback_rap = CallbackData("set", "action", "number", "IP")
-@dp.callback_query_handler(callback_rap.filter(action=["pusk", "stop", "dist_mest", "ust_plus", "ust_minus", "set_speed_ventP_plus", "set_speed_ventP_minus", "set_speed_ventV_plus", "set_speed_ventV_minus", "sbros_error", "stop_vv", "start_vv"]))
+@dp.callback_query_handler(callback_rap.filter(action=["pusk", "stop", "dist_mest", "ust_plus", "ust_minus", "set_speed_ventP_plus", "set_speed_ventP_minus", "set_speed_ventV_plus", "set_speed_ventV_minus", "sbros_error", "stop_vv", "start_vv", "zima", "leto", "auto"]))
 @logger.catch
 async def update(call: CallbackQuery, callback_data: dict):
     logger.info("Пользователь: " + str(call.from_user.id) + " нажал " + str(call.data))
@@ -833,6 +833,7 @@ async def update(call: CallbackQuery, callback_data: dict):
             MR.modbus_set(callback_data["IP"], 41991, 0)
         elif callback_data["action"] == "zima":
             MR.modbus_set(callback_data["IP"], 41991, 1)
+            print("zima")
         elif callback_data["action"] == "auto":
             MR.modbus_set(callback_data["IP"], 41991, 2)
         elif callback_data["action"] == "sbros_error":
