@@ -77,12 +77,12 @@ def pool_menu(user):
     if db.check_user_acess(user, "pool_menu", "vodopad"):
         vodopad = InlineKeyboardButton(text="Водопад", callback_data="vodopad")
         pool_menu.insert(vodopad)
-    if db.check_user_acess(user, "pool_menu", "imp_pool_up"):
-        imp_pool_up = InlineKeyboardButton(text="Имп. Бас. верх", callback_data="imp_pool_up")
-        pool_menu.insert(imp_pool_up)
-    if db.check_user_acess(user, "pool_menu", "imp_pool_down"):
-        imp_pool_down = InlineKeyboardButton(text="Имп. Бас. низ", callback_data="imp_pool_down")
-        pool_menu.insert(imp_pool_down)
+    # if db.check_user_acess(user, "pool_menu", "imp_pool_up"):
+    #     imp_pool_up = InlineKeyboardButton(text="Имп. Бас. верх", callback_data="imp_pool_up")
+    #     pool_menu.insert(imp_pool_up)
+    # if db.check_user_acess(user, "pool_menu", "imp_pool_down"):
+    #     imp_pool_down = InlineKeyboardButton(text="Имп. Бас. низ", callback_data="imp_pool_down")
+    #     pool_menu.insert(imp_pool_down)
     if db.check_user_acess(user, "pool_menu", "pool_time"):
         pool_time = InlineKeyboardButton(text="Время", callback_data="pool_time")
         pool_menu.insert(pool_time)

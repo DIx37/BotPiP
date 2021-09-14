@@ -130,7 +130,8 @@ def pool_time_message(DayOfWeek):
     get_pool_time_DayOfWeek = db.get_pool_time_DayOfWeek(DayOfWeek)
     time_message = ""
     for rele in get_pool_time_DayOfWeek:
-        time_message += "\nID: " + str(rele[0])
+        # time_message += "\nID: " + str(rele[0])
+        time_message += "\n/del_" + str(rele[0])
         if rele[4] == "pod_navesom":
             time_message += "     <b>Под навесом</b>\n"
         elif rele[4] == "reklama":
@@ -214,7 +215,11 @@ def add_time(message_text):
 """ Удаление времеи из базы по его ID """
 @logger.catch
 def del_time(message_text):
-    db.del_time(message_text[5:7])
+    try:
+        db.del_time(int(message_text[5:]))
+        return True
+    except:
+        return False
 
 """ Функция переключения реле """
 @logger.catch
@@ -242,23 +247,27 @@ def l24_xml_f():
 async def send_welcome(message: types.Message):
     logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
     await message.answer(text=add_time(message.text),
-                         reply_markup=kb.menu_time)
-
-""" Отлов команды удаления """
-@dp.message_handler(commands=['del'])
-@logger.catch
-async def send_welcome(message: types.Message):
-    logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
-    del_time(message.text)
-    await message.answer(text="Удалено",
-                         reply_markup=kb.menu_time)
+                         reply_markup=kb.pool_time)
 
 """ Отлов сообщений """
 @dp.message_handler()
 @logger.catch
-async def main_vent(message: Message):
-    logger.info("Пользователь: " + str(message.from_user.id) + " нажал")
-    await message.answer(text=message_pool_sun_f() + message_l22_f() + message_l21_f(), reply_markup=kb.main_menu(message.from_user.id))
+async def main(message: Message):
+    logger.info("Пользователь отправил сообщение " + str(message.text))
+    await bot.delete_message(chat_id=message.from_user.id, message_id = message.message_id)
+    if str(message.text[0:1]) == "/":
+        if str(message.text[1:4]) == "del":
+            result = del_time(message.text)
+            # if result:
+            #     await message.answer(text="Удалено")
+            #     time.sleep(5)
+            #     await bot.delete_message(chat_id=message.from_user.id, message_id = message.message_id)
+            # else:
+            #     await message.answer(text="Не найден ID, не удалено!")
+            #     time.sleep(5)
+            #     await bot.delete_message(chat_id=message.from_user.id, message_id = message.message_id)
+    else:
+        await message.answer(text=message_pool_sun_f() + message_l22_f() + message_l21_f(), reply_markup=kb.main_menu(message.from_user.id))
 
 
 """ Меню бассейна """
