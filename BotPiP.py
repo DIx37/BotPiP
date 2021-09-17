@@ -457,6 +457,7 @@ async def update(call: CallbackQuery):
         if l20_json != "N/A":
             result = LJ.set_rele(L_IP20, L_Pass, 4, 1)
             requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,0")
+            # requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,0")
     await call.message.edit_text(text=message_l20_f())
     if result == 404:
         await call.message.edit_text(text=message_l20_f() + "\n<b>ВНИМАНИЕ!</b>\nМодуль недоступен, попробуйте ещё раз")
