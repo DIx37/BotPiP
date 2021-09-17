@@ -450,15 +450,13 @@ async def update(call: CallbackQuery):
     elif str(call.data) == "smoker_80":
         l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
         if l20_json != "N/A":
-            LJ.set_rele(L_IP20, L_Pass, 4, 1)
+            result = LJ.set_rele(L_IP20, L_Pass, 4, 1)
             requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,20")
-            result = LJ.switch_rele("L5", L_IP20, L_Pass, 1)
     elif str(call.data) == "smoker_100":
         l20_json = LJ.l5_json_read_all(L_IP20, L_Pass)
         if l20_json != "N/A":
-            LJ.set_rele(L_IP20, L_Pass, 4, 1)
+            result = LJ.set_rele(L_IP20, L_Pass, 4, 1)
             requests.get(f"http://{L_IP20}/cmd.cgi?psw={L_Pass}&cmd=PWM,4,SET,0")
-            result = LJ.switch_rele("L5", L_IP20, L_Pass, 1)
     await call.message.edit_text(text=message_l20_f())
     if result == 404:
         await call.message.edit_text(text=message_l20_f() + "\n<b>ВНИМАНИЕ!</b>\nМодуль недоступен, попробуйте ещё раз")
